@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-
-  <title>Ember Starter Kit</title>
+    <!--Set the viewport of the page to the size of the device. VERY IMPORTANT!!-->
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BabbleFish</title>
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <script type="text/x-handlebars" id="application">
-    <h2>Welcome to Ember.js</h2>
+    <h2>Welcome to the BabbleFish Testing Page</h2>
     
     <ul>
       <li>{{#link-to 'teamlist'}} DUDE {{/link-to}}</li>
       <li>{{#link-to 'blah'}}TO BLAH {{/link-to}}</li>
     </ul>
 
-    {{outlet transition = "slideLeft"}}
+    {{outlet}}
   </script>
 
-
-    
    <script type="text/x-handlebars" id="teamlist">
 
     <p>Hello and welcome to the most wonderful website!! We are really fortunate that you are here thank you very much!!</p>
@@ -30,18 +28,17 @@
    <ul>
     {{#each controller}}
 
-      <li>{{#link-to 'teamdescription' this}}{{name}} {{/link-to}}</li>
+      <li>{{#link-to 'teamlist.teamdescription' this}}{{name}} {{/link-to}}</li>
     
        {{/each}}
-
-        
+       <li>{{#link-to 'teamlist.blah'}}TO BLAH {{/link-to}}</li>
     </ul>
   
-       {{outlet }}
+       {{outlet}}
 
    </script>
 
-       <script type="text/x-handlebars" id="teamdescription">
+       <script type="text/x-handlebars" id="teamlist/teamdescription">
             
            <h2>Role Description</h2>
 
@@ -55,7 +52,14 @@
 
    </script>
 
+   <script type="text/x-handlebars" id="teamlist/blah">
+            
+    <p>Fuck YEAH!! You clicked on BLAH!!</p>
+
+   </script>
+
   <script src="js/libs/jquery-1.10.2.js"></script>
+     <script src="js/libs/jquery.transit.min.js"></script>
     <script src="js/libs/handlebars-1.1.2.js"></script>
   <script src="js/libs/ember-1.4.0.js"></script>
       <script src="js/libs/ember-data.js"></script>

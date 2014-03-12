@@ -1,15 +1,13 @@
 App = Ember.Application.create();
 
-App.Store = DS.Store.extend({
- adapter:  DS.FixtureAdapter
-});
-
+App.ApplicationAdapter = DS.FixtureAdapter;
 
 App.Router.map(function () {
     this.resource('teamlist', function () {
-        this.resource('teamdescription', { path: ':team_id' })
+        this.route('teamdescription', { path: '/:team_id' })
+        this.route('blah');
     });
-    this.resource('blah');
+    this.route('blah');
 });
 
 App.Team = DS.Model.extend({
@@ -34,10 +32,6 @@ App.TeamlistRoute = Ember.Route.extend({
     model: function () {
         return this.store.find('team');
     }
-});
-
-App.TeamdescriptionRoute = Ember.Route.extend({
-
 });
 
 App.BlahRoute = Ember.Route.extend({
