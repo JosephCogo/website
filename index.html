@@ -3,60 +3,30 @@
 <head>
     <!--Set the viewport of the page to the size of the device. VERY IMPORTANT!!-->
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BabbleFish</title>
+  <title>Operly</title>
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <script type="text/x-handlebars" id="application">
-    <h2>Welcome to the BabbleFish Testing Page</h2>
-    
-    <ul>
-      <li>{{#link-to 'teamlist'}} DUDE {{/link-to}}</li>
-      <li>{{#link-to 'blah'}}TO BLAH {{/link-to}}</li>
-    </ul>
-
+  
+    <script type="text/x-handlebars" id="application">
     {{outlet}}
   </script>
 
-   <script type="text/x-handlebars" id="teamlist">
+   <script type="text/x-handlebars" id="index">
 
-    <p>Hello and welcome to the most wonderful website!! We are really fortunate that you are here thank you very much!!</p>
-    
-    <p>  Here are the other users! </p>
-
-   <ul>
-    {{#each controller}}
-
-      <li>{{#link-to 'teamlist.teamdescription' this}}{{name}} {{/link-to}}</li>
-    
-       {{/each}}
-       <li>{{#link-to 'teamlist.blah'}}TO BLAH {{/link-to}}</li>
-    </ul>
-  
-       {{outlet}}
-
-   </script>
-
-       <script type="text/x-handlebars" id="teamlist/teamdescription">
-            
-           <h2>Role Description</h2>
-
-           <p>{{description}}</p>
-
-   </script>
-
-   <script type="text/x-handlebars" id="blah">
-            
-    <p>Congratulations!! You clicked on BLAH!!</p>
-
-   </script>
-
-   <script type="text/x-handlebars" id="teamlist/blah">
-            
-    <p>Fuck YEAH!! You clicked on BLAH!!</p>
-
-   </script>
+    <div class = "question">
+       <h2>SIGN IN</h2>
+       <p><i> or {{#link-to 'teamlist'}}<span style = "color : #66d7bf;"> sign up </span>{{/link-to}}</i></p>
+   <form>
+        <input type="text" class="questionInput" placeholder="firstname">
+        <input type="text" class="questionInput" placeholder="lastname">
+        <input type="submit" class ="loginButton" value ="Enter" action="signin" method = "get">
+    </form>
+    </div>
+              
+    {{outlet}}
+  </script>
 
   <script src="js/libs/jquery-1.10.2.js"></script>
      <script src="js/libs/jquery.transit.min.js"></script>
