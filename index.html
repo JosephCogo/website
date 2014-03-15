@@ -21,11 +21,17 @@
    <form>
         <input type="text" class="questionInput" placeholder="firstname">
         <input type="text" class="questionInput" placeholder="lastname">
-        <input type="submit" class ="loginButton" value ="Enter" action="signin" method = "get">
+        <button class ="loginButton" {{action 'login'}}>Enter</button>
     </form>
     </div>
               
     {{outlet}}
+  </script>
+
+  <script type="text/x-handlebars" id="teamlist">
+      
+      <span style= "color : rgb(255,255,255)">Login SUCCESS</span>
+
   </script>
 
   <script src="js/libs/jquery-1.10.2.js"></script>
@@ -34,10 +40,11 @@
   <script src="js/libs/ember-1.4.0.js"></script>
       <script src="js/libs/ember-data.js"></script>
     <script src="js/app.js"></script>
-    
+   <!--<script src="http://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.3.min.js"></script> -->
 
   <!-- to activate the test runner, add the "?test" query string parameter -->
   <script src="tests/runner.js"></script>
+    <script src='http://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.2.min.js'></script>
 
 </body>
 </html>

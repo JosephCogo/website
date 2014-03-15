@@ -10,6 +10,29 @@ App.Router.map(function () {
     this.route('blah');
 });
 
+App.IndexController = Ember.ObjectController.extend({
+
+    actions: {
+        login: function () {
+            var Router = this;
+            $.post('https://momentum.azure-mobile.net/api/login', {
+             emailAddress: 'joemilsom@gmail.com', password: 'password'
+            }, function(data) {
+            var authToken = data.token;
+            Ember.Logger.log(data.token);
+            //App.Store.authToken = data.token;
+            App.Auth = Ember.Object.create({
+            authToken: data.token
+           // accountId: data.session.account_id
+          });
+          Router.transitionToRoute('teamlist');
+           Ember.Logger.log("LOGIN");
+        });
+           
+        }
+    }
+});
+
 App.Team = DS.Model.extend({
     name : DS.attr('string'),
     description : DS.attr('string')
