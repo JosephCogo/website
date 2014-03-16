@@ -17,7 +17,7 @@
 
     <div class = "question">
        <h2>SIGN IN</h2>
-       <p><i> or {{#link-to 'askaquestion'}}<span style = "color : #66d7bf;"> sign up </span>{{/link-to}}</i></p>
+       <p><i> or {{#link-to 'register'}}<span style = "color : #66d7bf;"> sign up </span>{{/link-to}}</i></p>
    <form>
         <input type="text" class="questionInput" placeholder="firstname">
         <input type="text" class="questionInput" placeholder="lastname">
@@ -31,6 +31,11 @@
   <script type="text/x-handlebars" id="register">
       
       <div class = "question">
+      <form>
+        <input type="text" class="questionInput" placeholder="Email">
+        <input type="text" class="questionInput" placeholder="Password">
+        <button class ="loginButton" {{action 'register'}}>Register</button>
+      </form>
       </div>
 
   </script>
