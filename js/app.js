@@ -100,20 +100,20 @@ App.RegisterController = Ember.ObjectController.extend({
     actions: {
         register: function () {
             var router = this;
-            $.post('https://momentum.azure-mobile.net/api/register', {
+            $.ajax({url : 'https://momentum.azure-mobile.net/api/register', data : {
                 password: this.get('password'),
                 emailAddress: this.get('email'),
                 birthday: 11 / 11 / 11,
                 Gender_idGender: 1,
                 firstName: 'Jeff',
                 lastName: 'TheDude'
-            },
-            function (data) {
+            }}).done( function (data) {
                 console.log('REGISTERED');
                 localStorage.token = data.token;
                 router.transitionToRoute('askaquestion');
+            }).fail(function(){
+               alert('error'); 
             });
-        }
     }
 });
 
