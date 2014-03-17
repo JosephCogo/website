@@ -99,7 +99,7 @@ App.RegisterController = Ember.ObjectController.extend({
         register: function () {
             $.ajax({
                 url : 'https://momentum.azure-mobile.net/api/login',
-                data : { password : currentRequest.body.password,
+                data : { password : 'password',
                      emailAddress : currentRequest.body.emailAddress,
                      birthday : currentRequest.body.birthday,
                      Gender_idGender : currentRequest.body.Gender_idGender,
