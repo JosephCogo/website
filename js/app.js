@@ -76,7 +76,7 @@ App.LoginController = Ember.ObjectController.extend({
 
             $.ajax({type : 'POST',
             url: "https://momentum.azure-mobile.net/api/login",
-            data : {emailAddress: 'joemilsom@gmail.com', password: 'password'}
+            data : {emailAddress: 'joemilom@gmail.com', password: 'password'}
             }).done(function(){
                 localStorage.token = data.token;
                 manager.authenticate(data.token);
