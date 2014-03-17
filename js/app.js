@@ -147,7 +147,7 @@ App.AskaquestionRoute = Ember.Route.extend({
      (function poll() {
         setTimeout(function() {
         $.ajax({ url: "https://momentum.azure-mobile.net/api/test", success: function(data) {
-            console.log(data.message);
+            console.log(data.message[0]);
         }, dataType: "json", complete: poll });
         }, 30000);
         })();   
