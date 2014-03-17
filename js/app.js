@@ -41,16 +41,17 @@ var manager = App.AuthManager.create();
 //in the index route checks if the client is authenticated,
 //if so, transition to asking a question, if not go to login
 App.IndexRoute = Ember.Route.extend({
-  redirect: function() {
-           if(manager.isAuthenticated()){
-               console.log('auth');
-               this.transitionTo('askaquestion');  
-           }
-           else{
-               console.log('notauth');
-               this.transitionTo('login');
-           }
-  }
+    redirect: function () {
+        print();
+        if (manager.isAuthenticated()) {
+            console.log('auth');
+            this.transitionTo('askaquestion');
+        }
+        else {
+            console.log('notauth');
+            this.transitionTo('login');
+        }
+    }
 });
 
 App.LoginRoute = Ember.Route.extend({
@@ -122,7 +123,7 @@ App.Team = DS.Model.extend({
     description : DS.attr('string')
 });
 
-function fadeOut(){
-    $(this).transition({ opacity: 0 });
+function print(){
+    console.log(sessionStorage.token);
 }
 
