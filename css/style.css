@@ -62,6 +62,7 @@ li {
     list-style: none;
 }
 
+
 .question{
     max-width: 80%;
     width: 400px;
@@ -103,11 +104,12 @@ li {
 }
 
 .login{
-    margin-top: 80px;
+    margin-top: 50px;
 }
 
 .register{
-    margin-top: 50px;
+    padding-top: 1px;
+    margin-top: 48px;
 }
 
 form{

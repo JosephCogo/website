@@ -17,10 +17,10 @@
 
     <div class = "question">
        <h2>SIGN IN</h2>
-       <p><i> or {{#link-to 'register'}}<span style = "color : #66d7bf;"> sign up </span>{{/link-to}}</i></p>
-   <form>
-        <input type="text" class="questionInput" placeholder="firstname">
-        <input type="text" class="questionInput" placeholder="lastname">
+       <p><i> or <a href=""><span style = "color : #66d7bf;" {{action 'register'}}> sign up</span> </a></i></p>
+   <form class="login">
+        <input type="text" class="questionInput" placeholder="Email">
+        <input type="text" class="questionInput" placeholder="Password">
         <button class ="loginButton" {{action 'login'}}>Enter</button>
     </form>
     </div>
@@ -58,7 +58,7 @@
 
   <!-- to activate the test runner, add the "?test" query string parameter -->
   <script src="tests/runner.js"></script>
-    <script src='http://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.2.min.js'></script>
+  <script src='http://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.1.2.min.js'></script>
 
 </body>
 </html>

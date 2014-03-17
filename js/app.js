@@ -64,6 +64,7 @@ App.LoginRoute = Ember.Route.extend({
   }
 });
 
+
 App.LoginController = Ember.ObjectController.extend({
     actions: {
         //will create a post request to login, if successful, login and store token
@@ -82,14 +83,44 @@ App.LoginController = Ember.ObjectController.extend({
         register: function () {
             var router = this;
             console.log('register');
-            router.transitionToRoute('register');
+           // $(".question").transition({ opacity: 0 }, function(){
+                 router.transitionToRoute('register');
+           // });
         }
     }
 });
+
+App.RegisterRoute = Ember.Route.extend({
+
+});
+
+App.RegisterController = Ember.ObjectController.extend({
+    actions: {
+        register: function () {
+            $.ajax({
+                url : 'https://momentum.azure-mobile.net/api/login',
+                data : { password : currentRequest.body.password,
+                     emailAddress : currentRequest.body.emailAddress,
+                     birthday : currentRequest.body.birthday,
+                     Gender_idGender : currentRequest.body.Gender_idGender,
+                     firstName : currentRequest.body.firstName,
+                     lastName : currentRequest.body.lastName }
+            }).done(function (data) {
+                var router = this;
+                console.log('REGISTERED');
+                router.transitionToRoute('askaquestion');
+            });
+        }
+    }
+});
+
 
 App.Team = DS.Model.extend({
     name : DS.attr('string'),
     description : DS.attr('string')
 });
 
+function fadeOut(){
+    $(this).transition({ opacity: 0 });
+}
 
