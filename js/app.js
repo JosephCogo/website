@@ -73,21 +73,25 @@ App.LoginController = Ember.ObjectController.extend({
         //will create a post request to login, if successful, login and store token
         login: function () {
             var router = this;
-            $.post('https://momentum.azure-mobile.net/api/login', {
-                emailAddress: 'joemilsom@gmail.com', password: 'password'
-            }, function (data) {
+
+            $.ajax({type : 'POST',
+            url: "https://momentum.azure-mobile.net/api/login",
+            data : {emailAddress: 'joemilsom@gmail.com', password: 'password'}
+            }).done(function(){
                 localStorage.token = data.token;
                 manager.authenticate(data.token);
                 router.transitionToRoute('askaquestion');
+            }).fail(function(){
+              alert('error');  
             });
         },
 
         register: function () {
             var router = this;
             console.log('register');
-           // $(".question").transition({ opacity: 0 }, function(){
-                 router.transitionToRoute('register');
-           // });
+            // $(".question").transition({ opacity: 0 }, function(){
+            router.transitionToRoute('register');
+            // });
         }
     }
 });
