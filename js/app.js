@@ -14,24 +14,25 @@ App.Router.map(function () {
 //though, as it is just using local storage, but ok 
 //for now, as it is not storing any important information
 App.AuthManager = Ember.Object.extend({
-  init: function() {
-    this._super();//ember specific
-    var accessToken = localStorage.token;
-    if (!Ember.isEmpty(accessToken)) {
-      this.authenticate(accessToken);
+    init: function () {
+        this._super(); //ember specific
+        var accessToken = localStorage.token;
+        if (!Ember.isEmpty(accessToken)) {
+            this.authenticate(accessToken);
+        }
+    },
+
+    authenticate: function (accessToken) {
+        $.ajaxSetup({
+            headers: { "X-ZUMO-AUTH": localStorage.token },
+            dataType: 'json'
+        });
+    },
+
+    isAuthenticated: function () {
+        console.log(!Ember.isEmpty(localStorage.token));
+        return !Ember.isEmpty(localStorage.token);
     }
-  },
-    
-  authenticate: function(accessToken) {
-    $.ajaxSetup({
-      headers: { "X-ZUMO-AUTH" : localStorage.token},
-      dataType: 'json'
-    });
-  },
-      
-  isAuthenticated: function() {
-    return !Ember.isEmpty(localStorage.token);
-  }
 });
 
 //create a new authmanager instance to handle authentication
