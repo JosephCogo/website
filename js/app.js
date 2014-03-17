@@ -41,7 +41,9 @@ var manager = App.AuthManager.create();
 //in the index route checks if the client is authenticated,
 //if so, transition to asking a question, if not go to login
 App.IndexRoute = Ember.Route.extend({
+
     redirect: function () {
+        localStorage.token = null;
         print();
         if (manager.isAuthenticated()) {
             console.log('auth');
