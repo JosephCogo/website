@@ -30,7 +30,6 @@ App.AuthManager = Ember.Object.extend({
     },
 
     isAuthenticated: function () {
-        console.log(!Ember.isEmpty(localStorage.token));
         return !Ember.isEmpty(localStorage.token);
     }
 });
