@@ -80,7 +80,7 @@ App.LoginController = Ember.ObjectController.extend({
             $.ajax({type : 'POST',
             url: "https://momentum.azure-mobile.net/api/login",
             data : {emailAddress: this.get('email'), password: this.get('password')}
-            }).done(function(){
+            }).done(function(data){
                 localStorage.token = data.token;
                 manager.authenticate(data.token);
                 router.transitionToRoute('askaquestion');
