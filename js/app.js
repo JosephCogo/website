@@ -24,13 +24,13 @@ App.AuthManager = Ember.Object.extend({
     
   authenticate: function(accessToken) {
     $.ajaxSetup({
-      headers: { "X-ZUMO-AUTH" : sessionStorage.token},
+      headers: { "X-ZUMO-AUTH" : localStorage.token},
       dataType: 'json'
     });
   },
       
   isAuthenticated: function() {
-    return !Ember.isEmpty(sessionStorage.token);
+    return !Ember.isEmpty(localStorage.token);
   }
 });
 
