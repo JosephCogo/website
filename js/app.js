@@ -1,7 +1,8 @@
 App = Ember.Application.create();
 
 App.ApplicationAdapter = DS.RESTAdapter.extend({
-    host : "https://momentum.azure-mobile.net/api"
+    host : "https://momentum.azure-mobile.net",
+    namespace : "api/"
 });
 
 
