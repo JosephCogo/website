@@ -59,7 +59,10 @@ App.IndexRoute = Ember.Route.extend({
 App.LoginRoute = Ember.Route.extend({
     //if user is already authenticated, go back to ask a question,
     //little hack to make sure user doesn't go back to login
-    redirect: function() {
+   model : function(){
+     return {};  
+   },
+   redirect: function() {
            if(manager.isAuthenticated()){
                console.log('auth');
                this.transitionTo('askaquestion');  
