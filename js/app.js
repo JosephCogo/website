@@ -16,7 +16,7 @@ App.Router.map(function () {
 App.AuthManager = Ember.Object.extend({
   init: function() {
     this._super();//ember specific
-    var accessToken = sessionStorage.token;
+    var accessToken = localStorage.token;
     if (!Ember.isEmpty(accessToken)) {
       this.authenticate(accessToken);
     }
@@ -74,9 +74,8 @@ App.LoginController = Ember.ObjectController.extend({
             $.post('https://momentum.azure-mobile.net/api/login', {
                 emailAddress: 'joemilsom@gmail.com', password: 'password'
             }, function (data) {
-                sessionStorage.token = data.token;
+                localStorage.token = data.token;
                 manager.authenticate(data.token);
-
                 router.transitionToRoute('askaquestion');
             });
         },
@@ -111,6 +110,7 @@ App.RegisterController = Ember.ObjectController.extend({
             },
             function (data) {
                 console.log('REGISTERED');
+                localStorage.token = data.token;
                 router.transitionToRoute('askaquestion');
             });
         }
@@ -124,6 +124,6 @@ App.Team = DS.Model.extend({
 });
 
 function print(){
-    console.log(sessionStorage.token);
+    console.log(localStorage.token);
 }
 
