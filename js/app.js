@@ -162,7 +162,7 @@ App.AskaquestionRoute = Ember.Route.extend({
     ready: function () {
         setInterval(function () {
             console.log('reload');
-            App.Switchboard.findAll('message').reload()
+            this.store.findAll('message').reload();
         }, 30000);
     }
 
