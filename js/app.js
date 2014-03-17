@@ -1,6 +1,8 @@
 App = Ember.Application.create();
 
-App.ApplicationAdapter = DS.FixtureAdapter;
+App.ApplicationAdapter = DS.RESTAdapter.extend({
+    host : "https://momentum.azure-mobile.net/api"
+});
 
 App.Router.map(function () {
     this.resource('login');
@@ -131,9 +133,8 @@ App.RegisterController = Ember.ObjectController.extend({
 });
 
 
-App.Team = DS.Model.extend({
-    name : DS.attr('string'),
-    description : DS.attr('string')
+App.Message = DS.Model.extend({
+    message : DS.attr('string')
 });
 
 function print(){
@@ -143,7 +144,7 @@ function print(){
 //ask a question route, do long polling as we need to
 //properly set up a web server so we can use Socket.io
 App.AskaquestionRoute = Ember.Route.extend({
-    beforeModel: function(transition){
+   /* beforeModel: function(transition){
      (function poll() {
         setTimeout(function() {
         $.ajax({ url: "https://momentum.azure-mobile.net/api/test", success: function(data) {
@@ -153,6 +154,9 @@ App.AskaquestionRoute = Ember.Route.extend({
         }, dataType: "json", complete: poll });
         }, 30000);
         })();   
+    }*/
+    model : function(){
+     return App.Message.findAll();   
     }
 });
 

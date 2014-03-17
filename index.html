@@ -48,6 +48,10 @@
       {{textarea class="questionBox" placeholder="Input Here" valueBinding="email"}}
       </div>
 
+      {{#each message in controller}}
+        <p>{{message.message}} </p>
+      {{/each}}
+
   </script>
 
   <script src="js/libs/jquery-1.10.2.js"></script>
