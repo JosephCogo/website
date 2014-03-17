@@ -157,12 +157,9 @@ App.AskaquestionRoute = Ember.Route.extend({
     }*/
     model: function () {
         return this.store.findAll('message');
-    },
-
-    ready: function () {
-        setInterval(function () {
+        setInterval(function() {
             console.log('reload');
-            this.store.findAll('message').reload();
+            this.reload();
         }, 2000);
     }
 
