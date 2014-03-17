@@ -4,6 +4,7 @@ App.ApplicationAdapter = DS.RESTAdapter.extend({
     host : "https://momentum.azure-mobile.net/api"
 });
 
+
 App.Router.map(function () {
     this.resource('login');
     this.resource('register');
