@@ -155,12 +155,14 @@ App.AskaquestionRoute = Ember.Route.extend({
     }, 30000);
     })();   
     }*/
-    model: function () {
+    ready : function(){
         setInterval(function() {
-            console.log('reload');
-            App.Askaquestion.reload();
+        console.log('reload');
+        var controller = this.controller;
+        this.store.findAll('message').then(function (messages) {
+        controller.set('content', messages);
+        });
         }, 2000);
-        return this.store.findAll('message');
     }
 
 });
