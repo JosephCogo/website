@@ -158,7 +158,7 @@ App.AskaquestionRoute = Ember.Route.extend({
         })();   
     }*/
     model : function(){
-     return this.store.findAll('messages');   
+     return this.store.findAll('message');   
     }
 });
 
