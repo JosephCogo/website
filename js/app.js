@@ -156,6 +156,7 @@ App.AskaquestionRoute = Ember.Route.extend({
     })();   
     }*/
     ready: function () {
+        console.log('preload');
         setInterval(function () {
             console.log('reload');
 
