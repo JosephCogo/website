@@ -91,22 +91,24 @@ App.LoginController = Ember.ObjectController.extend({
 });
 
 App.RegisterRoute = Ember.Route.extend({
-
+   model: function() {
+    return {};
+   }
 });
 
 App.RegisterController = Ember.ObjectController.extend({
     actions: {
         register: function () {
-            $.ajax({
-                url : 'https://momentum.azure-mobile.net/api/login',
-                data : { password : 'password',
-                     emailAddress : currentRequest.body.emailAddress,
-                     birthday : currentRequest.body.birthday,
-                     Gender_idGender : currentRequest.body.Gender_idGender,
-                     firstName : currentRequest.body.firstName,
-                     lastName : currentRequest.body.lastName }
-            }).done(function (data) {
-                var router = this;
+            var router = this;
+            $.post('https://momentum.azure-mobile.net/api/register', {
+                password: this.get('password'),
+                emailAddress: this.get('email'),
+                birthday: 11 / 11 / 11,
+                Gender_idGender: 1,
+                firstName: 'Jeff',
+                lastName: 'TheDude'
+            },
+            function (data) {
                 console.log('REGISTERED');
                 router.transitionToRoute('askaquestion');
             });

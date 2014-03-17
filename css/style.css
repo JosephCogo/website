@@ -90,6 +90,37 @@ li {
     padding-left: 10px;
 }
 
+.questionInput{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    width: 70%;
+    resize: none;
+    border-color: #66d7bf;
+    border-style: solid;
+    user-select: none;
+    padding-left: 10px;
+}
+
+.questionBox{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+   -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 70%;
+    height: 60%;
+    resize: none;
+    border-color: #66d7bf;
+    border-style: solid;
+    user-select: none;
+    padding-left: 10px;
+    resize: none;
+}
+
 .loginButton{
     background-color:  #66d7bf;
     border-style: none;

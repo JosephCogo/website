@@ -33,8 +33,8 @@
       <div class = "question">
        <h2>REGISTER</h2>
       <form class="register">
-        <input type="text" class="questionInput" placeholder="Email">
-        <input type="text" class="questionInput" placeholder="Password">
+        {{input type="text" class="questionInput" placeholder="Email" valueBinding="email"}}
+        {{input type="text" class="questionInput" placeholder="Password" valueBinding="password"}};
         <button class ="loginButton" {{action 'register'}}>Register</button>
       </form>
       </div>
@@ -44,6 +44,8 @@
   <script type="text/x-handlebars" id="askaquestion">
       
       <div class = "question">
+      <h2>ASK A QUESTION</h2>
+      {{textarea class="questionBox" placeholder="Input Here" valueBinding="email"}}
       </div>
 
   </script>
