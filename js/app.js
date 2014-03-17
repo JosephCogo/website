@@ -44,7 +44,7 @@ var manager = App.AuthManager.create();
 App.IndexRoute = Ember.Route.extend({
 
     redirect: function () {
-        localStorage.token = null;
+        localStorage.removeItem('token');
         print();
         if (manager.isAuthenticated()) {
             console.log('auth');
