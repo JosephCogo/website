@@ -2,7 +2,7 @@ App = Ember.Application.create();
 
 App.ApplicationAdapter = DS.RESTAdapter.extend({
     host : "https://momentum.azure-mobile.net",
-    namespace : "api/"
+    namespace : "api"
 });
 
 
@@ -40,7 +40,6 @@ App.AuthManager = Ember.Object.extend({
 
 //create a new authmanager instance to handle authentication
 var manager = App.AuthManager.create();
-
 
 //in the index route checks if the client is authenticated,
 //if so, transition to asking a question, if not go to login
@@ -141,6 +140,20 @@ function print(){
     console.log(localStorage.token);
 }
 
+App.PollForMessages = Ember.Object.extend({
+    start: function () {
+        console.log("init Poll");
+        this.timer = setInterval(this.onPoll, 2000);
+    },
+    stop: function () {
+        clearInterval(this.timer);
+    },
+    onPoll: function () {
+        console.log("polling");
+        App.store.findAll('message');
+    }
+});
+
 //ask a question route, do long polling as we need to
 //properly set up a web server so we can use Socket.io
 App.AskaquestionRoute = Ember.Route.extend({
@@ -155,17 +168,16 @@ App.AskaquestionRoute = Ember.Route.extend({
     }, 30000);
     })();   
     }*/
-    ready: function () {
-        console.log('preload');
-        setInterval(function () {
-            console.log('reload');
 
-        }, 2000);
-    },
 
     model: function () {
+        console.log("model: " + this);
         return this.store.findAll('message');
-    }
+    },
 
+    ready: function () {
+        var poll = App.PollForMessages.create();
+        poll.start();
+    }
 });
 
