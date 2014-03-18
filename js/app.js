@@ -27,10 +27,10 @@ App.AuthManager = Ember.Object.extend({
     },
 
     authenticate: function (accessToken) {
-        $.ajaxSetup({
-            headers: { "X-ZUMO-AUTH": localStorage.token },
-            dataType: 'json'
-        });
+        //$.ajaxSetup({
+       //     headers: { "X-ZUMO-AUTH": localStorage.token },
+        //    dataType: 'json'
+      //  });
     },
 
     isAuthenticated: function () {
@@ -39,14 +39,14 @@ App.AuthManager = Ember.Object.extend({
 });
 
 //create a new authmanager instance to handle authentication
-//var manager = App.AuthManager.create();
+var manager = App.AuthManager.create();
 
 //in the index route checks if the client is authenticated,
 //if so, transition to asking a question, if not go to login
 App.IndexRoute = Ember.Route.extend({
 
     redirect: function () {
-        if (!manager.isAuthenticated()) {
+        if (manager.isAuthenticated()) {
             console.log('auth');
             this.transitionTo('askaquestion');
         }
@@ -150,34 +150,19 @@ App.PollForMessages = Ember.Object.extend({
     },
     onPoll: function () {
         console.log("polling");
-        App.store.findAll('message');
+        App.Askaquestion.findAll('message').reload;
     }
 });
 
 //ask a question route, do long polling as we need to
 //properly set up a web server so we can use Socket.io
 App.AskaquestionRoute = Ember.Route.extend({
-    /* beforeModel: function(transition){
-    (function poll() {
-    setTimeout(function() {
-    $.ajax({ url: "https://momentum.azure-mobile.net/api/test", success: function(data) {
-    for (var i = 0; i < data.message.length; i++){
-    console.log(data.message[i]);
-    }
-    }, dataType: "json", complete: poll });
-    }, 30000);
-    })();   
-    }*/
-
 
     model: function () {
         console.log("model: " + this);
-        return this.store.findAll('message');
-    },
-
-    ready: function () {
         var poll = App.PollForMessages.create();
         poll.start();
+        return this.store.findAll('message');
     }
 });
 
