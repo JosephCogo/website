@@ -39,14 +39,14 @@ App.AuthManager = Ember.Object.extend({
 });
 
 //create a new authmanager instance to handle authentication
-var manager = App.AuthManager.create();
+//var manager = App.AuthManager.create();
 
 //in the index route checks if the client is authenticated,
 //if so, transition to asking a question, if not go to login
 App.IndexRoute = Ember.Route.extend({
 
     redirect: function () {
-        if (manager.isAuthenticated()) {
+        if (!manager.isAuthenticated()) {
             console.log('auth');
             this.transitionTo('askaquestion');
         }
