@@ -1,7 +1,7 @@
 App = Ember.Application.create();
 
 App.ApplicationAdapter = DS.RESTAdapter.extend({
-    host : "https://momentum.azure-mobile.net",
+    host : "https://operly.azure-mobile.net",
     namespace : "api"
 });
 
@@ -79,7 +79,7 @@ App.LoginController = Ember.ObjectController.extend({
             var router = this;
 
             $.ajax({type : 'POST',
-            url: "https://momentum.azure-mobile.net/api/login",
+            url: "https://operly.azure-mobile.net/api/login",
             data : {emailAddress: this.get('email'), password: this.get('password')}
             }).done(function(data){
                 localStorage.token = data.token;
@@ -111,7 +111,7 @@ App.RegisterController = Ember.ObjectController.extend({
         register: function () {
             var router = this;
             $.ajax({type: 'POST',
-                 url: 'https://momentum.azure-mobile.net/api/register',
+                 url: 'https://operly.azure-mobile.net/api/register',
              data: {
                 password: this.get('password'),
                 emailAddress: this.get('email'),
