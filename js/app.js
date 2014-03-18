@@ -150,7 +150,7 @@ App.PollForMessages = Ember.Object.extend({
     },
     onPoll: function () {
         console.log("polling");
-        App.Askaquestion.findAll('message').reload;
+
     }
 });
 
