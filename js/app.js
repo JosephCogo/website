@@ -23,8 +23,8 @@ App.AuthManager = Ember.Object.extend({
 
         //get the token from local storage, if it exists,
         //authenticate the user
-        localStorage.removeItem('token');
-        localStorage.removeItem('idUser');
+        //localStorage.removeItem('token');
+        //localStorage.removeItem('idUser');
         var accessToken = localStorage.token;
         if (!Ember.isEmpty(accessToken)) {
             this.authenticate(accessToken);
