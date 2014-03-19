@@ -20,19 +20,28 @@ App.Router.map(function () {
 App.AuthManager = Ember.Object.extend({
     init: function () {
         this._super(); //ember specific
+
+        //get the token from local storage, if it exists,
+        //authenticate the user
+        localStorage.removeItem('token');
+        localStorage.removeItem('idUser');
         var accessToken = localStorage.token;
         if (!Ember.isEmpty(accessToken)) {
             this.authenticate(accessToken);
         }
     },
 
+    //set up all subsequent ajax calls so that
+    //it sends through the token in the headers.
     authenticate: function (accessToken) {
-        //$.ajaxSetup({
-       //     headers: { "X-ZUMO-AUTH": localStorage.token },
-        //    dataType: 'json'
-      //  });
+        $.ajaxSetup({
+            //headers: { "X-ZUMO-AUTH": localStorage.token },
+            //dataType: 'json'
+        });
     },
 
+    //returns true if there is a token in 
+    //localstorage
     isAuthenticated: function () {
         return !Ember.isEmpty(localStorage.token);
     }
@@ -46,8 +55,7 @@ var manager = App.AuthManager.create();
 App.IndexRoute = Ember.Route.extend({
 
     redirect: function () {
-
-        if (!manager.isAuthenticated()) {
+        if (manager.isAuthenticated()) {
             console.log('auth');
             this.transitionTo('askaquestion');
         }
@@ -79,15 +87,17 @@ App.LoginController = Ember.ObjectController.extend({
         login: function () {
             var router = this;
 
-            $.ajax({type : 'POST',
-            url: "https://operly.azure-mobile.net/api/login",
-            data : {emailAddress: this.get('email'), password: this.get('password')}
-            }).done(function(data){
+            $.ajax({ type: 'POST',
+                url: "https://operly.azure-mobile.net/api/login",
+                data: { emailAddress: this.get('email'), password: this.get('password') }
+            }).done(function (data) {
+                //store authentication info in localstorage
                 localStorage.token = data.token;
+                localStorage.user = data.idUser;
                 manager.authenticate(data.token);
                 router.transitionToRoute('askaquestion');
-            }).fail(function(){
-              alert('error');  
+            }).fail(function () {
+                alert('error');
             });
         },
 
@@ -111,19 +121,18 @@ App.RegisterController = Ember.ObjectController.extend({
     actions: {
         register: function () {
             var router = this;
-            $.ajax({type: 'POST',
-                 url: 'https://operly.azure-mobile.net/api/register',
-             data: {
-                password: this.get('password'),
-                emailAddress: this.get('email'),
-                birthday: 11 / 11 / 11,
-                Gender_idGender: 1,
-                firstName: 'Jeff',
-                lastName: 'TheDude'
-            }
+            $.ajax({ type: 'POST',
+                url: 'https://operly.azure-mobile.net/api/register',
+                data: {
+                    password: this.get('password'),
+                    emailAddress: this.get('email'),
+                    firstName: 'Jeff',
+                    lastName: 'TheDude'
+                }
             }).done(function (data) {
                 console.log('REGISTERED');
                 localStorage.token = data.token;
+                localStorage.idUser = data.idUser;
                 router.transitionToRoute('askaquestion');
             }).fail(function () {
                 alert('error');
@@ -142,8 +151,7 @@ App.PollForMessages = Ember.Object.extend({
         clearInterval(this.timer);
     },
     onPoll: function () {
-        console.log("polling");
-        
+        console.log("polling");  
     }
 });
 
@@ -155,37 +163,37 @@ App.AskaquestionRoute = Ember.Route.extend({
         console.log("model: " + this);
         return this.store.findAll('message');
     },
-    
-    setupController : function(controller, model){
-    //this needs to be here!!! otherwise the model is not set correctly!!     
-    this._super(controller, model);
-        
-    if (Ember.isNone(this.get('poller'))) {
-      var route = this;
-      this.set('poller', App.PollForMessages.create({
-        
-        onPoll: function() {
 
-            Ember.$.getJSON('https://operly.azure-mobile.net/api/messages', 'GET').then(function(data) {
-                var messages = data.message;
-                for(var i = 0; i < messages.length; i++){
-                    route.get('store').push('message', {
-                        id : messages[i].id, 
-                        message : messages[i].message
+    setupController: function (controller, model) {
+        //this needs to be here!!! otherwise the model is not set correctly!!     
+        this._super(controller, model);
+
+        if (Ember.isNone(this.get('poller'))) {
+            var route = this;
+            this.set('poller', App.PollForMessages.create({
+
+                onPoll: function () {
+
+                    Ember.$.getJSON('https://operly.azure-mobile.net/api/messages', 'GET').then(function (data) {
+                        var messages = data.message;
+                        for (var i = 0; i < messages.length; i++) {
+                            route.get('store').push('message', {
+                                id: messages[i].id,
+                                message: messages[i].message
+                            });
+                            //console.log(messages[i].id);
+                        }
                     });
-                    console.log(messages[i].id);
                 }
-            });
+            }));
+            this.get('poller').start();
         }
-        })); 
-    this.get('poller').start();
+    },
+
+    deactivate: function () {
+        this.get('poller').stop();
     }
-},
-    
-deactivate: function() {
-    this.get('poller').stop();
-}
-    
+
 });
 
 App.Message = DS.Model.extend({
@@ -196,3 +204,5 @@ App.AskaquestionController = Ember.ArrayController.extend({
    
 });
 
+//$(document).ajaxStart(function(){ $( "#loading" ).show})
+//$(document).ajaxStop(function() {$( "#loading" ).hide})
