@@ -165,8 +165,8 @@ App.AskaquestionRoute = Ember.Route.extend({
 
     setupController: function (controller, model) {
         //this needs to be here!!! otherwise the model is not set correctly!!     
-        this._super(controller, model);
-
+        //this._super(controller, model);
+        controller.set("content", model);
         if (Ember.isNone(this.get('poller'))) {
             var route = this;
             this.set('poller', App.PollForMessages.create({
