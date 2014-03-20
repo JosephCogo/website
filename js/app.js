@@ -160,7 +160,7 @@ App.PollForMessages = Ember.Object.extend({
 App.AskaquestionRoute = Ember.Route.extend({
 
     model: function () {
-        console.log("model: " + this);
+        console.log(localStorage.idUser);
         return this.store.findAll('message');
     },
 
@@ -173,7 +173,6 @@ App.AskaquestionRoute = Ember.Route.extend({
             this.set('poller', App.PollForMessages.create({
 
                 onPoll: function () {
-                    console.log(localStorage.idUser);
                     $.ajax({
                         type: "GET",
                         url: "https://operly.azure-mobile.net/api/messages",
