@@ -161,6 +161,7 @@ App.AskaquestionRoute = Ember.Route.extend({
 
     model: function () {
     //return this.store.find('message', { idUser: localStorage.idUser });
+    var store = this.store;
 
     return store.filter('message', { idUser: localStorage.idUser }, function(message) {
        return message;
