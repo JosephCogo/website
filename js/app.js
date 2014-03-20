@@ -177,7 +177,7 @@ App.AskaquestionRoute = Ember.Route.extend({
                     $.ajax({
                          type: "GET",
                          url: "https://operly.azure-mobile.net/api/messages",
-                         data: localStorage.idUser,
+                         data: "idUser = 1" ,
                          success: function(data){
                              var messages = data.message;
                              for (var i = 0; i < messages.length; i++) {
