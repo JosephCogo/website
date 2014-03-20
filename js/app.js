@@ -174,20 +174,27 @@ App.AskaquestionRoute = Ember.Route.extend({
 
                 onPoll: function () {
 
-                    Ember.$.getJSON('https://operly.azure-mobile.net/api/messages', 'GET').then(function (data) {
-                        var messages = data.message;
-                        for (var i = 0; i < messages.length; i++) {
-                            route.get('store').push('message', {
-                                id: messages[i].id,
-                                message: messages[i].message
-                            });
-                            //console.log(messages[i].id);
+                $.ajax({ type: 'GET',
+                        url: 'https://operly.azure-mobile.net/api/askquestion',
+                        data: {
+                                idUser: localStorage.idUser
                         }
-                    });
-                }
-            }));
+                        }).done(function (data) {
+                            var messages = data.message;
+                            for (var i = 0; i < messages.length; i++) {
+                                route.get('store').push('message', {
+                                    id: messages[i].id,
+                                    message: messages[i].message
+                                });
+                            }
+                        }).fail(function () {
+                             alert('error');
+                });
+
             this.get('poller').start();
-        }
+                }
+                });
+                }
     },
 
     deactivate: function () {
