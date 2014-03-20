@@ -160,13 +160,18 @@ App.PollForMessages = Ember.Object.extend({
 App.AskaquestionRoute = Ember.Route.extend({
 
     model: function () {
-        return this.store.find('message', { idUser: localStorage.idUser });
+    //return this.store.find('message', { idUser: localStorage.idUser });
+
+    return store.filter('message', { idUser: localStorage.idUser }, function(message) {
+       return message;
+    });
+    
     },
 
     setupController: function (controller, model) {
         //this needs to be here!!! otherwise the model is not set correctly!!     
-        //this._super(controller, model);
-        controller.set("content", model);
+        this._super(controller, model);
+
         if (Ember.isNone(this.get('poller'))) {
             var route = this;
             this.set('poller', App.PollForMessages.create({
