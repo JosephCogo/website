@@ -55,13 +55,15 @@ App.IndexRoute = Ember.Route.extend({
 
     redirect: function () {
         if (manager.isAuthenticated()) {
-            console.log('auth');
+            console.log(localStorage.idUser);
+            console.log(localStorage.token);
             this.transitionTo('askaquestion');
         }
         else {
             //just to make sure for now
             localStorage.removeItem('token');
             localStorage.removeItem('idUser');
+
             console.log('notauth');
             this.transitionTo('login');
         }
@@ -220,7 +222,7 @@ App.AskaquestionController = Ember.ArrayController.extend({
             localStorage.removeItem('token');
             localStorage.removeItem('idUser');
             var route = App.AskaquestionRoute;
-            route.transitionTo('index');
+            this.transitionTo('index');
         }
     }
 
