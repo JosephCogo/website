@@ -45,13 +45,13 @@
       
       <div class = "question">
       <h2>ASK OPERLY</h2>
-      {{textarea class="questionBox" placeholder="Input Here" valueBinding="email"}}
+      {{textarea class="questionBox" placeholder="Input Here" valueBinding="question"}}
       </div>
 
         {{#each message in controller}}
             <span style = "color : #66d7bf;"> {{message.message}} </span><br>
         {{/each}}
-        <button class = "loginButton" {{action 'addMsg'}}>MSG </button>
+        <button class = "loginButton" {{action 'askquestion'}}>MSG </button>
   </script>
 
 

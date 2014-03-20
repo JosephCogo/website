@@ -201,7 +201,26 @@ App.Message = DS.Model.extend({
 });
 
 App.AskaquestionController = Ember.ArrayController.extend({
-   
+
+    actions: {
+
+        sendQuestion: function () {
+
+            $.ajax({ type: 'POST',
+                url: 'https://operly.azure-mobile.net/api/askquestion',
+                data: {
+                    question: this.get('question')
+                }
+            }).done(function (data) {
+                console.log('Question Asked!!');
+                console.log(data.message);
+            }).fail(function () {
+                alert('error');
+            });
+
+        }
+    }
+
 });
 
 //$(document).ajaxStart(function(){ $( "#loading" ).show})
