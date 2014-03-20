@@ -23,8 +23,6 @@ App.AuthManager = Ember.Object.extend({
 
         //get the token from local storage, if it exists,
         //authenticate the user
-        //localStorage.removeItem('token');
-        //localStorage.removeItem('idUser');
         var accessToken = localStorage.token;
         if (!Ember.isEmpty(accessToken)) {
             this.authenticate(accessToken);
@@ -203,13 +201,13 @@ App.Message = DS.Model.extend({
 App.AskaquestionController = Ember.ArrayController.extend({
 
     actions: {
-
         askquestion: function () {
 
             $.ajax({ type: 'POST',
                 url: 'https://operly.azure-mobile.net/api/askquestion',
                 data: {
-                    question: this.get('question')
+                    question: this.get('question'),
+                    idUser: localStorage.idUser
                 }
             }).done(function (data) {
                 console.log('Question Asked!!');
@@ -218,6 +216,13 @@ App.AskaquestionController = Ember.ArrayController.extend({
                 alert('error');
             });
 
+        },
+
+        logout: function () {
+            localStorage.removeItem('token');
+            localStorage.removeItem('idUser');
+            var route = App.AskaquestionRoute;
+            route.transitionTo('index');
         }
     }
 
