@@ -161,7 +161,7 @@ App.AskaquestionRoute = Ember.Route.extend({
 
     model: function () {
         console.log(localStorage.idUser);
-        return this.store.findAll('message');
+        return this.store.find('message', {idUser : localStorage.idUser});
     },
 
     setupController: function (controller, model) {
@@ -174,9 +174,9 @@ App.AskaquestionRoute = Ember.Route.extend({
 
                 onPoll: function () {
                     $.ajax({
-                        type: "POST",
+                        type: "GET",
                         url: "https://operly.azure-mobile.net/api/messages",
-                        data: { idUser: localStorage.idUser },
+                        data: "idUser="+localStorage.idUser,
                         success: function (data) {
                             var messages = data.message;
                             for (var i = 0; i < messages.length; i++) {
