@@ -207,10 +207,10 @@ App.Message = DS.Model.extend({
 
 App.AskaquestionController = Ember.ArrayController.extend({
 
-  contentArrayDidChange: function(array, start, removeAmt, addAmt){
-    // do something to respond to this change
-    return this;
-  },
+    contentArrayDidChange: function (array, start, removeAmt, addAmt) {
+        console.log("add");
+        return this;
+    },
 
     actions: {
         askquestion: function () {
