@@ -172,21 +172,21 @@ App.AskaquestionRoute = Ember.Route.extend({
             var route = this;
             this.set('poller', App.PollForMessages.create({
 
-            onPoll: function () {
-
+                onPoll: function () {
+                    console.log(localStorage.idUser);
                     $.ajax({
-                         type: "GET",
-                         url: "https://operly.azure-mobile.net/api/messages",
-                         data: "idUser=" + localStorage.idUser ,
-                         success: function(data){
-                             var messages = data.message;
-                             for (var i = 0; i < messages.length; i++) {
+                        type: "GET",
+                        url: "https://operly.azure-mobile.net/api/messages",
+                        data: "idUser=" + localStorage.idUser,
+                        success: function (data) {
+                            var messages = data.message;
+                            for (var i = 0; i < messages.length; i++) {
                                 route.get('store').push('message', {
-                                id: messages[i].id,
-                                message: messages[i].message
+                                    id: messages[i].id,
+                                    message: messages[i].message
                                 });
-                             }
-                         }
+                            }
+                        }
                     });
                 }
             }));
