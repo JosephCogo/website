@@ -160,7 +160,6 @@ App.PollForMessages = Ember.Object.extend({
 App.AskaquestionRoute = Ember.Route.extend({
 
     model: function () {
-        console.log(localStorage.idUser);
         return this.store.find('message', { idUser: localStorage.idUser });
     },
 
@@ -207,6 +206,11 @@ App.Message = DS.Model.extend({
 });
 
 App.AskaquestionController = Ember.ArrayController.extend({
+
+  contentArrayDidChange: function(array, start, removeAmt, addAmt){
+    // do something to respond to this change
+    return this;
+  },
 
     actions: {
         askquestion: function () {
