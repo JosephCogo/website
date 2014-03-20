@@ -127,7 +127,8 @@ App.RegisterController = Ember.ObjectController.extend({
                     password: this.get('password'),
                     emailAddress: this.get('email'),
                     firstName: 'Jeff',
-                    lastName: 'TheDude'
+                    lastName: 'TheDude',
+                    skills : [JavaScript, CSS]
                 }
             }).done(function (data) {
                 console.log('REGISTERED');
