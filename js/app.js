@@ -24,7 +24,8 @@ App.AuthManager = Ember.Object.extend({
         //get the token from local storage, if it exists,
         //authenticate the user
         var accessToken = localStorage.token;
-        if (!Ember.isEmpty(accessToken)) {
+        var idUser = localStorage.idUser;
+        if (!Ember.isEmpty(accessToken) && !Ember.isEmpty(idUser)) {
             this.authenticate(accessToken);
         }
     },
@@ -41,7 +42,7 @@ App.AuthManager = Ember.Object.extend({
     //returns true if there is a token in 
     //localstorage
     isAuthenticated: function () {
-        return !Ember.isEmpty(localStorage.token);
+        return !Ember.isEmpty(localStorage.token) && !Ember.isEmpty(localStorage.idUser);
     }
 });
 
@@ -58,6 +59,9 @@ App.IndexRoute = Ember.Route.extend({
             this.transitionTo('askaquestion');
         }
         else {
+            //just to make sure for now
+            localStorage.removeItem('token');
+            localStorage.removeItem('idUser');
             console.log('notauth');
             this.transitionTo('login');
         }
@@ -69,13 +73,7 @@ App.LoginRoute = Ember.Route.extend({
     //little hack to make sure user doesn't go back to login
    model : function(){
      return {};  
-   },
-   redirect: function() {
-           if(manager.isAuthenticated()){
-               console.log('auth');
-               this.transitionTo('askaquestion');  
-           }
-  }
+   }
 });
 
 
@@ -91,7 +89,7 @@ App.LoginController = Ember.ObjectController.extend({
             }).done(function (data) {
                 //store authentication info in localstorage
                 localStorage.token = data.token;
-                localStorage.user = data.idUser;
+                localStorage.idUser = data.idUser;
                 manager.authenticate(data.token);
                 router.transitionToRoute('askaquestion');
             }).fail(function () {
