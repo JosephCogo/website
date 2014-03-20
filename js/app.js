@@ -179,7 +179,6 @@ App.AskaquestionRoute = Ember.Route.extend({
                         success: function (data) {
                             var messages = data.message;
                             for (var i = 0; i < messages.length; i++) {
-                                console.log(messages[i].id);
                                 route.get('store').push('message', {
                                     id: messages[i].id,
                                     message: messages[i].message
