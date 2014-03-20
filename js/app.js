@@ -60,6 +60,8 @@ App.IndexRoute = Ember.Route.extend({
             this.transitionTo('askaquestion');
         }
         else {
+            console.log(localStorage.idUser);
+            console.log(localStorage.token);
             //just to make sure for now
             localStorage.removeItem('token');
             localStorage.removeItem('idUser');
@@ -210,7 +212,6 @@ App.AskaquestionController = Ember.ArrayController.extend({
                     idUser: localStorage.idUser
                 }
             }).done(function (data) {
-                console.log('Question Asked!!');
                 console.log(data.message);
             }).fail(function () {
                 alert('error');
