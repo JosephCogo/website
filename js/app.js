@@ -204,7 +204,7 @@ App.AskaquestionController = Ember.ArrayController.extend({
 
     actions: {
 
-        askQuestion: function () {
+        askquestion: function () {
 
             $.ajax({ type: 'POST',
                 url: 'https://operly.azure-mobile.net/api/askquestion',
