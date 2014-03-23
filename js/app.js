@@ -15,6 +15,7 @@ App.Router.map(function () {
 App.IndexController = Ember.ObjectController.extend({    
     actions: {
         login: function () {
+            print();
             var Router = this;
             $.post('https://momentum.azure-mobile.net/api/login', {
              emailAddress: 'joemilsom@gmail.com', password: 'password'
