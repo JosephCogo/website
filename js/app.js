@@ -60,11 +60,11 @@ App.Team.FIXTURES = [
 }
 ]
 
-App.TeamlistRoute = Ember.Route.extend({
-    model: function () {
-        return this.store.find('team');
-    }
-});
+//App.TeamlistRoute = Ember.Route.extend({
+//    model: function () {
+//        return this.store.find('team');
+//    }
+//});
 
 App.BlahRoute = Ember.Route.extend({
 
