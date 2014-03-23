@@ -18,17 +18,16 @@ App.IndexController = Ember.ObjectController.extend({
             $.post('https://momentum.azure-mobile.net/api/login', {
              emailAddress: 'joemilsom@gmail.com', password: 'password'
             }, function(data) {
-                sessionStorage.token = '1';
-                console.log(sessionStorage.token);
-            var authToken = data.token;
-            Ember.Logger.log(data.token);
-            //App.Store.authToken = data.token;
-            App.Auth = Ember.Object.create({
-            authToken: data.token
-           // accountId: data.session.account_id
-          });
-          Router.transitionToRoute('teamlist');
-           Ember.Logger.log("LOGIN");
+            sessionStorage.token = data.token;
+            //Router.transitionToRoute('teamlist');
+            //Ember.Logger.log("LOGIN");   
+            
+            $.post('https://momentum.azure-mobile.net/api/challengeupdate', {
+             
+            }, function(data) {
+                console.log(data);
+            
+            });
         });
            
         }
