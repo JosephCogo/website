@@ -37,6 +37,7 @@ App.AuthManager = Ember.Object.extend({
 
 //create a new authmanager instance to handle authentication
 var manager = App.AuthManager.create();
+manager.init();
 
 App.IndexRoute = Ember.Route.extend({
   redirect: function() {
