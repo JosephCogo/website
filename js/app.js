@@ -39,14 +39,13 @@ var manager = App.AuthManager.create();
 
 App.IndexRoute = Ember.Route.extend({
   redirect: function() {
-           var router = this;
            if(manager.isAuthenticated()){
                console.log('auth');
-               router.transitionToRoute('askaquestion');  
+               this.transitionTo('askaquestion');  
            }
            else{
                console.log('notauth');
-               router.transitionToRoute('login');
+               this.transitionTo('login');
            }
   }
 
