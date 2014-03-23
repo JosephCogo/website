@@ -29,7 +29,6 @@ App.AuthManager = Ember.Object.extend({
   },
       
   isAuthenticated: function() {
-    console.log(sessionStorage.token);
     return !Ember.isEmpty(sessionStorage.token);
   }
     
@@ -37,7 +36,6 @@ App.AuthManager = Ember.Object.extend({
 
 //create a new authmanager instance to handle authentication
 var manager = App.AuthManager.create();
-manager.init();
 
 App.IndexRoute = Ember.Route.extend({
   redirect: function() {
