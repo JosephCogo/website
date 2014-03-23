@@ -51,6 +51,15 @@ App.IndexRoute = Ember.Route.extend({
 
 });
 
+App.LoginRoute = Ember.Route.extend({
+    redirect: function() {
+           if(manager.isAuthenticated()){
+               console.log('auth');
+               this.transitionTo('askaquestion');  
+           }
+  }
+
+});
 
 App.LoginController = Ember.ObjectController.extend({    
     actions: {
