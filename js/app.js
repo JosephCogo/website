@@ -23,8 +23,8 @@ App.IndexController = Ember.ObjectController.extend({
             //Ember.Logger.log("LOGIN");   
                 
             $.ajax({
-            url: 'https://momentum.azure-mobile.net/api/challengeupdate',
-            type: 'post',
+            url: 'https://momentum.azure-mobile.net/api/test',
+            type: 'get',
             data: {},
             headers: {
             "X-ZUMO-AUTH" : sessionStorage.token
