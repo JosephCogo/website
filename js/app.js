@@ -19,7 +19,7 @@ App.IndexController = Ember.ObjectController.extend({
              emailAddress: 'joemilsom@gmail.com', password: 'password'
             }, function(data) {
                 sessionStorage.token = '1';
-                console.log(token);
+                console.log(sessionStorage.token);
             var authToken = data.token;
             Ember.Logger.log(data.token);
             //App.Store.authToken = data.token;
