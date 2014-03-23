@@ -27,7 +27,7 @@ App.IndexController = Ember.ObjectController.extend({
             type: 'post',
             data: {},
             headers: {
-            X-ZUMO-AUTH : sessionStorage.token;
+            "X-ZUMO-AUTH" : sessionStorage.token;
             },
             dataType: 'json',
             success: function (data) {
