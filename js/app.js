@@ -3,7 +3,7 @@ App = Ember.Application.create();
 App.ApplicationAdapter = DS.FixtureAdapter;
 
 App.Router.map(function () {
-    this.resource('teamlist', function () {
+    this.resource('askaquestion', function () {
         this.route('teamdescription', { path: '/:team_id' })
         this.route('blah');
     });
@@ -21,21 +21,20 @@ App.IndexController = Ember.ObjectController.extend({
              emailAddress: 'joemilsom@gmail.com', password: 'password'
             }, function(data) {
             sessionStorage.token = data.token;
-            //Router.transitionToRoute('teamlist');
-            //Ember.Logger.log("LOGIN");   
+            Router.transitionToRoute('askaquestion');  
                 
-            $.ajax({
-            url: 'https://momentum.azure-mobile.net/api/test',
-            type: 'get',
-            data: {},
-            headers: {
-            "X-ZUMO-AUTH" : sessionStorage.token
-            },
-            dataType: 'json',
-            success: function (data) {
-            console.log('success');
-            }
-            });
+//            $.ajax({
+//            url: 'https://momentum.azure-mobile.net/api/test',
+//            type: 'get',
+//            data: {},
+//            headers: {
+//            "X-ZUMO-AUTH" : sessionStorage.token
+//            },
+//            dataType: 'json',
+//            success: function (data) {
+//            console.log('success');
+//            }
+//            });
                          
         });
            
