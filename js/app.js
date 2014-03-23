@@ -47,6 +47,7 @@ App.IndexController = Ember.ObjectController.extend({
            else{
                router.transitionToRoute('login');
            }
+        }
    }
 });
 
