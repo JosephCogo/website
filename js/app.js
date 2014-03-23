@@ -6,7 +6,7 @@ App.Router.map(function () {
     this.resource('login');
     this.resource('register');
     this.resource('askaquestion', function () {
-        this.route('teamdescription', { path: '/:team_id' })
+        
     });
 });
 
@@ -29,6 +29,7 @@ App.AuthManager = Ember.Object.extend({
   },
       
   isAuthenticated: function() {
+    console.log(sessionStorage.token);
     return !Ember.isEmpty(sessionStorage.token);
   }
     
