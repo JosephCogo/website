@@ -41,6 +41,7 @@ App.IndexController = Ember.ObjectController.extend({
    actions:{
        load: function(){
         var Router = this;
+           console.log('load');
            if(manager.isAuthenticated){
                router.transitionToRoute('askaquestion');  
            }
