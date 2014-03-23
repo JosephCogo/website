@@ -41,11 +41,11 @@ App.IndexRoute = Ember.Route.extend({
   redirect: function() {
            if(manager.isAuthenticated()){
                console.log('auth');
-               router.transitionToRoute('askaquestion');  
+               router.transitionTo('askaquestion');  
            }
            else{
                console.log('notauth');
-               router.transitionToRoute('login');
+               router.transitionTo('login');
            }
   }
 
