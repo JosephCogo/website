@@ -18,6 +18,8 @@ App.IndexController = Ember.ObjectController.extend({
             $.post('https://momentum.azure-mobile.net/api/login', {
              emailAddress: 'joemilsom@gmail.com', password: 'password'
             }, function(data) {
+                sessionStorage.token = '1';
+                console.log(token);
             var authToken = data.token;
             Ember.Logger.log(data.token);
             //App.Store.authToken = data.token;
