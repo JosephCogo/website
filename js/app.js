@@ -10,6 +10,10 @@ App.Router.map(function () {
     this.route('blah');
 });
 
+App.IndexRoute = Ember.Route.extend({
+console.log(sessionStorage.token);
+});
+
 App.IndexController = Ember.ObjectController.extend({
 
     actions: {
