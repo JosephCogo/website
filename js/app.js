@@ -29,7 +29,7 @@ App.AuthManager = Ember.Object.extend({
   },
       
   isAuthenticated: function() {
-    return !Ember.isEmpty(sessionStorage.token));
+    return !Ember.isEmpty(sessionStorage.token);
   }
     
 });
