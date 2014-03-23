@@ -12,10 +12,7 @@ App.Router.map(function () {
 
 
 
-App.IndexController = Ember.ObjectController.extend({
-
-    console.log(sessionStorage.token);
-    
+App.IndexController = Ember.ObjectController.extend({    
     actions: {
         login: function () {
             var Router = this;
@@ -72,3 +69,7 @@ App.TeamlistRoute = Ember.Route.extend({
 App.BlahRoute = Ember.Route.extend({
 
 });
+
+function print(){
+        console.log(sessionStorage.token);
+}
