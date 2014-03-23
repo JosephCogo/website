@@ -21,13 +21,20 @@ App.IndexController = Ember.ObjectController.extend({
             sessionStorage.token = data.token;
             //Router.transitionToRoute('teamlist');
             //Ember.Logger.log("LOGIN");   
-            
-            $.post('https://momentum.azure-mobile.net/api/challengeupdate', {
-             
-            }, function(data) {
-                console.log(data);
-            
+                
+            $.ajax({
+            url: 'https://momentum.azure-mobile.net/api/challengeupdate',
+            type: 'post',
+            data: {},
+            headers: {
+            X-ZUMO-AUTH : sessionStorage.token;
+            },
+            dataType: 'json',
+            success: function (data) {
+            console.log('success');
+            }
             });
+                         
         });
            
         }
