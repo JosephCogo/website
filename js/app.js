@@ -38,21 +38,30 @@ App.AuthManager = Ember.Object.extend({
 var manager = App.AuthManager.create();
 
 App.IndexController = Ember.ObjectController.extend({
-   console.log('hrkk'); 
+   actions:{
+       load: function(){
+        var Router = this;
+           if(manager.isAuthenticated){
+               router.transitionToRoute('askaquestion');  
+           }
+           else{
+               router.transitionToRoute('login');
+           }
+   }
 });
 
 App.LoginController = Ember.ObjectController.extend({    
     actions: {
         login: function () {
             print();
-            var Router = this;
+            var router = this;
             $.post('https://momentum.azure-mobile.net/api/login', {
              emailAddress: 'joemilsom@gmail.com', password: 'password'
             }, function(data) {
             sessionStorage.token = data.token;
             manager.authenticate(data.token);
                 
-            Router.transitionToRoute('askaquestion');  
+            router.transitionToRoute('askaquestion');  
         });  
         }
     }
