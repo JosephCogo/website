@@ -37,10 +37,8 @@ App.AuthManager = Ember.Object.extend({
 //create a new authmanager instance to handle authentication
 var manager = App.AuthManager.create();
 
-App.IndexController = Ember.ObjectController.extend({
-   actions:{
-       load: function(){
-        var Router = this;
+App.IndexRoute = Ember.Route.extend({
+  redirect: function() {
            console.log('load');
            if(manager.isAuthenticated){
                router.transitionToRoute('askaquestion');  
@@ -48,9 +46,10 @@ App.IndexController = Ember.ObjectController.extend({
            else{
                router.transitionToRoute('login');
            }
-        }
-   }
+  }
+
 });
+
 
 App.LoginController = Ember.ObjectController.extend({    
     actions: {
