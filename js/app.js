@@ -143,13 +143,14 @@ function print(){
 //ask a question route, do long polling as we need to
 //properly set up a web server so we can use Socket.io
 App.AskaquestionRoute = Ember.Route.extend({
-
+    beforeModel: function(transition){
+     (function poll() {
+        setTimeout(function() {
+        $.ajax({ url: "https://momentum.azure-mobile.net/api/test", success: function(data) {
+            console.log(data.message);
+        }, dataType: "json", complete: poll });
+        }, 30000);
+        })();   
+    }
 });
 
-(function poll() {
-   setTimeout(function() {
-       $.ajax({ url: "https://momentum.azure-mobile.net/api/test", success: function(data) {
-            console.log(data.message);
-       }, dataType: "json", complete: poll });
-    }, 10000);
-})();
