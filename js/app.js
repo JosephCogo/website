@@ -146,10 +146,10 @@ App.AskaquestionRoute = Ember.Route.extend({
 
 });
 
-(function poll(){
-    $.ajax({ url: "https://momentum.azure-mobile.net/api/test", success: function(data){
-
-        console.log(data.message);
-
-    }, dataType: "json", complete: poll, timeout: 30000 });
+(function poll() {
+   setTimeout(function() {
+       $.ajax({ url: "https://momentum.azure-mobile.net/api/test", success: function(data) {
+            console.log(data.message);
+       }, dataType: "json", complete: poll });
+    }, 10000);
 })();
