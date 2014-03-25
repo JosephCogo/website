@@ -182,7 +182,7 @@ App.AskaquestionRoute = Ember.Route.extend({
         })); 
     this.get('poller').start();
     }
-}
+},
     
 deactivate: function() {
     this.get('poller').stop();
