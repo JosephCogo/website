@@ -170,10 +170,12 @@ App.AskaquestionRoute = Ember.Route.extend({
 
 App.AskaquestionController = Ember.ArrayController.extend({
     ready : function () {
+        console.log('gjj');
       var msg = this.store.createRecord('message', {
         message: 'message'
       });
       msg.save();
+        
     }
 });
 
