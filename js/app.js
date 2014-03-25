@@ -173,7 +173,7 @@ App.AskaquestionController = Ember.ArrayController.extend({
       var msg = this.store.createRecord('message', {
         message: 'message'
       });
-      todo.save();
+      msg.save();
     }
 });
 
