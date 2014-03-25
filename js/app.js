@@ -150,7 +150,8 @@ App.PollForMessages = Ember.Object.extend({
     },
     onPoll: function () {
         console.log("polling");
-
+        var msg = this.store.createRecord('message'{message: 'message'});
+        msg.save();
     }
 });
 
