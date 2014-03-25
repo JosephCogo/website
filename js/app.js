@@ -188,7 +188,7 @@ App.AskaquestionController = Ember.ArrayController.extend({
 
         var messages = data.message;
         for(var i = 0; i < messages.length; i++){
-            this.store.push(id : messages[i].id, message : messages[i].message);
+            this.store.push('id' : messages[i].id, 'message' : messages[i].message);
         }
     });
     
