@@ -164,7 +164,8 @@ App.AskaquestionRoute = Ember.Route.extend({
         console.log("model: " + this);
         //var poll = App.PollForMessages.create();
        // poll.start();
-        return this.store.findAll('message');
+       // return this.store.findAll('message');
+        return {};
     },
     
     ready : function(){
@@ -174,6 +175,8 @@ App.AskaquestionRoute = Ember.Route.extend({
 });
 
 App.AskaquestionController = Ember.ArrayController.extend({
+    
+    actions: {
     addMsg: function () {
       console.log('gjj');
       //var msg = this.store.createRecord('message', {
@@ -181,9 +184,13 @@ App.AskaquestionController = Ember.ArrayController.extend({
       //});
       //this will send a post request to the server!!!! CRAZY
       //msg.save();
-      this.store.push('message', {
-          id : 6,
-          message: 'message'
-      });   
+    Ember.$.getJSON('/updates', 'GET').then(function(data) {
+
+        var messages = data.message;
+        for(int i = 0; i < messages.length; i++){
+            this.store.push(id : messages[i].id, message : messages[i].message);
+        }
+      });
+     }
     }
 });
