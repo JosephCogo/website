@@ -137,22 +137,17 @@ App.Message = DS.Model.extend({
     message : DS.attr('string')
 });
 
-function print(){
-    console.log(localStorage.token);
-}
-
 App.PollForMessages = Ember.Object.extend({
     start: function () {
         console.log("init Poll");
-        this.timer = setInterval(this.onPoll, 2000);
+        this.timer = setInterval(this.onPoll, 10000);
     },
     stop: function () {
         clearInterval(this.timer);
     },
     onPoll: function () {
         console.log("polling");
-        var msg = App.AskaquestionController.store.createRecord('message', {message: 'message'});
-        msg.save();
+        
     }
 });
 
@@ -165,8 +160,28 @@ App.AskaquestionRoute = Ember.Route.extend({
         //var poll = App.PollForMessages.create();
        // poll.start();
         return this.store.findAll('message');
-        //return {};
+    },
+    
+    setupController : function(controller, model){
+    if (Ember.isNone(this.get('poller')) {
+      this.set('poller', App.PollForMessages.create({
+        onPoll: function() {
+        
+        Ember.$.getJSON('https://operly.azure-mobile.net/api/messages', 'GET').then(function(data) {
+            var messages = data.message;
+            for(var i = 0; i < messages.length; i++){
+            controller.store.push('message', {
+                id : messages[i].id, 
+                message : messages[i].message
+            });
+            console.log(messages[i].id);
+            }
+        });
     }
+    })); 
+    this.get('poller').start();
+}
+}
     
 });
 
@@ -174,30 +189,16 @@ App.AskaquestionController = Ember.ArrayController.extend({
     
     actions: {
     addMsg: function () {
-      console.log('gjj');
       //var msg = this.store.createRecord('message', {
       //  message: 'message'
       //});
       //this will send a post request to the server!!!! CRAZY
       //msg.save();
-      
-//      this.store.push('message', {
-//          id : 6
-//          message: 'message'
-//      });   
-        var controller = this;
-    Ember.$.getJSON('https://operly.azure-mobile.net/api/messages', 'GET').then(function(data) {
+        
+    var controller = this;
 
-        var messages = data.message;
-        for(var i = 0; i < messages.length; i++){
-            controller.store.push('message', {
-                id : messages[i].id, 
-                message : messages[i].message
-            });
-           // console.log(messages[i].message);
-        }
-    });
     
     }
     }
+
 });
