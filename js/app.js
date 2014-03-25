@@ -193,6 +193,7 @@ App.AskaquestionController = Ember.ArrayController.extend({
 
       message: function() {
         var postId = this.get('id');
+          console.log(postId);
           return 'message';
         //return this.get('store').filter('message', function(message) {
         //return message.get('post.id') == postId;
