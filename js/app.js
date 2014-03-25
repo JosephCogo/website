@@ -162,9 +162,18 @@ App.AskaquestionRoute = Ember.Route.extend({
 
     model: function () {
         console.log("model: " + this);
-        var poll = App.PollForMessages.create();
-        poll.start();
+        //var poll = App.PollForMessages.create();
+       // poll.start();
         return this.store.findAll('message');
+    }
+});
+
+App.AskaquestionController = Ember.ObjectController.extend({
+    ready : function () {
+      var msg = this.store.createRecord('message', {
+        message: 'message'
+      });
+      todo.save();
     }
 });
 
