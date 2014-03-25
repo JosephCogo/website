@@ -185,12 +185,12 @@ App.AskaquestionController = Ember.ArrayController.extend({
 //          id : 6
 //          message: 'message'
 //      });   
-        
+        var controller = this;
     Ember.$.getJSON('https://operly.azure-mobile.net/api/messages', 'GET').then(function(data) {
 
         var messages = data.message;
         for(var i = 0; i < messages.length; i++){
-            this.store.push('message', {
+            controller.store.push('message', {
                 id : messages[i].id, 
                 message : messages[i].message
             });
