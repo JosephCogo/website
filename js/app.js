@@ -182,7 +182,8 @@ App.AskaquestionController = Ember.ArrayController.extend({
       //this will send a post request to the server!!!! CRAZY
       //msg.save();
       this.store.push('message', {
-        message: 'message'
+          id : 6,
+          message: 'message'
       });   
     }
 });
