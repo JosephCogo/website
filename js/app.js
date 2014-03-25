@@ -163,7 +163,7 @@ App.AskaquestionRoute = Ember.Route.extend({
     },
     
     setupController : function(controller, model){
-    if (Ember.isNone(this.get('poller')) {
+    if (Ember.isNone(this.get('poller'))) {
       this.set('poller', App.PollForMessages.create({
         
         onPoll: function() {
@@ -181,7 +181,7 @@ App.AskaquestionRoute = Ember.Route.extend({
         }
         })); 
     this.get('poller').start();
-    });
+    }
 }
     
 });
