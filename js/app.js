@@ -46,7 +46,7 @@ var manager = App.AuthManager.create();
 App.IndexRoute = Ember.Route.extend({
 
     redirect: function () {
-        console.log('rr');
+
         if (!manager.isAuthenticated()) {
             console.log('auth');
             this.transitionTo('askaquestion');
@@ -151,7 +151,7 @@ App.PollForMessages = Ember.Object.extend({
     },
     onPoll: function () {
         console.log("polling");
-        var msg = this.store.createRecord('message', {message: 'message'});
+        var msg = App.AskaquestionController.store.createRecord('message', {message: 'message'});
         msg.save();
     }
 });
