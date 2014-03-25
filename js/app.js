@@ -184,22 +184,20 @@ App.AskaquestionRoute = Ember.Route.extend({
     }
 }
     
+deactivate: function() {
+    this.get('poller').stop();
+}
+    
 });
 
 App.AskaquestionController = Ember.ArrayController.extend({
     
-    actions: {
-    addMsg: function () {
-      //var msg = this.store.createRecord('message', {
-      //  message: 'message'
-      //});
-      //this will send a post request to the server!!!! CRAZY
-      //msg.save();
-        
-    var controller = this;
 
+      message: function() {
+        var postId = this.get('id');
+        return this.get('store').filter('message', function(message) {
+        return message.get('post.id') == postId;
+      });
+        }.property()
     
-    }
-    }
-
 });
