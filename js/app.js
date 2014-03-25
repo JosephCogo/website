@@ -184,14 +184,23 @@ App.AskaquestionController = Ember.ArrayController.extend({
       //});
       //this will send a post request to the server!!!! CRAZY
       //msg.save();
+      
+//      this.store.push('message', {
+//          id : 6
+//          message: 'message'
+//      });   
+        
     Ember.$.getJSON('https://operly.azure-mobile.net/api/messages', 'GET').then(function(data) {
 
         var messages = data.message;
         for(var i = 0; i < messages.length; i++){
-            this.store.push('id' : messages[i].id, 'message' : messages[i].message);
+            this.store.push('message', {
+                id : messages[i].id 
+                message : messages[i].message
+            });
         }
     });
     
     }
-}
+    }
 });
