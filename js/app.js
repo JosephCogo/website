@@ -157,8 +157,6 @@ App.AskaquestionRoute = Ember.Route.extend({
 
     model: function () {
         console.log("model: " + this);
-        //var poll = App.PollForMessages.create();
-       // poll.start();
         return this.store.findAll('message');
     },
     
@@ -195,9 +193,10 @@ App.AskaquestionController = Ember.ArrayController.extend({
 
       message: function() {
         var postId = this.get('id');
-        return this.get('store').filter('message', function(message) {
-        return message.get('post.id') == postId;
-      });
-        }.property()
+          return 'message';
+        //return this.get('store').filter('message', function(message) {
+        //return message.get('post.id') == postId;
+        //});
+      }//.property()
     
 });
