@@ -164,8 +164,8 @@ App.AskaquestionRoute = Ember.Route.extend({
         console.log("model: " + this);
         //var poll = App.PollForMessages.create();
        // poll.start();
-        //return this.store.findAll('message');
-        return {};
+        return this.store.findAll('message');
+        //return {};
     }
     
 });
