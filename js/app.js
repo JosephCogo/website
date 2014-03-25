@@ -166,11 +166,16 @@ App.AskaquestionRoute = Ember.Route.extend({
        // poll.start();
         return this.store.findAll('message');
     }
+    
+    ready : function(){
+        console.log('ready');
+        this.controllerFor('Askaquestion').send('addMsg');
+    }
 });
 
 App.AskaquestionController = Ember.ArrayController.extend({
     addMsg: function () {
-        console.log('gjj');
+      console.log('gjj');
       var msg = this.store.createRecord('message', {
         message: 'message'
       });
@@ -178,5 +183,3 @@ App.AskaquestionController = Ember.ArrayController.extend({
         
     }
 });
-
-App.AskaquestionController.addMsg();
