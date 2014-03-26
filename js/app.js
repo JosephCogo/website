@@ -156,7 +156,7 @@ App.AskaquestionRoute = Ember.Route.extend({
         return this.store.findAll('message');
     },
     
-//    setupController : function(controller, model){
+    setupController : function(controller, model){
 //    if (Ember.isNone(this.get('poller'))) {
 //      var route = this;
 //      this.set('poller', App.PollForMessages.create({
@@ -177,7 +177,7 @@ App.AskaquestionRoute = Ember.Route.extend({
 //        })); 
 //    this.get('poller').start();
 //    }
-//},
+},
     
 deactivate: function() {
     this.get('poller').stop();
