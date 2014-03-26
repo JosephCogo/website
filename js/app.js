@@ -133,10 +133,6 @@ App.RegisterController = Ember.ObjectController.extend({
 });
 
 
-App.Message = DS.Model.extend({
-    message : DS.attr('string')
-});
-
 App.PollForMessages = Ember.Object.extend({
     start: function () {
         console.log("init Poll");
@@ -162,6 +158,7 @@ App.AskaquestionRoute = Ember.Route.extend({
 //    
     setupController : function(controller, model){
     if (Ember.isNone(this.get('poller'))) {
+      var route = this;
       this.set('poller', App.PollForMessages.create({
         
         onPoll: function() {
@@ -169,7 +166,7 @@ App.AskaquestionRoute = Ember.Route.extend({
             Ember.$.getJSON('https://operly.azure-mobile.net/api/messages', 'GET').then(function(data) {
                 var messages = data.message;
                 for(var i = 0; i < messages.length; i++){
-                    controller.store.push('message', {
+                    route.get('store').push('message', {
                         id : messages[i].id, 
                         message : messages[i].message
                     });
@@ -188,14 +185,15 @@ deactivate: function() {
     
 });
 
+App.Message = DS.Model.extend({
+    message : DS.attr('string')
+});
+
 App.MessageController = Ember.ObjectController.extend({
     
-
       message: function() {
-        console.log("damn!!");
+        console.log("message function");
         var postId = this.get('id');
-//        //  console.log(postId);
-//        //  return 'message';
         return this.get('store').filter('message', function(message) {
         return message.get('post.id') == postId;
         });
