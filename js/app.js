@@ -155,31 +155,31 @@ App.PollForMessages = Ember.Object.extend({
 //properly set up a web server so we can use Socket.io
 App.AskaquestionRoute = Ember.Route.extend({
 
-    model: function () {
-        console.log("model: " + this);
-        return this.store.findAll('message');
-    },
-    
+//    model: function () {
+//        console.log("model: " + this);
+//        return this.store.findAll('message');
+//    },
+//    
     setupController : function(controller, model){
-//    if (Ember.isNone(this.get('poller'))) {
-//      this.set('poller', App.PollForMessages.create({
-//        
-//        onPoll: function() {
-//
-//            Ember.$.getJSON('https://operly.azure-mobile.net/api/messages', 'GET').then(function(data) {
-//                var messages = data.message;
-//                for(var i = 0; i < messages.length; i++){
-//                    controller.store.push('message', {
-//                        id : messages[i].id, 
-//                        message : messages[i].message
-//                    });
-//                    console.log(messages[i].id);
-//                }
-//            });
-//        }
-//        })); 
-//    this.get('poller').start();
-//    }
+    if (Ember.isNone(this.get('poller'))) {
+      this.set('poller', App.PollForMessages.create({
+        
+        onPoll: function() {
+
+            Ember.$.getJSON('https://operly.azure-mobile.net/api/messages', 'GET').then(function(data) {
+                var messages = data.message;
+                for(var i = 0; i < messages.length; i++){
+                    controller.store.push('message', {
+                        id : messages[i].id, 
+                        message : messages[i].message
+                    });
+                    console.log(messages[i].id);
+                }
+            });
+        }
+        })); 
+    this.get('poller').start();
+    }
 },
     
 deactivate: function() {
@@ -192,12 +192,13 @@ App.AskaquestionController = Ember.ArrayController.extend({
     
 
       message: function() {
-        var postId = this.get('id');
-          console.log(postId);
-          return 'message';
+          console.log("damn!!");
+       // var postId = this.get('id');
+        //  console.log(postId);
+        //  return 'message';
         //return this.get('store').filter('message', function(message) {
         //return message.get('post.id') == postId;
         //});
-      }//.property()
+      }.property()
     
 });
