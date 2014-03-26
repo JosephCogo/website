@@ -188,7 +188,7 @@ deactivate: function() {
     
 });
 
-App.AskaquestionController = Ember.ObjectController.extend({
+App.MessageController = Ember.ObjectController.extend({
     
 
       messages: function() {
