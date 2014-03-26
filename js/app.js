@@ -189,8 +189,9 @@ App.Message = DS.Model.extend({
     message : DS.attr('string')
 });
 
-App.MessaeController = Ember.ObjectController.extend({
+App.MessageController = Ember.ObjectController.extend({
     
+    actions : {
       message: function() {
         console.log("message function");
         var postId = this.get('id');
@@ -198,5 +199,5 @@ App.MessaeController = Ember.ObjectController.extend({
         return message.get('post.id') == postId;
         });
       }.property()
-    
+    }
 });
