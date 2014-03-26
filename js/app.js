@@ -191,7 +191,7 @@ deactivate: function() {
 App.MessageController = Ember.ObjectController.extend({
     
 
-      messages: function() {
+      message: function() {
         console.log("damn!!");
 //        var postId = this.get('id');
 //        //  console.log(postId);
