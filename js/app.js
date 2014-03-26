@@ -188,7 +188,7 @@ deactivate: function() {
     
 });
 
-App.AskaquestionController = Ember.Controller.extend({
+App.AskaquestionController = Ember.ObjectController.extend({
     
 
       messages: function() {
@@ -196,9 +196,9 @@ App.AskaquestionController = Ember.Controller.extend({
 //        var postId = this.get('id');
 //        //  console.log(postId);
 //        //  return 'message';
-//        return this.get('store').filter('message', function(message) {
-//        return message.get('post.id') == postId;
-//        });
-      }
+        return this.get('store').filter('message', function(message) {
+        return message.get('post.id') == postId;
+        });
+      }.property()
     
 });
