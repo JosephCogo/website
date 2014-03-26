@@ -157,27 +157,28 @@ App.AskaquestionRoute = Ember.Route.extend({
     },
     
     setupController : function(controller, model){
-        this._super(controller, model);
-//    if (Ember.isNone(this.get('poller'))) {
-//      var route = this;
-//      this.set('poller', App.PollForMessages.create({
-//        
-//        onPoll: function() {
-//
-//            Ember.$.getJSON('https://operly.azure-mobile.net/api/messages', 'GET').then(function(data) {
-//                var messages = data.message;
-//                for(var i = 0; i < messages.length; i++){
-//                    route.get('store').push('message', {
-//                        id : messages[i].id, 
-//                        message : messages[i].message
-//                    });
-//                    console.log(messages[i].id);
-//                }
-//            });
-//        }
-//        })); 
-//    this.get('poller').start();
-//    }
+    //this needs to be here!!! otherwise the model is not set correctly!!     
+    this._super(controller, model);
+    if (Ember.isNone(this.get('poller'))) {
+      var route = this;
+      this.set('poller', App.PollForMessages.create({
+        
+        onPoll: function() {
+
+            Ember.$.getJSON('https://operly.azure-mobile.net/api/messages', 'GET').then(function(data) {
+                var messages = data.message;
+                for(var i = 0; i < messages.length; i++){
+                    route.get('store').push('message', {
+                        id : messages[i].id, 
+                        message : messages[i].message
+                    });
+                    console.log(messages[i].id);
+                }
+            });
+        }
+        })); 
+    this.get('poller').start();
+    }
 },
     
 deactivate: function() {
