@@ -188,12 +188,12 @@ deactivate: function() {
     
 });
 
-App.MessgeController = Ember.ObjectController.extend({
+App.MessageController = Ember.ObjectController.extend({
     
 
       message: function() {
         console.log("damn!!");
-//        var postId = this.get('id');
+        var postId = this.get('id');
 //        //  console.log(postId);
 //        //  return 'message';
         return this.get('store').filter('message', function(message) {
