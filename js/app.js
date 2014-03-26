@@ -151,11 +151,11 @@ App.PollForMessages = Ember.Object.extend({
 //properly set up a web server so we can use Socket.io
 App.AskaquestionRoute = Ember.Route.extend({
 
-//    model: function () {
-//        console.log("model: " + this);
-//        return this.store.findAll('message');
-//    },
-//    
+    model: function () {
+        console.log("model: " + this);
+        return this.store.findAll('message');
+    },
+    
     setupController : function(controller, model){
     if (Ember.isNone(this.get('poller'))) {
       var route = this;
@@ -189,9 +189,14 @@ App.Message = DS.Model.extend({
     message : DS.attr('string')
 });
 
+App.AskaquestionController = Ember.ArrayController.extend({
+   
+    
+    
+});
+
 App.MessageController = Ember.ObjectController.extend({
     
-    actions : {
       message: function() {
         console.log("message function");
         var postId = this.get('id');
@@ -199,5 +204,5 @@ App.MessageController = Ember.ObjectController.extend({
         return message.get('post.id') == postId;
         });
       }.property()
-    }
+    
 });
