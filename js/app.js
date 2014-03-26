@@ -188,7 +188,7 @@ deactivate: function() {
     
 });
 
-App.MessageController = Ember.ObjectController.extend({
+App.MessgeController = Ember.ObjectController.extend({
     
 
       message: function() {
