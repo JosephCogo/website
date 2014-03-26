@@ -159,6 +159,7 @@ App.AskaquestionRoute = Ember.Route.extend({
     setupController : function(controller, model){
     //this needs to be here!!! otherwise the model is not set correctly!!     
     this._super(controller, model);
+        
     if (Ember.isNone(this.get('poller'))) {
       var route = this;
       this.set('poller', App.PollForMessages.create({
@@ -193,18 +194,5 @@ App.Message = DS.Model.extend({
 
 App.AskaquestionController = Ember.ArrayController.extend({
    
-    
-    
 });
 
-App.MessageController = Ember.ObjectController.extend({
-    
-      message: function() {
-        console.log("message function");
-        var postId = this.get('id');
-        return this.get('store').filter('message', function(message) {
-        return message.get('post.id') == postId;
-        });
-      }.property()
-    
-});
