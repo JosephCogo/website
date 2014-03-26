@@ -189,7 +189,7 @@ App.Message = DS.Model.extend({
     message : DS.attr('string')
 });
 
-App.MessageController = Ember.ObjectController.extend({
+App.MessaeController = Ember.ObjectController.extend({
     
       message: function() {
         console.log("message function");
