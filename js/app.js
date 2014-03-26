@@ -193,12 +193,12 @@ App.AskaquestionController = Ember.ObjectController.extend({
 
       messages: function() {
         console.log("damn!!");
-        var postId = this.get('id');
-        //  console.log(postId);
-        //  return 'message';
-        return this.get('store').filter('message', function(message) {
-        return message.get('post.id') == postId;
-        });
-      }.property()
+//        var postId = this.get('id');
+//        //  console.log(postId);
+//        //  return 'message';
+//        return this.get('store').filter('message', function(message) {
+//        return message.get('post.id') == postId;
+//        });
+      }
     
 });
