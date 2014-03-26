@@ -49,12 +49,12 @@
       </div>
 
       
-        <span style = "color : #66d7bf;"> {{render "messages" message}} </span><br>
+        <span style = "color : #66d7bf;"> {{render "messages" messages}} </span><br>
       
         <button class = "loginButton" {{action 'addMsg'}}>MSG </button>
   </script>
     
-<script type="text/x-handlebars" data-template-name='message'>
+<script type="text/x-handlebars" data-template-name='messages'>
       {{postId}}
 </script>
 
