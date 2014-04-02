@@ -54,11 +54,13 @@ var manager = App.AuthManager.create();
 App.IndexRoute = Ember.Route.extend({
 
     redirect: function () {
+        //if the user is authenticated transfer to ask a question
         if (manager.isAuthenticated()) {
             console.log(localStorage.idUser);
             console.log(localStorage.token);
             this.transitionTo('askaquestion');
         }
+        //if there is no token, go to login
         else {
             console.log(localStorage.idUser);
             console.log(localStorage.token);
@@ -119,6 +121,7 @@ App.RegisterRoute = Ember.Route.extend({
 
 App.RegisterController = Ember.ObjectController.extend({
     actions: {
+        //if user chooses to do registration
         register: function () {
             var router = this;
             $.ajax({ type: 'POST',
