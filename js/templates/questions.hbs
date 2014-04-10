@@ -1,64 +1,24 @@
-<!DOCTYPE html>
-<html>
 <head>
-<title>Operly</title>
-<!-- Bootstrap core CSS -->
-<link href="css/bootstrap.css" rel="stylesheet">
-
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
-
-<link href="css/askaquestionstyle.css" rel="stylesheet">
-<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="js/libs/jquery-1.10.2.js"></script>
 <script src="js/libs/jquery.autosize.min.js"></script>
 </head>
+
 <body>
 <div class='sidebar'>
     <h4>John Smith</h4>
     <ul class="nav nav-stacked">
-        <li><a href="#" class="active-link">Ask A Question</a><span>(3)</span></li>
-        <li><a href="#">Answer A Question</a><span>(4)</span></li>
+        <li>{{#link-to 'askaquestion'}}Ask Question{{/link-to}}<span>(3)</span></li>
+        <li>{{#link-to 'answeraquestion'}}Answer A Question{{/link-to}}<span>(4)</span></li>
     </ul>
 </div>
 <div class='content-pane'>
     <div class='content'>
 
-        <div class="lightbulb-help">
-            <a href='#'>
-                <i class="fa fa-lightbulb-o fa-3x" style="color: #2BB4A7"></i>
-            </a>
-            <div class="helptext">
-                - Enter your expertise into the box below<br>
-                - The input should autofill as you start typing.<br>
-                - If there is no preset expertise, please enter it in the alternative box.<br>
-                - A minimum of 5 is needed.<br>
-            </div>
-        </div>
-        
-        <div class="actions">
-            <span>Ask Question</span>
-            <span class='selected'>Solved (2)</span>
-            <span>Unsolved</span>
-        </div>
-
-        <div class="question-stack">
-            <p>(Q) Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?</p>
-            <p>(Q) G elit, sed do eiusmod?</p>
-
-            <div class="question-help">
-                <span class="arrow"></span>
-                <div class="textwrap">
-                    <textarea></textarea>
-                </div>
-                <div class="btnwrap">
-                    <button><i class="fa fa-paperclip"> </i> Attach Image</button>
-                    <button><i class="fa fa-paperclip"> </i> Send</button>
-                </div>
-            </div>
-        </div>
+        {{outlet}}
 
     </div>
 </div>
+
 <script>
 $('.question-stack > p').on('click', function(e) {
     if (e.target !== this) return;
@@ -75,5 +35,5 @@ $('.lightbulb-help > a').on('click', function(e) {
     $('.lightbulb-help > div').fadeToggle('slow');
 })
 </script>
+
 </body>
-</html>
