@@ -1,15 +1,5 @@
-        <div class="lightbulb-help">
-            <a href='#'>
-                <i class="fa fa-lightbulb-o fa-3x" style="color: #2BB4A7"></i>
-            </a>
-            <div class="helptext">
-                - Enter your expertise into the box below<br>
-                - The input should autofill as you start typing.<br>
-                - If there is no preset expertise, please enter it in the alternative box.<br>
-                - A minimum of 5 is needed.<br>
-            </div>
-        </div>
-        
+
+       
         <div class="actions">
             <span>Ask Question</span>
             <span class='selected'>Solved (2)</span>
@@ -33,3 +23,19 @@
         </div>
 
 
+  <script>
+$('.question-stack > p').on('click', function(e) {
+    if (e.target !== this) return;
+    $('.selected-question').removeClass('selected-question');
+    if (!$('.question-help').is(":visible")) {
+        $('.question-help').fadeIn('slow')
+        $('.question-help textarea').autosize({append: "\n"}).text("(A) ");
+    }
+    $(this).addClass('selected-question');
+    $('.question-help .arrow').css("top", $(this).position().top);
+})
+$('.lightbulb-help > a').on('click', function(e) {
+    e.preventDefault();
+    $('.lightbulb-help > div').fadeToggle('slow');
+})
+</script>
