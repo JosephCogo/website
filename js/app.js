@@ -1,15 +1,15 @@
 App = Ember.Application.create();
 
 App.ApplicationAdapter = DS.RESTAdapter.extend({
-    host : "https://operly.azure-mobile.net",
-    namespace : "api"
+    //host : "https://operly.azure-mobile.net",
+    //namespace : "api"
 });
 
-
+//define the routes
 App.Router.map(function () {
     this.resource('login');
     this.resource('register');
-    this.resource('askaquestion', function () {
+    this.resource('questions', function () {
         
     });
 });
@@ -33,10 +33,7 @@ App.AuthManager = Ember.Object.extend({
     //set up all subsequent ajax calls so that
     //it sends through the token in the headers.
     authenticate: function (accessToken) {
-        $.ajaxSetup({
-            //headers: { "X-ZUMO-AUTH": localStorage.token },
-            //dataType: 'json'
-        });
+
     },
 
     //returns true if there is a token in 
@@ -58,7 +55,7 @@ App.IndexRoute = Ember.Route.extend({
         if (manager.isAuthenticated()) {
             console.log(localStorage.idUser);
             console.log(localStorage.token);
-            this.transitionTo('askaquestion');
+            this.transitionTo('questions');
         }
         //if there is no token, go to login
         else {
@@ -69,7 +66,7 @@ App.IndexRoute = Ember.Route.extend({
             localStorage.removeItem('idUser');
 
             console.log('notauth');
-            this.transitionTo('login');
+            this.transitionTo('questions');
         }
     }
 });
@@ -88,27 +85,18 @@ App.LoginController = Ember.ObjectController.extend({
         //will create a post request to login, if successful, login and store token
         login: function () {
             var router = this;
+            //fill out
+            $.ajax({
 
-            $.ajax({ type: 'POST',
-                url: "https://operly.azure-mobile.net/api/login",
-                data: { emailAddress: this.get('email'), password: this.get('password') }
-            }).done(function (data) {
-                //store authentication info in localstorage
-                localStorage.token = data.token;
-                localStorage.idUser = data.idUser;
-                manager.authenticate(data.token);
-                router.transitionToRoute('askaquestion');
-            }).fail(function () {
-                alert('error');
+
+
             });
         },
 
         register: function () {
             var router = this;
             console.log('register');
-            // $(".question").transition({ opacity: 0 }, function(){
             router.transitionToRoute('register');
-            // });
         }
     }
 });
@@ -123,85 +111,32 @@ App.RegisterController = Ember.ObjectController.extend({
     actions: {
         //if user chooses to do registration
         register: function () {
-            var router = this;
-            $.ajax({ type: 'POST',
-                url: 'https://operly.azure-mobile.net/api/register',
-                data: {
-                    password: this.get('password'),
-                    emailAddress: this.get('email'),
-                    firstName: 'Jeff',
-                    lastName: 'TheDude',
-                    skills : ["Falconry", "Panda Slapping"]
-                }
-            }).done(function (data) {
-                console.log('REGISTERED');
-                localStorage.token = data.token;
-                localStorage.idUser = data.idUser;
-                router.transitionToRoute('askaquestion');
-            }).fail(function () {
-                alert('error');
-            });
+
         }
     }
 });
 
-
-App.PollForMessages = Ember.Object.extend({
-    start: function () {
-        console.log("init Poll");
-        this.timer = setInterval(this.onPoll, 10000);
-    },
-    stop: function () {
-        clearInterval(this.timer);
-    },
-    onPoll: function () {
-        console.log("polling");  
-    }
+App.Message = DS.Model.extend({
+    message : DS.attr('string')
 });
 
 //ask a question route, do long polling as we need to
 //properly set up a web server so we can use Socket.io
-App.AskaquestionRoute = Ember.Route.extend({
+App.QuestionsRoute = Ember.Route.extend({
 
     model: function () {
     //return this.store.find('message', { idUser: localStorage.idUser });
     var store = this.store;
 
-    return store.filter('message', { idUser: localStorage.idUser }, function(message) {
-       return message;
-    });
+    //return store.filter('message', { idUser: localStorage.idUser }, function(message) {
+    //   return message;
+    //});
     
     },
 
     setupController: function (controller, model) {
         //this needs to be here!!! otherwise the model is not set correctly!!     
         this._super(controller, model);
-
-        if (Ember.isNone(this.get('poller'))) {
-            var route = this;
-            this.set('poller', App.PollForMessages.create({
-
-                onPoll: function () {
-                    $.ajax({
-                        type: "GET",
-                        url: "https://operly.azure-mobile.net/api/messages",
-                        data: "idUser=" + localStorage.idUser,
-                        success: function (data) {
-                            var messages = data.message;
-                            for (var i = 0; i < messages.length; i++) {
-                                route.get('store').push('message', {
-                                    id: messages[i].id,
-                                    message: messages[i].message
-                                });
-                            }
-                        }
-                    });
-                }
-            }));
-
-
-            this.get('poller').start();
-        }
     },
 
     deactivate: function () {
@@ -214,7 +149,9 @@ App.Message = DS.Model.extend({
     message : DS.attr('string')
 });
 
-App.AskaquestionController = Ember.ArrayController.extend({
+App.QuestionsController = Ember.ArrayController.extend({
+
+    templateName: 'questions', 
 
     contentArrayDidChange: function (array, start, removeAmt, addAmt) {
         console.log("add");
@@ -223,18 +160,6 @@ App.AskaquestionController = Ember.ArrayController.extend({
 
     actions: {
         askquestion: function () {
-
-            $.ajax({ type: 'POST',
-                url: 'https://operly.azure-mobile.net/api/askquestion',
-                data: {
-                    question: this.get('question'),
-                    idUser: localStorage.idUser
-                }
-            }).done(function (data) {
-                console.log(data.message);
-            }).fail(function () {
-                alert('error');
-            });
 
         },
 
@@ -247,6 +172,3 @@ App.AskaquestionController = Ember.ArrayController.extend({
     }
 
 });
-
-//$(document).ajaxStart(function(){ $( "#loading" ).show})
-//$(document).ajaxStop(function() {$( "#loading" ).hide})

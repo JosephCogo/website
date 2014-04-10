@@ -5,13 +5,6 @@ a:link, a:visited, a:active {
     text-decoration: none;
 }
 
-html { 
-  background: url('image.jpeg') no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
 
 /* Put your CSS here */
 .ember-application {
