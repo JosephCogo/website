@@ -21,10 +21,11 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 Ember.TEMPLATES["askaquestion"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', stack1;
+  var buffer = '', stack1, escapeExpression=this.escapeExpression;
 
 
-  data.buffer.push("        \r\n        <div class=\"actions\">\r\n            <span data-target='askquestion' class='selected'>Ask Question</span>\r\n            <span data-target='solved'>Solved (2)</span>\r\n            <span data-target='unsolved'>Unsolved</span>\r\n        </div>\r\n\r\n        ");
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "App.QuestionsnavView", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data})));
+  data.buffer.push("\r\n\r\n");
   stack1 = helpers._triageMustache.call(depth0, "outlet", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n\r\n\r\n\r\n");
@@ -66,6 +67,23 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   data.buffer.push("<div class=\"holder\">\r\n    <div class=\"mast login-mast\">\r\n    <img src='img/logogreensmal_.png'/>\r\n    <h4>LOGIN</h4>\r\n    </div>\r\n    <form class=\"form\">\r\n        <input class=\"form-control\" type=\"text\" placeholder=\"Email\">\r\n        <input class=\"form-control\" type=\"text\" placeholder=\"Password\">\r\n        <a ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "login", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
   data.buffer.push(" class='btn btnsmall pull-right'>Enter</a>\r\n    </form>\r\n</div>");
+  return buffer;
+  
+});
+
+Ember.TEMPLATES["questionsnav"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var buffer = '', escapeExpression=this.escapeExpression;
+
+
+  data.buffer.push("        <div class=\"actions\">\r\n            <span ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "ask", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push(" class='selected'>Ask Question</span>\r\n            <span ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "solved", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push(">Solved (2)</span>\r\n            <span ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "unsolved", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push(">Unsolved</span>\r\n        </div>");
   return buffer;
   
 });
