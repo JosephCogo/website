@@ -1,23 +1,9 @@
-        
-        <div class="actions">
-            <span>Ask Question</span>
-            <span class='selected'>Solved (2)</span>
-            <span>Unsolved</span>
-        </div>
+<div class="askquestion contenthide">
+            <form class="form text-center">
+                <textarea class="form-control" rows="3" placeholder="Enter your question here..."></textarea>
+                <input class="form-control" type="text" placeholder="Enter expertise requierd to answer question here (e.g Social media marketing, Javascript)...">
+                <button class='btn'>Submit Question</button>
+            </form>
+</div> 
 
-        <div class="question-stack">
-            {{#each question in controller}}
-                <p>(Q) {{question.question}}</p>
-            {{/each}}
-            <div class="question-help">
-                <span class="arrow"></span>
-                <div class="textwrap">
-                    <textarea></textarea>
-                </div>
-                <div class="btnwrap">
-                    <button><i class="fa fa-paperclip"> </i> Attach Image</button>
-                    <button><i class="fa fa-paperclip"> </i> Send</button>
-                </div>
-            </div>
-        </div>
 

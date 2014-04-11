@@ -5,19 +5,7 @@
             <span data-target='unsolved'>Unsolved</span>
         </div>
 
-        <div class="question-stack">
-            {{#each question in controller}}
-                <p>(Q) {{question.question}}</p>
-            {{/each}}
-            <div class="question-help">
-                <span class="arrow"></span>
-                <div class="textwrap">
-                    <textarea></textarea>
-                </div>
-                <div class="btnwrap">
-                    <button><i class="fa fa-paperclip"> </i> Attach Image</button>
-                    <button><i class="fa fa-paperclip"> </i> Send</button>
-                </div>
-            </div>
-        </div>
+        {{outlet}}
+
+
 

@@ -46,7 +46,7 @@ App.ExpertiseController = Ember.ObjectController.extend({
     actions: {
 
         submit: function () {
-            this.transitionToRoute('questionspage');
+            this.transitionToRoute('ask');
         },
 
         bang: function () {
@@ -55,6 +55,7 @@ App.ExpertiseController = Ember.ObjectController.extend({
     }
 });
 
+//this is the ember view that handles the light bulb helper
 App.LightbulbhelperView = Ember.View.extend({
     templateName: 'lightbulbhelper',
 
