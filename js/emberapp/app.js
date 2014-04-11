@@ -64,7 +64,7 @@ App.IndexRoute = Ember.Route.extend({
         if (manager.isAuthenticated()) {
             console.log(localStorage.idUser);
             console.log(localStorage.token);
-            this.transitionTo('ask');
+            this.transitionTo('login');
         }
         //if there is no token, go to login
         else {
