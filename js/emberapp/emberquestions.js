@@ -1,4 +1,4 @@
-App.QuestionsRoute = Ember.Route.extend({
+App.QuestionspageRoute = Ember.Route.extend({
 
 });
 

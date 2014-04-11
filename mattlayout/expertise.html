@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Operly</title>
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap.css" rel="stylesheet">
+
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+
+<link href="css/style.css" rel="stylesheet">
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+<div class="lightbulb-help">
+    <a href='#'>
+        <img src='img/lightbulb.png'/>
+    </a>
+    <div class="helptext">
+        - Enter your expertise into the box below<br>
+        - The input should autofill as you start typing.<br>
+        - If there is no preset expertise, please enter it in the alternative box.<br>
+        - A minimum of 5 is needed.<br>
+    </div>
+</div>
+<div class="holder">
+    <div class="mast">
+        <h4>Expertise</h4>
+    </div>
+    <form class="form expertise">
+        <div class="input-group"><input class="form-control" type="text" placeholder="Enter your expertise"><span class="input-group-addon"><img src='img/tickwhite.png'/></span></div>
+        <a href="ask.html" class='btn btnsmall pull-right' type="submit">Finish</a>
+    </form>
+</div>
+<script>
+$('.lightbulb-help > a').on('click', function(e) {
+    e.preventDefault();
+    $('.lightbulb-help > div').fadeToggle('slow');
+})
+</script>
+</body>
+</html>

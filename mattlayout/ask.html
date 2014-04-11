@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Operly</title>
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap.css" rel="stylesheet">
+
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+
+<link href="css/style.css" rel="stylesheet">
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="js/jquery.autosize.min.js"></script>
+</head>
+<body>
+<div class='sidebar'>
+    <h4>John Smith</h4>
+    <ul class="nav nav-stacked">
+        <li><a href="ask.html"  class="active-link">Ask A Question</a><span>(3)</span></li>
+        <li><a href="answer.html">Answer A Question</a><span>(4)</span></li>
+    </ul>
+</div>
+<div class='content-pane'>
+    <div class='content'>
+
+        <div class="lightbulb-help">
+            <a href='#'>
+                <img src='img/lightbulb.png'/>
+            </a>
+            <div class="helptext">
+                - Enter your expertise into the box below<br>
+                - The input should autofill as you start typing.<br>
+                - If there is no preset expertise, please enter it in the alternative box.<br>
+                - A minimum of 5 is needed.<br>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <span data-target='askquestion' class='selected'>Ask Question</span>
+            <span data-target='solved'>Solved (2)</span>
+            <span data-target='unsolved'>Unsolved</span>
+        </div>
+        <div class="askquestion contenthide">
+            <form class="form text-center">
+                <textarea class="form-control" rows="3" placeholder="Enter your question here..."></textarea>
+                <input class="form-control" type="text" placeholder="Enter expertise requierd to answer question here (e.g Social media marketing, Javascript)...">
+                <button class='btn'>Submit Question</button>
+            </form>
+        </div>
+        <div class="solved contenthide" style="display: none;">
+            <div class="question-stack">
+                <p>(Q) Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?</p>
+                <p>(Q) G elit, sed do eiusmod?</p>
+
+                <div class="question-help">
+                    <span class="arrow"></span>
+                    <div class="textwrap">
+                        <p class="text-left">
+                        (A) An example of the form that opens after clicking on a question. This is where you would enter an answer.
+                        </p>
+                    </div>
+                    <div class="btnwrap">
+                        <button><img height="20px" src='img/tickwhite.png'> READ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="unsolved contenthide" style="display: none;">
+            <div class="question-stack">
+                <p>(Q) Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?</p>
+                <p>(Q) G elit, sed do eiusmod?</p>
+                <p>(Q) G elit, sed do eiusmod?</p>
+
+                <div class="question-help">
+                    <span class="arrow"></span>
+                    <div class="textwrap">
+                        <p class="text-left">
+                        There has been no answer for your question. You can leave the question here or you can archive it.
+                        </p>
+                    </div>
+                    <div class="btnwrap">
+                        <button><img height="20px" src='img/tickwhite.png'> ARCHIVE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+$('.actions > span').click(function() {
+    $('.contenthide, .question-help').hide();
+    $('.'+$(this).data('target')).fadeIn('slow');
+    $('.actions > span').removeClass('selected');
+    $(this).addClass('selected');
+})
+$('.question-stack > p').on('click', function(e) {
+    if (e.target !== this) return;
+    $('.selected-question').removeClass('selected-question');
+    if (!$('.question-help').is(":visible")) {
+        $('.question-help').fadeIn('slow')
+    }
+    $(this).addClass('selected-question');
+    $('.question-help .arrow').css("top", $(this).position().top);
+})
+$('.lightbulb-help > a').on('click', function(e) {
+    e.preventDefault();
+    $('.lightbulb-help > div').fadeToggle('slow');
+})
+</script>
+</body>
+</html>

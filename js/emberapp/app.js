@@ -10,8 +10,15 @@ App.ApplicationAdapter = DS.FixtureAdapter;
 App.Router.map(function () {
     this.resource('login');
     this.resource('register');
-    this.resource('questions', function () {
-        this.resource('askaquestion');
+    this.resource('expertise');
+
+    this.resource('questionspage', function () {
+        this.resource('askaquestion', function () {
+            this.resource('ask');
+            this.resource('solved');
+            this.resource('unsolved');
+        });
+
         this.resource('answeraquestion');
     });
 });
@@ -57,7 +64,7 @@ App.IndexRoute = Ember.Route.extend({
         if (manager.isAuthenticated()) {
             console.log(localStorage.idUser);
             console.log(localStorage.token);
-            this.transitionTo('questions');
+            this.transitionTo('questionspage');
         }
         //if there is no token, go to login
         else {
@@ -68,7 +75,7 @@ App.IndexRoute = Ember.Route.extend({
             localStorage.removeItem('idUser');
 
             console.log('notauth');
-            this.transitionTo('questions');
+            this.transitionTo('login');
         }
     }
 });

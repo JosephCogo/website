@@ -16,6 +16,7 @@ App.LoginController = Ember.ObjectController.extend({
             $.ajax({
 
             });
+            router.transitionToRoute('expertise');
         },
 
         register: function () {
@@ -39,4 +40,28 @@ App.RegisterController = Ember.ObjectController.extend({
 
         }
     }
+});
+
+App.ExpertiseController = Ember.ObjectController.extend({
+    actions: {
+
+        submit: function () {
+            this.transitionToRoute('questionspage');
+        },
+
+        bang: function () {
+            console.log('bang');
+        }
+    }
+});
+
+App.LightbulbhelperView = Ember.View.extend({
+    templateName: 'lightbulbhelper',
+
+   click: function(evt) {
+        $('.lightbulb-help > div').fadeToggle('slow');
+   }
+
+
+
 });

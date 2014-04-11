@@ -1,21 +1,31 @@
+<!DOCTYPE html>
+<html>
 <head>
-<script src="js/libs/jquery-1.10.2.js"></script>
-<script src="js/libs/jquery.autosize.min.js"></script>
-</head>
+<title>Operly</title>
+<!-- Bootstrap core CSS -->
+<link href="css/bootstrap.css" rel="stylesheet">
 
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+
+<link href="css/style.css" rel="stylesheet">
+<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="js/jquery.autosize.min.js"></script>
+</head>
 <body>
 <div class='sidebar'>
     <h4>John Smith</h4>
     <ul class="nav nav-stacked">
-        <li>{{#link-to 'askaquestion'}}Ask Question{{/link-to}}<span>(3)</span></li>
-        <li>{{#link-to 'answeraquestion'}}Answer A Question{{/link-to}}<span>(4)</span></li>
+        <li><a href="ask.html">Ask A Question</a><span>(3)</span></li>
+        <li><a href="answer.html" class="active-link">Answer A Question</a><span>(4)</span></li>
     </ul>
 </div>
 <div class='content-pane'>
     <div class='content'>
-            <div class="lightbulb-help">
+
+        <div class="lightbulb-help">
             <a href='#'>
-                <i class="fa fa-lightbulb-o fa-3x" style="color: #2BB4A7"></i>
+                <img src='img/lightbulb.png'/>
             </a>
             <div class="helptext">
                 - Enter your expertise into the box below<br>
@@ -24,11 +34,11 @@
                 - A minimum of 5 is needed.<br>
             </div>
         </div>
-        {{outlet}}
+        
+        
 
     </div>
 </div>
-
 <script>
 $('.question-stack > p').on('click', function(e) {
     if (e.target !== this) return;
@@ -45,5 +55,5 @@ $('.lightbulb-help > a').on('click', function(e) {
     $('.lightbulb-help > div').fadeToggle('slow');
 })
 </script>
-
 </body>
+</html>
