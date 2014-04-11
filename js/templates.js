@@ -93,7 +93,7 @@ function program3(depth0,data) {
   data.buffer.push("<span>(3)</span></li>\r\n        <li>");
   stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "answeraquestion", options) : helperMissing.call(depth0, "link-to", "answeraquestion", options));
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("<span>(4)</span></li>\r\n    </ul>\r\n</div>\r\n<div class='content-pane'>\r\n    <div class='content'>\r\n            \r\n            ");
+  data.buffer.push("<span>(4)</span></li>\r\n    </ul>\r\n</div>\r\n<div class='content-pane'>\r\n    <div class='content'>\r\n            \r\n        ");
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "App.LightbulbhelperView", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data})));
   data.buffer.push("    \r\n\r\n        ");
   stack1 = helpers._triageMustache.call(depth0, "outlet", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
