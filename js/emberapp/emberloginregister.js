@@ -12,7 +12,7 @@ App.LoginController = Ember.ObjectController.extend({
         //will create a post request to login, if successful, login and store token
         login: function () {
             var router = this;
-            //fill out
+            //fill out now
             $.ajax({
 
             });

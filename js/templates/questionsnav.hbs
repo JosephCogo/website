@@ -1,5 +1,5 @@
         <div class="actions">
-            <span {{action 'ask'}} class='selected'>Ask Question</span>
-            <span {{action 'solved'}}>Solved (2)</span>
-            <span {{action 'unsolved'}}>Unsolved</span>
+            <span {{action 'ask'}} {{bind-attr class="askSelected"}}>Ask Question</span>
+            <span {{action 'solved'}}{{bind-attr class="solvedSelected"}}>Solved {{solved}}</span>
+            <span {{action 'unsolved'}}{{bind-attr class="unsolvedSelected"}}>Unsolved</span>
         </div>
