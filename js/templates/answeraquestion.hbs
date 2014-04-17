@@ -2,32 +2,14 @@
         </div>
 
         <div class="question-stack">
-            <p>(Q) Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua?</p>
-            <p>(Q) Lorem lorem lorem ipsum ipsum ipsum. Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore?</p>
-            <p>(Q) G elit, sed do eiusmod?</p>
+            {{#each question in controller}}
+                
+                    {{#view App.QuestionView contentBinding="this"}}
+                        {{#link-to 'answer' question}} {{question.question}} {{/link-to}}
+                    {{/view}}
+                
+            {{/each}}
+            
+            {{outlet}}
 
-            <div class="question-help">
-                <span class="arrow"></span>
-                <div class="textwrap">
-                    <textarea></textarea>
-                </div>
-                <div class="btnwrap">
-                    <button><i class="fa fa-paperclip"> </i> Attach Image</button>
-                    <button><i class="fa fa-paperclip"> </i> Send</button>
-                </div>
-            </div>
         </div>
-
-
-  <script>
-$('.question-stack > p').on('click', function(e) {
-    if (e.target !== this) return;
-    $('.selected-question').removeClass('selected-question');
-    if (!$('.question-help').is(":visible")) {
-        $('.question-help').fadeIn('slow')
-        $('.question-help textarea').autosize({append: "\n"}).text("(A) ");
-    }
-    $(this).addClass('selected-question');
-    $('.question-help .arrow').css("top", $(this).position().top);
-})
-</script>

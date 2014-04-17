@@ -4,8 +4,8 @@
     <h4>LOGIN</h4>
     </div>
     <form class="form">
-        <input class="form-control" type="text" placeholder="Email">
-        <input class="form-control" type="text" placeholder="Password">
+        {{input class = "form-control" placeholder="Email" valueBinding = "email"}}
+        {{input class = "form-control" placeholder="Password" type= "password" valueBinding = "password"}}
         <a {{action 'login'}} class='btn btnsmall pull-right'>Enter</a>
     </form>
 </div>

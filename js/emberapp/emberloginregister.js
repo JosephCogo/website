@@ -12,11 +12,21 @@ App.LoginController = Ember.ObjectController.extend({
         //will create a post request to login, if successful, login and store token
         login: function () {
             var router = this;
-            //fill out now
-            $.ajax({
 
+            $.ajax({
+                url: "http://localhost:80/login",
+                type: "post",
+                data: { email: this.get('email'), password: this.get('password') },
+                statusCode: {
+                    200: function (data) {
+                        localStorage.token = data.token;
+                        router.transitionToRoute('expertise');
+                    },
+                    400: function () {
+                        console.log("Invalid Username or Password");
+                    }
+                }
             });
-            router.transitionToRoute('expertise');
         },
 
         register: function () {

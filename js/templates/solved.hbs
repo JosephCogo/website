@@ -1,15 +1,11 @@
         <div class="question-stack">
             {{#each question in controller}}
-                <p>(Q) {{question.question}}</p>
+                {{#view App.QuestionView contentBinding="this"}}
+                    {{#link-to 'solvedanswer' question}} {{question.question}} {{/link-to}}
+                {{/view}}
             {{/each}}
-            <div class="question-help">
-                <span class="arrow"></span>
-                <div class="textwrap">
-                    <textarea></textarea>
-                </div>
-                <div class="btnwrap">
-                    <button><i class="fa fa-paperclip"> </i> Attach Image</button>
-                    <button><i class="fa fa-paperclip"> </i> Send</button>
-                </div>
-            </div>
+            
+            {{outlet}}
+
+
         </div>

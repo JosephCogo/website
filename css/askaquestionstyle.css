@@ -139,6 +139,7 @@ body, html {
     text-align: left;
     cursor: pointer;
 }
+
 .question-help {
     position: absolute;
     color: white;
@@ -147,6 +148,9 @@ body, html {
     left: 65%;
     right: 0;
     top: 0;
+    transition: height 0.2s;
+    -webkit-transition: height 0.2s; 
+    -moz-transition: height 0.2s; 
 }
 .question-help > .textwrap {
     background-color: #2BB4A7;
@@ -236,6 +240,7 @@ textarea {
 }
 .form > input, .form > textarea {
     margin-bottom: 20px;
+    resize: none;
 }
 .form > input:last-of-type, .input-group {
     margin-bottom: 30px;
@@ -281,4 +286,12 @@ textarea {
 .expertise img {
     width: 30px;
     height: 20px;
+}
+
+.questions-content-area{
+    margin-bottom: 1px;
+}
+
+.questionsOutlet {
+    padding-top: 1px;
 }

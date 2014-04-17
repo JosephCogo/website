@@ -1,9 +1,5 @@
 App = Ember.Application.create();
 
-//var socket = io.connect('http://localhost:80', {
-           // query: 'token=' + token
-//});
-
 App.ApplicationAdapter = DS.FixtureAdapter;
 
 //define the routes
@@ -13,70 +9,59 @@ App.Router.map(function () {
     this.resource('expertise');
 
     this.resource('questionspage', function () {
+        //answer a question and its sub routes
         this.resource('askaquestion', function () {
             this.resource('ask');
-            this.resource('solved');
+            this.resource('solved', function () {
+                //should be a route
+                this.resource('solvedanswer', {path : '/:question_id'});
+            });
             this.resource('unsolved');
         });
 
-        this.resource('answeraquestion');
+        this.resource('answeraquestion', function () {
+            //should be a route
+            this.resource('answer', {path : '/:question_id'});
+        });
     });
 });
-
-//class that handles authentication, not secure
-//though, as it is just using local storage, but ok 
-//for now, as it is not storing any important information
-App.AuthManager = Ember.Object.extend({
-    init: function () {
-        this._super(); //ember specific
-
-        //get the token from local storage, if it exists,
-        //authenticate the user
-        var accessToken = localStorage.token;
-        var idUser = localStorage.idUser;
-        if (!Ember.isEmpty(accessToken) && !Ember.isEmpty(idUser)) {
-            this.authenticate(accessToken);
-        }
-    },
-
-    //set up all subsequent ajax calls so that
-    //it sends through the token in the headers.
-    authenticate: function (accessToken) {
-
-    },
-
-    //returns true if there is a token in 
-    //localstorage
-    isAuthenticated: function () {
-        return !Ember.isEmpty(localStorage.token) && !Ember.isEmpty(localStorage.idUser);
-    }
-});
-
-//create a new authmanager instance to handle authentication
-var manager = App.AuthManager.create();
 
 //in the index route checks if the client is authenticated,
 //if so, transition to asking a question, if not go to login
 App.IndexRoute = Ember.Route.extend({
 
     redirect: function () {
-        //if the user is authenticated transfer to ask a question
-        if (manager.isAuthenticated()) {
-            console.log(localStorage.idUser);
-            console.log(localStorage.token);
-            this.transitionTo('login');
+        var router = this;
+        var store = this.store;
+        //if there is no token in the localstorage, then transition to login
+        if (Ember.isEmpty(localStorage.token)) {
+            router.transitionTo("login");
         }
-        //if there is no token, go to login
+        //if there is a token, try to refresh it. If the token is
+        //expired, then transition to login, else set the new token 
+        //to the localStorage
         else {
-            console.log(localStorage.idUser);
-            console.log(localStorage.token);
-            //just to make sure for now
-            localStorage.removeItem('token');
-            localStorage.removeItem('idUser');
+            $.ajax({
+                url: "http://localhost:80/refreshtoken",
+                type: "post",
+                data: { token: localStorage.token },
+                statusCode: {
+                    200: function (data) {
+                        //set the new token
+                        localStorage.token = data.token;
 
-            console.log('notauth');
-            this.transitionTo('login');
+                        initSocket(store, function () {
+                            console.info("Successfully Connected. Transitioning to Ask a question");
+                            router.transitionTo("ask");
+                        });
+
+                    },
+                    401: function () {
+                        console.log("ERROR");
+                        router.transitionTo("login");
+                    }
+                }
+            });
         }
     }
-});
-
+});    
