@@ -7,7 +7,9 @@
                     {{#view App.QuestionView contentBinding="this"}}
                         {{#link-to 'answer' question}} {{question.question}} {{/link-to}}
                     {{/view}}
-                
+                    
+                    {{else}}
+                         <span>There are no questions to answer</span>
             {{/each}}
             
             {{outlet}}

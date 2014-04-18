@@ -12,16 +12,20 @@ App.Router.map(function () {
         //answer a question and its sub routes
         this.resource('askaquestion', function () {
             this.resource('ask');
+            this.resource('asksuccess');
             this.resource('solved', function () {
                 //should be a route
-                this.resource('solvedanswer', {path : '/:question_id'});
+                this.resource('solvedanswer', { path: '/:question_id' });
             });
-            this.resource('unsolved');
+            
+            this.resource('unsolved', function(){
+                this.resource('unsolvedanswer', { path: '/:question_id' });
+            });
         });
 
         this.resource('answeraquestion', function () {
             //should be a route
-            this.resource('answer', {path : '/:question_id'});
+            this.resource('answer', { path: '/:question_id' });
         });
     });
 });

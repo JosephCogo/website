@@ -1,7 +1,7 @@
         <div class="question-stack">
-            {{#each solvedquestion in controller}}
+            {{#each unsolvedquestion in controller}}
                 {{#view App.QuestionView contentBinding="this"}}
-                    {{#link-to 'solvedanswer' solvedquestion}} {{solvedquestion.question}} {{/link-to}}
+                    {{#link-to 'solvedanswer' question}} {{unsolvedquestion.question}} {{/link-to}}
                 {{/view}}
             {{/each}}
             

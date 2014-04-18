@@ -92,7 +92,7 @@ App.AskaquestionController = Ember.ArrayController.extend({
 App.SolvedRoute = Ember.Route.extend({
     model : function (){
         var store = this.store;
-        return store.find('question');
+        return store.find('solvedquestion');
     },
 
     setupController : function (controller, model){
@@ -104,7 +104,7 @@ App.SolvedRoute = Ember.Route.extend({
 App.UnsolvedRoute = Ember.Route.extend({
     model : function (){
         var store = this.store;
-        return store.find('question');
+        return store.find('unsolvedquestion');
     },
 
     setupController : function (controller, model){
@@ -127,7 +127,8 @@ App.AskController = Ember.Controller.extend({
     actions: {
 
         askquestion: function () {
-            sendMessage(this.get('question'), this.get('expertise'));
+            //askQuestion(this.get('question'), this.get('expertise'));
+            this.transitionToRoute("asksuccess");
         }
 
     }
@@ -137,10 +138,8 @@ App.AnswerRoute = Ember.Route.extend({
 
     activate: function () {
 
-    },
-    deactivate: function () {
-        this.transitionTo('answeraquestion');
     }
+
 });
 
 App.AnswerController = Ember.ObjectController.extend({
@@ -148,8 +147,7 @@ App.AnswerController = Ember.ObjectController.extend({
     actions: {
 
         answer: function () {
-            console.log("ok");
-
+            answerQuestion(this.get('answerText'), this.get('id'));
         }
 
     }
@@ -167,7 +165,6 @@ App.AnsweraquestionRoute = Ember.Route.extend({
     }
 });
 
-
 App.AnsweraquestionController = Ember.ArrayController.extend({
     actions: {
 
@@ -182,17 +179,33 @@ App.Question = DS.Model.extend({
     question : DS.attr('string')
 });
 
+App.Unsolvedquestion = DS.Model.extend({
+    question : DS.attr('string')
+});
+
+App.Solvedquestion = DS.Model.extend({
+    question : DS.attr('string'),
+    abody : DS.attr('string'),
+    aid : DS.attr('string')
+});
+
 App.Question.FIXTURES = [];
+App.Unsolvedquestion.FIXTURES = [];
+App.Solvedquestion.FIXTURES = [];
 
 App.QuestionView = Ember.View.extend({
 
     tagName: 'p',
 
+    didInsertElement: function () {
+        $('.question-stack > p').fadeTo(200, 1);
+    },
+
     click: function (evt) {
         console.log("click");
         //this works, but at what cost??
         if (!$('.question-help').is(":visible")) {
-            $('.question-help').fadeTo(200,1);
+            $('.question-help').fadeTo(200, 1);
             $('.question-help textarea').autosize({ append: "\n" });
             $('.selected-question').removeClass('selected-question');
 

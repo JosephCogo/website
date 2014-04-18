@@ -35,13 +35,28 @@ function handleMessages() {
     console.log("Handle Messages");
 
     socket.on('sendquestions', function (data) {
-        emberStore.push('question', { id: data.id, question: data.question });
+        console.log(data.question.qid);
+        emberStore.push('question', { id: data.question.qid, question: data.question.question });
+    });
+
+    socket.on('unsolvedquestions', function (data) {
+        console.log(data.question.qid);
+        emberStore.push('unsolvedquestion', { id: data.question.qid, question: data.question.question });
+    });
+
+    socket.on('solvedquestions', function (data) {
+        console.log("solved");
+        emberStore.push('solvedquestion', { id: data.question.qid, question: data.question.question, answer : data.question.abody, aid : data.question.aid });
     });
 
 }
 
-function sendMessage(question, expertise){
+function askQuestion(question, expertise){
     ex = ["node.js"];
-    socket.emit('askquestion', {question : question, skills : ex});
+    socket.emit('askquestion', {question : question, skills : [{skillname : "node.js", sid : 1}] } );
+}
+
+function answerQuestion(answer, qid){
+    socket.emit('answerquestion', {answer : answer, qid: qid} );
 }
     
