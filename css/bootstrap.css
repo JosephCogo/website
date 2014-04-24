@@ -1711,13 +1711,19 @@ output {
 }
 .form-control::-moz-placeholder {
   color: #999999;
+  font-family: 'Lato', sans-serif;
+  font-style: italic;
   opacity: 1;
 }
 .form-control:-ms-input-placeholder {
   color: #999999;
+  font-family: 'Lato', sans-serif;
+  font-style: italic;
 }
 .form-control::-webkit-input-placeholder {
   color: #999999;
+  font-family: 'Lato', sans-serif;
+  font-style: italic;
 }
 .form-control[disabled],
 .form-control[readonly],

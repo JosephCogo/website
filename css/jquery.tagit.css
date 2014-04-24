@@ -3,6 +3,8 @@ ul.tagit {
     overflow: auto;
     margin-left: inherit; /* usually we don't want the regular ul margins. */
     margin-right: inherit;
+    margin: 0;
+    background-color: #fff;
 }
 ul.tagit li {
     display: block;
@@ -12,6 +14,10 @@ ul.tagit li {
 ul.tagit li.tagit-choice {    
     position: relative;
     line-height: inherit;
+    background-color: #DEE7F8;
+    font-family: Arial;
+    color: #000;
+    font-weight: 100;
 }
 input.tagit-hidden-field {
     display: none;
@@ -31,6 +37,7 @@ ul.tagit li.tagit-new {
 ul.tagit li.tagit-choice a.tagit-label {
     cursor: pointer;
     text-decoration: none;
+    
 }
 ul.tagit li.tagit-choice .tagit-close {
     cursor: pointer;

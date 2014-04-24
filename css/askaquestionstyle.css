@@ -1,8 +1,8 @@
+
 html {
     height: 100%;
     min-height: 100%;
     font-family: 'Lato', sans-serif;
-    text-align: center;
 }
 body, html {
     background-color: #F4F4F4;
@@ -70,6 +70,11 @@ body, html {
     right: 25px;
     top: 9px;
 }
+
+.nav > li {
+    font-family: 'Lato', sans-serif;
+}
+
 .active-link:after {
     content: " ";
     border-top: solid transparent 16px;
@@ -117,6 +122,7 @@ body, html {
     margin-right: 20px;
     font-weight: bold;
     transition: background-color 0.2s ease;
+    font-family: 'Lato', sans-serif;
 }
 .actions span:last-of-type {
     margin-right: 0px;
@@ -169,6 +175,8 @@ body, html {
     background-color: transparent;
     min-height: 150px;
     padding: 10px 10px;
+    font-family: 'Lato', 'sans-serif';
+    font-style: italic;
 }
 .selected-question {
     position: relative;
@@ -196,6 +204,7 @@ body, html {
     text-align: right;
 }
 .btnwrap > button {
+    height: 45px;
     width: 50%;
     border: none;
     padding: 5px 3px;
@@ -205,6 +214,12 @@ body, html {
     border: none;
     border-top: 2px white solid;
 }
+.btnwrap > button > img {
+    padding-right: 10px;
+    height: 30px;
+    width: 45px;
+}
+
 .btnwrap > :last-child {
     border-left: 2px white solid;
     border-right: none;
@@ -216,8 +231,8 @@ body, html {
     z-index: 999;
 }
 .lightbulb-help img {
-    height: 35px;
-    width: 25px;
+    height: 50px;
+    width: 35px;
 }
 .lightbulb-help > .helptext {
     display: none;
@@ -229,9 +244,11 @@ body, html {
     width: 400px;
     padding: 10px 10px;
     font-size: 90%;
+    font-family: Lato;
 }
 
 .holder {
+    padding-top: 10%;
     width: 80%;
     max-width: 768px;
     margin: 0 auto;
@@ -243,6 +260,11 @@ textarea {
     margin-bottom: 20px;
     resize: none;
 }
+
+.askquestion{
+    padding-top: 50px;
+}
+
 .form > input:last-of-type, .input-group {
     margin-bottom: 30px;
 }
@@ -253,6 +275,7 @@ textarea {
     margin-bottom: 60px;
     padding-bottom: 50px;
     text-transform: uppercase;
+    text-align: center;
 }
 .login-mast {
     margin-top: 20px;
@@ -272,6 +295,7 @@ textarea {
     border-radius: 0;
     color: white;
     background-color: #2BB4A7;
+    font-family: 'Lato', sans-serif;
 }
 .btnsmall {
     width: 100px;

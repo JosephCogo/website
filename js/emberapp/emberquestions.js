@@ -1,9 +1,12 @@
 //this is the resource that contains both the questions and the answers
 App.QuestionspageRoute = Ember.Route.extend({
-    setupController : function(){
-        initSocket(this.store, function () {
-            console.info("Successfully Reconnected");
-        });
+    setupController: function () {
+        //reset the connection on refresh
+        if (Ember.isEmpty(getSocket())) {
+            initSocket(this.store, function () {
+                console.info("Successfully Reconnected");
+            });
+        }
     }
 });
 
@@ -101,18 +104,6 @@ App.SolvedRoute = Ember.Route.extend({
     }  
 });
 
-App.UnsolvedRoute = Ember.Route.extend({
-    model : function (){
-        var store = this.store;
-        return store.find('unsolvedquestion');
-    },
-
-    setupController : function (controller, model){
-       this._super(controller, model);
-       $('.questionsOutlet').fadeTo(200, 1); 
-    }
-});
-
 App.AskRoute = Ember.Route.extend({
    
    setupController : function(){
@@ -127,9 +118,35 @@ App.AskController = Ember.Controller.extend({
     actions: {
 
         askquestion: function () {
-            //askQuestion(this.get('question'), this.get('expertise'));
+            askQuestion(this.get('questionView'), this.get('expertise'));
             this.transitionToRoute("asksuccess");
         }
+
+    }
+});
+
+App.QuestionareaView = Ember.View.extend({
+
+    didInsertElement: function () {
+        console.log("bang");
+        var view = this;
+        //var question = view.get('questionVal');
+
+        $('#questions').typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 1
+        },
+        {
+            displayKey: 'value',
+            source: function (query, cb) {
+                console.log($('#questions').value.text);
+                //getQuestions(function () {
+                  //  cb(autoQuestions());
+                //});
+            }
+        });
+
 
     }
 });
@@ -191,7 +208,11 @@ App.Solvedquestion = DS.Model.extend({
 
 App.Question.FIXTURES = [];
 App.Unsolvedquestion.FIXTURES = [];
-App.Solvedquestion.FIXTURES = [];
+App.Solvedquestion.FIXTURES = [{id : 1, question : "Question 1", abody : "Answer 1"},
+{id : 2, question : "Question 2", abody : "Answer 2"},
+{id : 3, question : "Question 3", abody : "Answer 3"},
+{id : 4, question : "Question 4", abody : "Answer 4"}
+];
 
 App.QuestionView = Ember.View.extend({
 
@@ -202,7 +223,6 @@ App.QuestionView = Ember.View.extend({
     },
 
     click: function (evt) {
-        console.log("click");
         //this works, but at what cost??
         if (!$('.question-help').is(":visible")) {
             $('.question-help').fadeTo(200, 1);
@@ -212,7 +232,7 @@ App.QuestionView = Ember.View.extend({
             $('.question-stack').addClass('selected-question');
             $('.question-help .arrow').css("top", $('.question-stack > p').position().top);
         }
+
     }
 
 });
-

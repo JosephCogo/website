@@ -20,10 +20,17 @@ App.LoginController = Ember.ObjectController.extend({
                 statusCode: {
                     200: function (data) {
                         localStorage.token = data.token;
-                        router.transitionToRoute('expertise');
+                        console.info("Logged In");
+                        initSocket(this.store, function () {
+                            console.info("Sockets connected");
+                            router.transitionToRoute('expertise');
+                        });
                     },
                     400: function () {
                         console.log("Invalid Username or Password");
+                        var btn = $('.submit');
+                        btn.button('reset');
+                        $('#loginerror').removeClass("hide");
                     }
                 }
             });
@@ -52,16 +59,29 @@ App.RegisterController = Ember.ObjectController.extend({
     }
 });
 
+App.ExpertiseRoute = Ember.Route.extend({
+    setupController: function () {
+        //reset the connection on refresh
+        if (Ember.isEmpty(getSocket())) {
+            initSocket(this.store, function () {
+                console.info("Successfully Reconnected");
+            });
+        }
+    }
+
+});
+
 App.ExpertiseController = Ember.ObjectController.extend({
     actions: {
 
-        submit: function () {
-            this.transitionToRoute('ask');
+        test : function(){
+          $("#expertise").tagit("tagInput");  
         },
 
-        bang: function () {
-            console.log('bang');
+        submit: function () {
+            this.transitionToRoute('ask');
         }
+
     }
 });
 
@@ -76,3 +96,45 @@ App.LightbulbhelperView = Ember.View.extend({
 
 
 });
+
+App.SubmitButtonView = Ember.View.extend({
+
+    click: function (evt) {
+        console.log("yus");
+        var btn = $('.submit');
+        btn.button('loading');
+    }
+
+});
+
+App.ExpertiseView = Ember.View.extend({
+
+    didInsertElement: function () {
+        console.log("bang");
+
+        $('#tokenfield-typeahead').tokenfield({
+            typeahead: {
+                minLength: 1,
+                source: function (query, cb) {
+                    console.log("ok");
+                    getSkills(function () {
+                        cb(autoSkills());
+                    });
+                }
+            }
+        });
+    }
+});
+
+App.AlertView = Ember.View.extend({
+
+    didInsertElement: function () {
+        $(".alert").find(".close").on("click", function (e) {
+            $('#loginerror').addClass("hide");
+        });
+    }
+
+});
+
+
+

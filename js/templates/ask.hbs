@@ -1,8 +1,10 @@
 <div class="askquestion contenthide">
             <form class="form text-center">
-                {{textarea class="form-control"  rows="3" placeholder="Enter your question here..." valueBinding = "question"}}
+                {{#view App.QuestionareaView}}
+                    {{textarea class="form-control" id='questions' rows="3" placeholder="Enter your question here..." valueBinding="questionVal"}}
+                {{/view}}
                 {{input  class="form-control" type="text" placeholder="Enter expertise required to answer question here (e.g Social media marketing, Javascript)..." valueBinding="expertise"}}
-                <button class='btn' {{action 'askquestion'}}>Submit Question</button>
+                <button class='btn' {{action 'askquestion'}}>SUBMIT QUESTION</button>
             </form>
 </div> 
 

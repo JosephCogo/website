@@ -1,5 +1,7 @@
 var socket;
 var emberStore;
+var skills = [];
+var questions = [];
 
 //need to have error logic here
 function initSocket(store, callback){
@@ -49,11 +51,59 @@ function handleMessages() {
         emberStore.push('solvedquestion', { id: data.question.qid, question: data.question.question, answer : data.question.abody, aid : data.question.aid });
     });
 
+
+
 }
+
+function getSkills(callback){
+    socket.emit('autoskill', { skill: $('#tokenfield-typeahead').data('bs.tokenfield').$input.val() });
+
+    socket.on('autoskill', function (data) {
+        console.log(data.m);
+        var s = data.message.suggest[0];
+        console.log(s);
+
+        skills = [];
+        
+        for (var i = 0; i < s.options.length; i++) {
+            skills.push({value : s.options[i].text});
+        }
+
+        callback();
+    });
+}
+
+function autoSkills(){
+    return skills;
+}
+
+function getQuestions(callback){
+    socket.emit('autoquestion', { question: this.get('questionView') });
+
+    socket.on('autoquestion', function (data) {
+        var s = data.message.hits.hits;
+        console.log(s[0]);
+        questions = [];
+
+        for (var i = 0; i < s.length; i++) {
+            questions.push({ value: s[i]._source.qBody });
+        }
+
+        callback();
+    });
+}
+
+
+function autoQuestions(){
+    return questions;
+}
+
+
 
 function askQuestion(question, expertise){
     ex = ["node.js"];
-    socket.emit('askquestion', {question : question, skills : [{skillname : "node.js", sid : 1}] } );
+    console.log(question);
+    //socket.emit('askquestion', {question : 'Where does CURL serve its usefulness?', skills : [{skillname : "CURL", sid : "1gdgdy"}] } );
 }
 
 function answerQuestion(answer, qid){
