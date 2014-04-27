@@ -27,7 +27,7 @@
 }
 .twitter-typeahead .tt-input,
 .twitter-typeahead .tt-hint {
-  height: 34px;
+  resize:  none;
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.428571429;

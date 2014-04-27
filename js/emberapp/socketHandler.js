@@ -16,7 +16,7 @@ function initSocket(store, callback){
 function connectSocket(callback) {
 
     //connect to socket io
-    socket = io.connect('http://localhost:80', {
+    socket = io.connect('http://localhost:3000', {
         query: 'token=' + localStorage.token
     });
 
@@ -43,22 +43,22 @@ function handleMessages() {
 
     socket.on('unsolvedquestions', function (data) {
         console.log(data.question.qid);
-        emberStore.push('unsolvedquestion', { id: data.question.qid, question: data.question.question });
+        //emberStore.push('unsolvedquestion', { id: data.question.qid, question: data.question.question });
     });
 
     socket.on('solvedquestions', function (data) {
         console.log("solved");
-        emberStore.push('solvedquestion', { id: data.question.qid, question: data.question.question, answer : data.question.abody, aid : data.question.aid });
+       // emberStore.push('solvedquestion', { id: data.question.qid, question: data.question.question, answer : data.question.abody, aid : data.question.aid });
     });
 
 
 
 }
 
-function getSkills(callback){
-    socket.emit('autoskill', { skill: $('#tokenfield-typeahead').data('bs.tokenfield').$input.val() });
+function getSkills(question, callback){
+    socket.emit('autoskill', { skill: question });
 
-    socket.on('autoskill', function (data) {
+    socket.once('autoskill', function (data) {
         console.log(data.m);
         var s = data.message.suggest[0];
         console.log(s);
@@ -77,12 +77,11 @@ function autoSkills(){
     return skills;
 }
 
-function getQuestions(callback){
-    socket.emit('autoquestion', { question: this.get('questionView') });
+function getQuestions(question, callback){
+    socket.emit('autoquestion', { question: question });
 
-    socket.on('autoquestion', function (data) {
+    socket.once('autoquestion', function (data) {
         var s = data.message.hits.hits;
-        console.log(s[0]);
         questions = [];
 
         for (var i = 0; i < s.length; i++) {
@@ -90,6 +89,9 @@ function getQuestions(callback){
         }
 
         callback();
+    });
+    socket.removeListener("autoquestion", function () {
+        console.log("auto question removed");
     });
 }
 

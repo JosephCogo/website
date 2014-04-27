@@ -14,7 +14,7 @@ App.LoginController = Ember.ObjectController.extend({
             var router = this;
 
             $.ajax({
-                url: "http://localhost:80/login",
+                url: "http://localhost:3000/login",
                 type: "post",
                 data: { email: this.get('email'), password: this.get('password') },
                 statusCode: {
@@ -23,7 +23,7 @@ App.LoginController = Ember.ObjectController.extend({
                         console.info("Logged In");
                         initSocket(this.store, function () {
                             console.info("Sockets connected");
-                            router.transitionToRoute('expertise');
+                            router.replaceWith('expertise');
                         });
                     },
                     400: function () {
@@ -79,7 +79,7 @@ App.ExpertiseController = Ember.ObjectController.extend({
         },
 
         submit: function () {
-            this.transitionToRoute('ask');
+            this.replaceWith('ask');
         }
 
     }
@@ -110,7 +110,6 @@ App.SubmitButtonView = Ember.View.extend({
 App.ExpertiseView = Ember.View.extend({
 
     didInsertElement: function () {
-        console.log("bang");
 
         $('#tokenfield-typeahead').tokenfield({
             typeahead: {

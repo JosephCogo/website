@@ -1,9 +1,14 @@
 <div class="askquestion contenthide">
-            <form class="form text-center">
+            
                 {{#view App.QuestionareaView}}
-                    {{textarea class="form-control" id='questions' rows="3" placeholder="Enter your question here..." valueBinding="questionVal"}}
+                    {{textarea class="form-control" id='questions' rows="3" placeholder="Enter your question here..."  value=view.question }}
                 {{/view}}
-                {{input  class="form-control" type="text" placeholder="Enter expertise required to answer question here (e.g Social media marketing, Javascript)..." valueBinding="expertise"}}
+                <div class = "space"></div>
+                {{#view App.TagquestionView}}
+                    {{input  class="form-control" id="tagquestion" type="text" placeholder="Enter expertise required to answer question here (e.g Social media marketing, Javascript)..." valueBinding="expertise"}}
+                {{/view}}
+                <div class = "space"></div>
+            <form class="form text-center">
                 <button class='btn' {{action 'askquestion'}}>SUBMIT QUESTION</button>
             </form>
 </div> 

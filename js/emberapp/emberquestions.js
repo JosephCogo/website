@@ -10,6 +10,33 @@ App.QuestionspageRoute = Ember.Route.extend({
     }
 });
 
+App.QuestionspageController = Ember.Controller.extend({
+    ask: false,
+    answer: false,
+
+    actions: {
+
+        toAnswers: function () {
+            var controller = this;
+
+            $('.content').fadeTo(200, 0, function () {
+                controller.transitionToRoute('answeraquestion');
+            });
+        },
+
+        toQuestions: function () {
+            answer = false;
+            this.set("answer", false);
+            this.set("ask", "active-link");
+            var controller = this;
+            $('.content').fadeTo(200, 0, function () {
+                controller.transitionToRoute('ask');
+            });
+        }
+
+    }
+});
+
 //this is embedded at the top of the askcontroller view
 App.QuestionsnavView = Ember.View.extend({
 
@@ -25,31 +52,19 @@ App.AskaquestionRoute = Ember.Route.extend({
         },
 
         setupController: function (controller, model) {
-
             this._super(controller, model);
-            //everytime you navigate back to ask a question route,
-            //set the highlighted buttons to ask(corresponds with the current route)
-            controller.set("askSelected", "selected");
-            controller.set("solvedSelected", false);
-            controller.set("unsolvedSelected", false);
             $('.questions-content-area').fadeTo(200, 1);
-        },
-
-        deactivate: function () {
-
+            this.controllerFor('questionspage').set('ask', 'active-link');
+            this.controllerFor('questionspage').set('answer', false);
         }
 });
 
 App.AskaquestionController = Ember.ArrayController.extend({
     askSelected: "selected",
     solvedSelected: false,
-    unsolvedSelected: false,
     solved: "(2)",
 
     actions: {
-        askquestion: function () {
-
-        },
 
         logout: function () {
             localStorage.removeItem('token');
@@ -59,38 +74,21 @@ App.AskaquestionController = Ember.ArrayController.extend({
         },
 
         ask: function () {
-            this.set("askSelected", "selected");
-            this.set("solvedSelected", false);
-            this.set("unsolvedSelected", false);
-            
             var cont = this;
-            $('.questionsOutlet').fadeTo(100, 0, function () {
+            $('.questionsOutlet').fadeTo(200, 0, function () {
                 cont.transitionToRoute('ask');
             });
-
         },
 
         solved: function () {
-            this.set("askSelected", false);
-            this.set("solvedSelected", "selected");
-            this.set("unsolvedSelected", false);
             var cont = this;
-            $('.questionsOutlet').fadeTo(100, 0, function () {
+            $('.questionsOutlet').fadeTo(200, 0, function () {
                 cont.transitionToRoute('solved');
-            });
-        },
-
-        unsolved: function () {
-            this.set("askSelected", false);
-            this.set("solvedSelected", false);
-            this.set("unsolvedSelected", "selected");
-            var cont = this;
-            $('.questionsOutlet').fadeTo(100, 0, function () {
-                cont.transitionToRoute('unsolved');
             });
         }
     }
 });
+
 
 App.SolvedRoute = Ember.Route.extend({
     model : function (){
@@ -101,20 +99,25 @@ App.SolvedRoute = Ember.Route.extend({
     setupController : function (controller, model){
        this._super(controller, model);
        $('.questionsOutlet').fadeTo(200, 1); 
+        this.controllerFor('askaquestion').set('askSelected', false);
+        this.controllerFor('askaquestion').set('solvedSelected', 'selected');
     }  
 });
 
 App.AskRoute = Ember.Route.extend({
-   
-   setupController : function(){
-        $('.questionsOutlet').fadeTo(200, 1);  
-   }
+
+    setupController: function (controller, model) {
+        $('.content').fadeTo(300, 1);
+        $('.questionsOutlet').fadeTo(200, 1);
+        this.controllerFor('askaquestion').set('askSelected', 'selected');
+        this.controllerFor('askaquestion').set('solvedSelected', false);
+    }
 
 });
 
 
 App.AskController = Ember.Controller.extend({
-
+    
     actions: {
 
         askquestion: function () {
@@ -126,12 +129,10 @@ App.AskController = Ember.Controller.extend({
 });
 
 App.QuestionareaView = Ember.View.extend({
+    question: '',
 
     didInsertElement: function () {
-        console.log("bang");
         var view = this;
-        //var question = view.get('questionVal');
-
         $('#questions').typeahead({
             hint: true,
             highlight: true,
@@ -140,10 +141,10 @@ App.QuestionareaView = Ember.View.extend({
         {
             displayKey: 'value',
             source: function (query, cb) {
-                console.log($('#questions').value.text);
-                //getQuestions(function () {
-                  //  cb(autoQuestions());
-                //});
+                console.log($('#questions').val());
+                getQuestions($('#questions').val(), function () {
+                    cb(autoQuestions());
+                });
             }
         });
 
@@ -153,7 +154,7 @@ App.QuestionareaView = Ember.View.extend({
 
 App.AnswerRoute = Ember.Route.extend({
 
-    activate: function () {
+    setupController: function () {
 
     }
 
@@ -172,13 +173,16 @@ App.AnswerController = Ember.ObjectController.extend({
 });
 
 App.AnsweraquestionRoute = Ember.Route.extend({
-    model : function (){
+    model: function () {
         var store = this.store;
         return store.find('question');
     },
 
-    setupController : function (controller, model){
-       this._super(controller, model);
+    setupController: function (controller, model) {
+        this._super(controller, model);
+        $('.content').fadeTo(300, 1);
+        this.controllerFor('questionspage').set('answer', 'active-link');
+        this.controllerFor('questionspage').set('ask', false);
     }
 });
 
@@ -196,10 +200,6 @@ App.Question = DS.Model.extend({
     question : DS.attr('string')
 });
 
-App.Unsolvedquestion = DS.Model.extend({
-    question : DS.attr('string')
-});
-
 App.Solvedquestion = DS.Model.extend({
     question : DS.attr('string'),
     abody : DS.attr('string'),
@@ -207,7 +207,6 @@ App.Solvedquestion = DS.Model.extend({
 });
 
 App.Question.FIXTURES = [];
-App.Unsolvedquestion.FIXTURES = [];
 App.Solvedquestion.FIXTURES = [{id : 1, question : "Question 1", abody : "Answer 1"},
 {id : 2, question : "Question 2", abody : "Answer 2"},
 {id : 3, question : "Question 3", abody : "Answer 3"},
@@ -223,16 +222,50 @@ App.QuestionView = Ember.View.extend({
     },
 
     click: function (evt) {
+        console.log($(evt.target).attr('id'));
+        var view = $(evt.target).attr('id');
+        console.log($(evt.target).position().top);
         //this works, but at what cost??
         if (!$('.question-help').is(":visible")) {
             $('.question-help').fadeTo(200, 1);
-            $('.question-help textarea').autosize({ append: "\n" });
-            $('.selected-question').removeClass('selected-question');
-
-            $('.question-stack').addClass('selected-question');
-            $('.question-help .arrow').css("top", $('.question-stack > p').position().top);
         }
+        $('.question-help textarea').autosize({ append: "\n" });
+        $('.selected-question').removeClass('selected-question');
+
+        $('.question-stack').addClass('selected-question');
+        $('.question-help .arrow').css("top", $(evt.target).position().top);
+        //}
 
     }
 
+});
+
+App.TagquestionView = Ember.View.extend({
+
+    didInsertElement: function () {
+
+        $('#tagquestion').on('tokenfield:preparetoken', function (e) {
+            var autoArray = autoSkills();
+            var inArray = false;
+            for (var i = 0; i < autoArray.length; i++) {
+                var item = autoArray[i];
+                console.log(item['value']);
+                if (item['value'].toUpperCase() === e.token.value.toUpperCase()) {
+                    inArray = true;
+                }
+            }
+            if (!inArray) {
+                e.token = false;
+            }
+        }).tokenfield({
+            typeahead: {
+                minLength: 1,
+                source: function (query, cb) {
+                    getSkills($('#tagquestion').data('bs.tokenfield').$input.val(), function () {
+                        cb(autoSkills());
+                    });
+                }
+            }
+        });
+    }
 });
