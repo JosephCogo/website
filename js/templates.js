@@ -80,9 +80,8 @@ function program1(depth0,data) {
     'class': ("form-control"),
     'id': ("questions"),
     'rows': ("3"),
-    'placeholder': ("Enter your question here..."),
-    'value': ("view.question")
-  },hashTypes:{'class': "STRING",'id': "STRING",'rows': "STRING",'placeholder': "STRING",'value': "ID"},hashContexts:{'class': depth0,'id': depth0,'rows': depth0,'placeholder': depth0,'value': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "textarea", options))));
+    'placeholder': ("Enter your question here...")
+  },hashTypes:{'class': "STRING",'id': "STRING",'rows': "STRING",'placeholder': "STRING"},hashContexts:{'class': depth0,'id': depth0,'rows': depth0,'placeholder': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "textarea", options))));
   data.buffer.push("\r\n                ");
   return buffer;
   }
@@ -108,9 +107,9 @@ function program3(depth0,data) {
   data.buffer.push("\r\n                <div class = \"space\"></div>\r\n                ");
   stack1 = helpers.view.call(depth0, "App.TagquestionView", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n                <div class = \"space\"></div>\r\n            <form class=\"form text-center\">\r\n                <button class='btn' ");
+  data.buffer.push("\r\n                <div class = \"space\"></div>\r\n            <form class=\"form text-center\">\r\n                <button data-loading-text=\"SUBMITTING...\" class='btn' ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "askquestion", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(">SUBMIT QUESTION</button>\r\n            </form>\r\n</div> \r\n\r\n\r\n");
+  data.buffer.push(" >SUBMIT QUESTION</button>\r\n            </form>\r\n</div> \r\n\r\n\r\n");
   return buffer;
   
 });
@@ -133,17 +132,13 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 Ember.TEMPLATES["asksuccess"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var stack1, helper, options, self=this, helperMissing=helpers.helperMissing;
+  var buffer = '', escapeExpression=this.escapeExpression;
 
-function program1(depth0,data) {
-  
-  
-  data.buffer.push(" The question has been asked. Ask Another? ");
-  }
 
-  stack1 = (helper = helpers['link-to'] || (depth0 && depth0['link-to']),options={hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["STRING"],data:data},helper ? helper.call(depth0, "ask", options) : helperMissing.call(depth0, "link-to", "ask", options));
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  else { data.buffer.push(''); }
+  data.buffer.push("<p> <a href='#' ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "askAnotherQuestion", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push("> The question has been asked. Ask Another? </a> </p>");
+  return buffer;
   
 });
 

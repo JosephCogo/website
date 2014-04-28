@@ -6,7 +6,7 @@ var questions = [];
 //need to have error logic here
 function initSocket(store, callback){
     emberStore = store;
-    
+
     connectSocket(function (err, data) {
         handleMessages();
         callback();
@@ -23,6 +23,7 @@ function connectSocket(callback) {
     //if the server responds, transition to ask
     //NOTE: NEED TO HAVE A FAILURE EVENT
     socket.on('connect', function (data) {
+        console.log(data);
         callback(null, data);
     });
 
@@ -55,8 +56,9 @@ function handleMessages() {
 
 }
 
-function getSkills(question, callback){
-    socket.emit('autoskill', { skill: question });
+function getSkills(yourSkills, callback){
+    console.log(yourSkills);
+    socket.emit('autoskill', { skill: yourSkills });
 
     socket.once('autoskill', function (data) {
         console.log(data.m);
@@ -90,9 +92,6 @@ function getQuestions(question, callback){
 
         callback();
     });
-    socket.removeListener("autoquestion", function () {
-        console.log("auto question removed");
-    });
 }
 
 
@@ -100,12 +99,27 @@ function autoQuestions(){
     return questions;
 }
 
+function addSkills(skills, callback){
 
+    console.log(skills);
+    socket.emit('addskill', {skills : skills});
 
-function askQuestion(question, expertise){
-    ex = ["node.js"];
-    console.log(question);
-    //socket.emit('askquestion', {question : 'Where does CURL serve its usefulness?', skills : [{skillname : "CURL", sid : "1gdgdy"}] } );
+    socket.once('addedskills', function (data) {
+        console.info('successfully added skills');
+        callback();
+    });
+
+}
+
+function askQuestion(question, expertise, callback){
+    console.log(question + " " + expertise);
+
+    socket.emit('askquestion', {question : question, skills : expertise } );
+
+    socket.once('askedQuestion', function () {
+        console.info('asked success');
+        callback();
+    });
 }
 
 function answerQuestion(answer, qid){

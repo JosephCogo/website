@@ -7,6 +7,7 @@ App.QuestionspageRoute = Ember.Route.extend({
                 console.info("Successfully Reconnected");
             });
         }
+        $(".application-content").fadeTo(500, 1);
     }
 });
 
@@ -117,19 +118,45 @@ App.AskRoute = Ember.Route.extend({
 
 
 App.AskController = Ember.Controller.extend({
-    
+
     actions: {
 
         askquestion: function () {
-            askQuestion(this.get('questionView'), this.get('expertise'));
-            this.transitionToRoute("asksuccess");
+            var controller = this;
+            $(".btn").button('loading');
+            askQuestion($('#questions').val(), $('#tagquestion').tokenfield('getTokensList'), function () {
+                $('.questionsOutlet').fadeTo(200, 0, function () {
+                    controller.replaceRoute("asksuccess");
+                });
+            });
         }
 
     }
 });
 
+App.AsksuccessRoute = Ember.Route.extend({
+
+    setupController: function () {
+        $('.questionsOutlet').fadeTo(200, 1);
+    }
+
+});
+
+App.AsksuccessController = Ember.Controller.extend({
+    actions: {
+        askAnotherQuestion: function () {
+            console.log('bang');
+            var controller = this;
+            $('.questionsOutlet').fadeTo(200, 0, function () {
+                controller.replaceRoute('ask');
+            });
+        }
+    }
+
+});
+
+
 App.QuestionareaView = Ember.View.extend({
-    question: '',
 
     didInsertElement: function () {
         var view = this;
@@ -163,11 +190,9 @@ App.AnswerRoute = Ember.Route.extend({
 App.AnswerController = Ember.ObjectController.extend({
 
     actions: {
-
         answer: function () {
             answerQuestion(this.get('answerText'), this.get('id'));
         }
-
     }
 
 });
@@ -188,11 +213,9 @@ App.AnsweraquestionRoute = Ember.Route.extend({
 
 App.AnsweraquestionController = Ember.ArrayController.extend({
     actions: {
-
         answer: function () {
             console.log(this.get('answerText'));
         }
-
     }
 });
 
@@ -225,6 +248,7 @@ App.QuestionView = Ember.View.extend({
         console.log($(evt.target).attr('id'));
         var view = $(evt.target).attr('id');
         console.log($(evt.target).position().top);
+        
         //this works, but at what cost??
         if (!$('.question-help').is(":visible")) {
             $('.question-help').fadeTo(200, 1);
@@ -234,7 +258,6 @@ App.QuestionView = Ember.View.extend({
 
         $('.question-stack').addClass('selected-question');
         $('.question-help .arrow').css("top", $(evt.target).position().top);
-        //}
 
     }
 
@@ -258,6 +281,7 @@ App.TagquestionView = Ember.View.extend({
                 e.token = false;
             }
         }).tokenfield({
+            beautify: false,
             typeahead: {
                 minLength: 1,
                 source: function (query, cb) {

@@ -20,11 +20,22 @@ App.LoginController = Ember.ObjectController.extend({
                 statusCode: {
                     200: function (data) {
                         localStorage.token = data.token;
-                        console.info("Logged In");
+                        var firstTime = data.firsttime;
+
                         initSocket(this.store, function () {
                             console.info("Sockets connected");
-                            router.replaceWith('expertise');
+
+                            $(".application-content").fadeTo(500, 0, function () {
+                                console.log(firstTime);
+                                if (firstTime) {
+                                    router.replaceRoute('expertise');
+                                }
+                                else {
+                                    router.replaceRoute('ask');
+                                }
+                            });
                         });
+
                     },
                     400: function () {
                         console.log("Invalid Username or Password");
@@ -67,6 +78,7 @@ App.ExpertiseRoute = Ember.Route.extend({
                 console.info("Successfully Reconnected");
             });
         }
+        $(".application-content").fadeTo(500, 1);
     }
 
 });
@@ -74,12 +86,16 @@ App.ExpertiseRoute = Ember.Route.extend({
 App.ExpertiseController = Ember.ObjectController.extend({
     actions: {
 
-        test : function(){
-          $("#expertise").tagit("tagInput");  
-        },
 
         submit: function () {
-            this.replaceWith('ask');
+            var controller = this;
+            //send skills through on socket, getting all the inputted tokens.
+            //once successful, transition to asking a question
+            addSkills($('#tokenfield-typeahead').tokenfield('getTokensList'), function () {
+                $(".application-content").fadeTo(500, 0, function () {
+                    controller.replaceRoute('ask');
+                });
+            });
         }
 
     }
@@ -112,11 +128,11 @@ App.ExpertiseView = Ember.View.extend({
     didInsertElement: function () {
 
         $('#tokenfield-typeahead').tokenfield({
+            beautify : false,
             typeahead: {
                 minLength: 1,
                 source: function (query, cb) {
-                    console.log("ok");
-                    getSkills(function () {
+                    getSkills($('#tokenfield-typeahead').data('bs.tokenfield').$input.val(), function () {
                         cb(autoSkills());
                     });
                 }

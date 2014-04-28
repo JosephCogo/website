@@ -1,7 +1,7 @@
 <div class="askquestion contenthide">
             
                 {{#view App.QuestionareaView}}
-                    {{textarea class="form-control" id='questions' rows="3" placeholder="Enter your question here..."  value=view.question }}
+                    {{textarea class="form-control" id='questions' rows="3" placeholder="Enter your question here..." }}
                 {{/view}}
                 <div class = "space"></div>
                 {{#view App.TagquestionView}}
@@ -9,7 +9,7 @@
                 {{/view}}
                 <div class = "space"></div>
             <form class="form text-center">
-                <button class='btn' {{action 'askquestion'}}>SUBMIT QUESTION</button>
+                <button data-loading-text="SUBMITTING..." class='btn' {{action 'askquestion'}} >SUBMIT QUESTION</button>
             </form>
 </div> 
 
