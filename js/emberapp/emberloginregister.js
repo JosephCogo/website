@@ -101,55 +101,7 @@ App.ExpertiseController = Ember.ObjectController.extend({
     }
 });
 
-//this is the ember view that handles the light bulb helper
-App.LightbulbhelperView = Ember.View.extend({
-    templateName: 'lightbulbhelper',
 
-   click: function(evt) {
-        $('.lightbulb-help > div').fadeToggle('slow');
-   }
-
-
-
-});
-
-App.SubmitButtonView = Ember.View.extend({
-
-    click: function (evt) {
-        console.log("yus");
-        var btn = $('.submit');
-        btn.button('loading');
-    }
-
-});
-
-App.ExpertiseView = Ember.View.extend({
-
-    didInsertElement: function () {
-
-        $('#tokenfield-typeahead').tokenfield({
-            beautify : false,
-            typeahead: {
-                minLength: 1,
-                source: function (query, cb) {
-                    getSkills($('#tokenfield-typeahead').data('bs.tokenfield').$input.val(), function () {
-                        cb(autoSkills());
-                    });
-                }
-            }
-        });
-    }
-});
-
-App.AlertView = Ember.View.extend({
-
-    didInsertElement: function () {
-        $(".alert").find(".close").on("click", function (e) {
-            $('#loginerror').addClass("hide");
-        });
-    }
-
-});
 
 
 

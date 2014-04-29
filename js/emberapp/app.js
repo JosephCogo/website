@@ -15,7 +15,7 @@ App.Router.map(function () {
             this.resource('asksuccess');
             this.resource('solved', function () {
                 //should be a route
-                this.resource('solvedanswer', { path: '/:question_id' });
+                this.route('solvedanswer', { path: '/:question_id' });
             });
             
             this.resource('unsolved', function(){

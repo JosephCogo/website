@@ -38,12 +38,7 @@ App.QuestionspageController = Ember.Controller.extend({
     }
 });
 
-//this is embedded at the top of the askcontroller view
-App.QuestionsnavView = Ember.View.extend({
 
-    templateName: 'questionsnav'
-
-});
 
 App.AskaquestionRoute = Ember.Route.extend({
 
@@ -91,19 +86,7 @@ App.AskaquestionController = Ember.ArrayController.extend({
 });
 
 
-App.SolvedRoute = Ember.Route.extend({
-    model : function (){
-        var store = this.store;
-        return store.find('solvedquestion');
-    },
 
-    setupController : function (controller, model){
-       this._super(controller, model);
-       $('.questionsOutlet').fadeTo(200, 1); 
-        this.controllerFor('askaquestion').set('askSelected', false);
-        this.controllerFor('askaquestion').set('solvedSelected', 'selected');
-    }  
-});
 
 App.AskRoute = Ember.Route.extend({
 
@@ -156,29 +139,6 @@ App.AsksuccessController = Ember.Controller.extend({
 });
 
 
-App.QuestionareaView = Ember.View.extend({
-
-    didInsertElement: function () {
-        var view = this;
-        $('#questions').typeahead({
-            hint: true,
-            highlight: true,
-            minLength: 1
-        },
-        {
-            displayKey: 'value',
-            source: function (query, cb) {
-                console.log($('#questions').val());
-                getQuestions($('#questions').val(), function () {
-                    cb(autoQuestions());
-                });
-            }
-        });
-
-
-    }
-});
-
 App.AnswerRoute = Ember.Route.extend({
 
     setupController: function () {
@@ -219,77 +179,45 @@ App.AnsweraquestionController = Ember.ArrayController.extend({
     }
 });
 
-App.Question = DS.Model.extend({
-    question : DS.attr('string')
-});
 
-App.Solvedquestion = DS.Model.extend({
-    question : DS.attr('string'),
-    abody : DS.attr('string'),
-    aid : DS.attr('string')
-});
-
-App.Question.FIXTURES = [];
-App.Solvedquestion.FIXTURES = [{id : 1, question : "Question 1", abody : "Answer 1"},
-{id : 2, question : "Question 2", abody : "Answer 2"},
-{id : 3, question : "Question 3", abody : "Answer 3"},
-{id : 4, question : "Question 4", abody : "Answer 4"}
-];
-
-App.QuestionView = Ember.View.extend({
-
-    tagName: 'p',
-
-    didInsertElement: function () {
-        $('.question-stack > p').fadeTo(200, 1);
+App.SolvedIndexRoute = Ember.Route.extend({
+    renderTemplate: function () {
+        this.render('solvedindex');
     },
 
-    click: function (evt) {
-        console.log($(evt.target).attr('id'));
-        var view = $(evt.target).attr('id');
-        console.log($(evt.target).position().top);
-        
-        //this works, but at what cost??
-        if (!$('.question-help').is(":visible")) {
-            $('.question-help').fadeTo(200, 1);
-        }
-        $('.question-help textarea').autosize({ append: "\n" });
-        $('.selected-question').removeClass('selected-question');
+    model: function () {
+        var store = this.store;
+        return store.find('solvedquestion');
+    },
 
-        $('.question-stack').addClass('selected-question');
-        $('.question-help .arrow').css("top", $(evt.target).position().top);
-
+    setupController: function (controller, model) {
+        this._super(controller, model);
+        $('.questionsOutlet').fadeTo(200, 1);
+        this.controllerFor('askaquestion').set('askSelected', false);
+        this.controllerFor('askaquestion').set('solvedSelected', 'selected');
     }
-
 });
 
-App.TagquestionView = Ember.View.extend({
-
-    didInsertElement: function () {
-
-        $('#tagquestion').on('tokenfield:preparetoken', function (e) {
-            var autoArray = autoSkills();
-            var inArray = false;
-            for (var i = 0; i < autoArray.length; i++) {
-                var item = autoArray[i];
-                console.log(item['value']);
-                if (item['value'].toUpperCase() === e.token.value.toUpperCase()) {
-                    inArray = true;
-                }
-            }
-            if (!inArray) {
-                e.token = false;
-            }
-        }).tokenfield({
-            beautify: false,
-            typeahead: {
-                minLength: 1,
-                source: function (query, cb) {
-                    getSkills($('#tagquestion').data('bs.tokenfield').$input.val(), function () {
-                        cb(autoSkills());
-                    });
-                }
-            }
-        });
+App.SolvedIndexController = Ember.ArrayController.extend({
+    actions : {
+        toSolvedAnswer : function(solvedQuestion){
+            var controller = this;
+            controller.transitionToRoute('solved.solvedanswer', solvedQuestion);   
+        }
     }
+});
+
+App.SolvedSolvedanswerRoute = Ember.Route.extend({
+    renderTemplate: function(){
+        this.render('solvedsolvedanswer');
+    },
+    
+    setupController: function (controller, model) {
+        controller.set('model', model);
+    }
+});
+
+App.SolvedSolvedanswerController = Ember.ObjectController.extend({
+
+
 });

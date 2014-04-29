@@ -1,9 +1,0 @@
-        <div class="question-stack">
-            {{#each solvedquestion in controller}}
-                {{#view App.QuestionView contentBinding="this"}}
-                    {{#link-to 'solvedanswer' solvedquestion}} {{solvedquestion.question}} {{/link-to}}
-                {{/view}}
-            {{/each}}
-            
-            {{outlet}}
-        </div>

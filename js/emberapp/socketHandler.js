@@ -44,12 +44,12 @@ function handleMessages() {
 
     socket.on('unsolvedquestions', function (data) {
         console.log(data.question.qid);
-        //emberStore.push('unsolvedquestion', { id: data.question.qid, question: data.question.question });
+        emberStore.push('solvedquestion', { id: data.question.qid, question: data.question.question });
     });
 
     socket.on('solvedquestions', function (data) {
         console.log("solved");
-       // emberStore.push('solvedquestion', { id: data.question.qid, question: data.question.question, answer : data.question.abody, aid : data.question.aid });
+        //emberStore.push('solvedquestion', { id: data.question.qid, question: data.question.question, answer : data.question.abody, aid : data.question.aid });
     });
 
 
