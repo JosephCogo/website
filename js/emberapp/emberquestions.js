@@ -210,11 +210,26 @@ App.SolvedIndexController = Ember.ArrayController.extend({
 });
 
 App.SolvedSolvedanswerRoute = Ember.Route.extend({
-    renderTemplate: function(){
+    renderTemplate: function () {
         this.render('solvedsolvedanswer');
     },
-    
+
+    model: function (params) {
+        console.log(params);
+        
+        //need to merge 2 promises into one
+        return Ember.RSVP.hash({
+            solvedquestion: this.store.find('solvedquestion', params.question_id),
+            answers : this.store.find('answer', [1,2])
+        });
+
+       // this.store.find('answer');
+
+       // return this.store.find('solvedquestion', params.question_id);
+    },
+
     setupController: function (controller, model) {
+
         controller.set('model', model);
     }
 });
@@ -223,3 +238,6 @@ App.SolvedSolvedanswerController = Ember.ObjectController.extend({
 
 
 });
+
+App.LoadingRoute = Ember.Route.extend({});
+

@@ -5,7 +5,7 @@
             {{#each question in controller}}
                 
                     {{#view App.QuestionView contentBinding="this"}}
-                        {{#link-to 'answer' question}} {{question.question}} {{/link-to}}
+                         <p class = "questionParagraph"> {{question.qbody}} </p>
                     {{/view}}
                     
                     {{else}}
