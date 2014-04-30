@@ -44,6 +44,7 @@ App.AskaquestionRoute = Ember.Route.extend({
 
         model: function () {
             var store = this.store;
+            store.find('answer');
             return store.find('question');
         },
 
@@ -160,6 +161,7 @@ App.AnswerController = Ember.ObjectController.extend({
 App.AnsweraquestionRoute = Ember.Route.extend({
     model: function () {
         var store = this.store;
+        
         return store.find('question');
     },
 

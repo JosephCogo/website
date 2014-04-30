@@ -1,7 +1,7 @@
         <div class="question-stack">
             {{#each solvedquestion in controller}}
             {{#view App.QuestionView contentBinding="this"}}
-                   <p class = "questionParagraph" {{action 'toSolvedAnswer' solvedquestion}}>  {{solvedquestion.question}} </p>
+                   <p class = "questionParagraph" {{action 'toSolvedAnswer' solvedquestion}}>  {{solvedquestion.qbody}} </p>
             {{/view}}
             {{/each}}
         </div>

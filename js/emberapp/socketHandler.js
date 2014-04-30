@@ -39,12 +39,12 @@ function handleMessages() {
 
     socket.on('sendquestions', function (data) {
         console.log(data.question.qid);
-        emberStore.push('question', { id: data.question.qid, question: data.question.question });
+        emberStore.push('question', { id: data.question.qid, qbody: data.question.question });
     });
 
     socket.on('unsolvedquestions', function (data) {
         console.log(data.question.qid);
-        emberStore.push('solvedquestion', { id: data.question.qid, question: data.question.question });
+        //emberStore.push('solvedquestion', { id: data.question.qid, qbody: data.question.question });
     });
 
     socket.on('solvedquestions', function (data) {
