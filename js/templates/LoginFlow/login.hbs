@@ -1,0 +1,25 @@
+<div class="holder">
+    <div class="mast login-mast">
+    <img src='img/logogreensmal_.png'/>
+    <h4>LOGIN</h4>
+</div>
+    
+    {{#view App.AlertView}}
+    <div class="alert alert-danger hide fade in" id = "loginerror">
+        <button type="button" class="close" aria-hidden="true">&times;</button>
+        <strong>Whoa!</strong> Sorry buddy we don't have that user name or password. Try again!
+    </div>
+    {{/view}}
+
+    <form class="form">
+        {{input class = "form-control" placeholder="Email" valueBinding = "email"}}
+        {{input class = "form-control" placeholder="Password" type= "password" valueBinding = "password"}}
+        
+        {{#view App.SubmitButtonView}}
+            <button {{action 'login'}} class='btn btnsmall pull-right submit' data-loading-text="Logging In...">Enter</button>
+        {{/view}}
+    </form>
+
+</div>
+
+

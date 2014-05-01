@@ -1,0 +1,16 @@
+<div class="askquestion contenthide">
+            
+                {{#view App.QuestionareaView}}
+                    {{textarea class="form-control" id='questions' rows="3" placeholder="Enter your question here..." }}
+                {{/view}}
+                <div class = "space"></div>
+                {{#view App.TagquestionView}}
+                    {{input  class="form-control" id="tagquestion" type="text" placeholder="Enter expertise required to answer question here (e.g Social media marketing, Javascript)..." valueBinding="expertise"}}
+                {{/view}}
+                <div class = "space"></div>
+            <form class="form text-center">
+                <button data-loading-text="SUBMITTING..." class='btn' {{action 'askquestion'}} >SUBMIT QUESTION</button>
+            </form>
+</div> 
+
+

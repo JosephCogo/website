@@ -1,0 +1,16 @@
+
+{{view App.LightbulbhelperView}}
+
+<div class="holder">
+    <div class="mast">
+        <h4>Expertise</h4>
+    </div>
+    <form class="form expertise">
+        {{#view App.ExpertiseView}}
+            <div class="input-group"><input class="form-control" id="tokenfield-typeahead" type="text" placeholder="Enter your expertise"><span class="input-group-addon"><img src='img/tickwhite.png'/></span></div>
+        {{/view}}
+        {{#view App.SubmitButtonView}}
+            <button {{action 'submit'}} data-loading-text="Updating..." class='btn btnsmall pull-right submit'>Finish</button>
+        {{/view}}
+    </form>
+</div>
