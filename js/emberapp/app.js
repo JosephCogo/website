@@ -1,3 +1,8 @@
+/**
+File which sets up the ember application and the routes. Also handles the initial redirect of the application;
+either to the login screen or to the home page of the application
+**/
+
 App = Ember.Application.create();
 
 App.ApplicationAdapter = DS.FixtureAdapter;
@@ -5,7 +10,6 @@ App.ApplicationAdapter = DS.FixtureAdapter;
 //define the routes
 App.Router.map(function () {
     this.resource('login');
-    this.resource('register');
     this.resource('expertise');
 
     this.resource('questionspage', function () {
@@ -16,10 +20,6 @@ App.Router.map(function () {
             this.resource('solved', function () {
                 //should be a route
                 this.route('solvedanswer', { path: '/:question_id' });
-            });
-            
-            this.resource('unsolved', function(){
-                this.resource('unsolvedanswer', { path: '/:question_id' });
             });
         });
 

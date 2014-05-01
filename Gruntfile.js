@@ -1,29 +1,53 @@
-module.exports = function(grunt) {
-  grunt.initConfig({
-    pkg: grunt.file.readJSON( 'package.json' ),
-    
-    emberTemplates: {
-      compile: {
-        options: {
-          templateBasePath: /js\/templates\//
+module.exports = function (grunt) {
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+
+        uglify: {
+            js: {
+                files: { 'js/emberapplication.js': 'js/emberapp/**/*.js' },
+                options: {
+                    preserveComments: false
+                }
+            }
         },
-        files: {
-          'js/templates.js': 'js/templates/**/*.hbs'
+
+        emberTemplates: {
+            compile: {
+                options: {
+                    templateBasePath: /js\/templates\//,
+
+                    templateName: function (name) {
+                        var tempArray = name.split('/');
+                        return tempArray[(tempArray.length) - 1];
+                    }
+                },
+                files: {
+                    'js/templates.js': ['js/templates/**/*.hbs', 'js/templates/views/**/*.hbs']
+                }
+            }
+        },
+
+        watch: {
+            emberTemplates: {
+                files: ['js/templates/**/*.hbs', 'js/templates/views/**/*.hbs'],
+                tasks: ['emberTemplates'],
+                options: {
+                    livereload: true
+                }
+            },
+            uglify: {
+                files: 'js/emberapp/**/*.js',
+                tasks: ['uglify'],
+                options: {
+                    livereload: true
+                }
+            }
         }
-      }
-    },
-    
-    watch: {
-      emberTemplates: {
-        files: 'js/templates/**/*.hbs',
-        tasks: ['emberTemplates']
-      }
-    }
-  });
- 
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-ember-templates');
- 
-  // Default task(s).
-  grunt.registerTask('default', ['emberTemplates']);
+    });
+
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-ember-templates');
+
+    grunt.registerTask('default', ['emberTemplates', 'uglify']);
 };
