@@ -45,7 +45,7 @@ App.AskaquestionRoute = Ember.Route.extend({
         model: function () {
             var store = this.store;
             store.find('answer');
-            return store.find('question');
+            return store.find('questionsyouask');
         },
 
         setupController: function (controller, model) {
@@ -162,7 +162,7 @@ App.AnsweraquestionRoute = Ember.Route.extend({
     model: function () {
         var store = this.store;
         
-        return store.find('question');
+        return store.find('questionsothersask');
     },
 
     setupController: function (controller, model) {
@@ -189,7 +189,7 @@ App.SolvedIndexRoute = Ember.Route.extend({
 
     model: function () {
         var store = this.store;
-        return store.find('solvedquestion');
+        return store.find('questionsyouask');
     },
 
     setupController: function (controller, model) {
@@ -219,7 +219,7 @@ App.SolvedSolvedanswerRoute = Ember.Route.extend({
         
         //need to merge 2 promises into one
         return Ember.RSVP.hash({
-            solvedquestion: this.store.find('solvedquestion', params.question_id),
+            solvedquestion: this.store.find('questionsyouask', params.question_id),
             answers : this.store.find('answer', [1,2])
         });
 

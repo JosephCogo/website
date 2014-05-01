@@ -1,7 +1,11 @@
         <div class="question-stack">
-            {{#each solvedquestion in controller}}
+            {{#each questionsyouask in controller}}
                 {{#view App.QuestionView contentBinding="this"}}
-                   <p class = "questionParagraph" {{action 'toSolvedAnswer' solvedquestion}}>  {{solvedquestion.qbody}} </p>
+                   <p class = "questionParagraph" {{action 'toSolvedAnswer' questionsyouask}}>  {{questionsyouask.qbody}} </p>
+                {{/view}}
+                {{else}}
+                {{#view App.QuestionView contentBinding="this"}}
+                <p class = "questionParagraph">  You haven't asked any questions. You should.... </p>
                 {{/view}}
             {{/each}}
         </div>

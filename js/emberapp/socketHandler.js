@@ -37,22 +37,15 @@ function handleMessages() {
 
     console.log("Handle Messages");
 
-    socket.on('sendquestions', function (data) {
-        console.log(data.question.qid);
-        emberStore.push('question', { id: data.question.qid, qbody: data.question.question });
+    socket.on('questions-others-ask', function (data) {
+        console.log(data);
+        emberStore.push('questionsothersask', { id: data.question.qid, qbody: data.question.question });
     });
 
-    socket.on('unsolvedquestions', function (data) {
-        console.log(data.question.qid);
-        //emberStore.push('solvedquestion', { id: data.question.qid, qbody: data.question.question });
+    socket.on('questions-you-ask', function (data) {
+        console.log(data);
+        emberStore.push('questionsyouask', { id: data.question.qid, question: data.question.qbody, answers : [] });
     });
-
-    socket.on('solvedquestions', function (data) {
-        console.log("solved");
-        //emberStore.push('solvedquestion', { id: data.question.qid, question: data.question.question, answer : data.question.abody, aid : data.question.aid });
-    });
-
-
 
 }
 
