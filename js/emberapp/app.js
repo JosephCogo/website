@@ -12,20 +12,19 @@ App.Router.map(function () {
     this.resource('login');
     this.resource('expertise');
 
-    this.resource('questionspage', function () {
+    this.resource('questionshomepage', function () {
         //answer a question and its sub routes
-        this.resource('askaquestion', function () {
-            this.resource('ask');
+        this.resource('askaquestioncontent', function () {
+            this.resource('askaquestion');
             this.resource('asksuccess');
-            this.resource('solved', function () {
-                //should be a route
-                this.route('solvedanswer', { path: '/:question_id' });
+            this.resource('yourquestions', function () {
+                this.route('answersprovided', { path: '/:question_id' });
             });
         });
 
         this.resource('answeraquestion', function () {
             //should be a route
-            this.resource('answer', { path: '/:question_id' });
+            this.resource('inputanswer', { path: '/:question_id' });
         });
     });
 });
@@ -53,12 +52,9 @@ App.IndexRoute = Ember.Route.extend({
                     200: function (data) {
                         //set the new token
                         localStorage.token = data.token;
-
-                        initSocket(store, function () {
-                            console.info("Successfully Connected. Transitioning to Ask a question");
-                            router.transitionTo("ask");
+                        loadData(store, function () {
+                            router.transitionTo("askaquestion");
                         });
-
                     },
                     401: function () {
                         console.log("ERROR");

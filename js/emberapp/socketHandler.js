@@ -1,18 +1,26 @@
+/**
+This class handles all the socket logic. Could possibly put this into each class implementation
+**/
+
 var socket;
+//the store for ember data
 var emberStore;
+//the array of skills from the server
 var skills = [];
+//the autocompleted questions returned from the server
 var questions = [];
 
-//need to have error logic here
+//initialise the socket and store and register event listeners for the 
+//grabbing messages from the server
 function initSocket(store, callback){
     emberStore = store;
 
     connectSocket(function (err, data) {
-        handleMessages();
         callback();
     });
 }
 
+//connects to the socket server
 function connectSocket(callback) {
 
     //connect to socket io
@@ -23,7 +31,7 @@ function connectSocket(callback) {
     //if the server responds, transition to ask
     //NOTE: NEED TO HAVE A FAILURE EVENT
     socket.on('connect', function (data) {
-        console.log(data);
+        //console.log(data);
         callback(null, data);
     });
 
@@ -33,24 +41,52 @@ function getSocket(){
     return socket;
 }
 
-function handleMessages() {
+function loadData(store, callback){
+    initSocket(store, function () {
+        console.info("Connected. Loading resources...");
 
-    console.log("Handle Messages");
+        loadYourQuestions(function () {
+            console.info("Your questions are loaded");
 
-    socket.on('questions-others-ask', function (data) {
-        console.log(data);
-        emberStore.push('questionsothersask', { id: data.question.qid, qbody: data.question.question });
+            loadQuestionsOthersAsk(function () {
+                console.info('others questions are loaded. Loading complete');
+                callback();
+            });
+        });
     });
-
-    socket.on('questions-you-ask', function (data) {
-        console.log(data);
-        emberStore.push('questionsyouask', { id: data.question.qid, question: data.question.qbody, answers : [] });
-    });
-
 }
 
+function loadYourQuestions(callback) {
+    console.info('loading your questions');
+    //these are the questions that you have asked!
+    socket.once('questions-you-ask', function (data) {
+        var questions = data.question;
+        for (var i = 0; i < questions.length; i++) {
+            var item = questions[i];
+            emberStore.push('questionsyouask', { id: item['q.qid'], qbody: item['q.qbody'], answers : [] });
+        }
+        callback();
+    });
+    
+}
+
+function loadQuestionsOthersAsk(callback) {
+    console.info('loading questions others ask');
+
+    //these are questions that need your expertise!!
+    socket.once('questions-others-ask', function (data) {
+        var questions = data.question;
+        for (var i = 0; i < questions.length; i++) {
+            var item = questions[i];
+            emberStore.push('questionsothersask', { id: item['q.qid'], qbody: item['q.qbody'] });
+        }
+        callback();
+    });
+    
+}
+
+//these are the skills that you get from the server
 function getSkills(yourSkills, callback){
-    console.log(yourSkills);
     socket.emit('autoskill', { skill: yourSkills });
 
     socket.once('autoskill', function (data) {
@@ -68,10 +104,12 @@ function getSkills(yourSkills, callback){
     });
 }
 
+//return the array of skills that have been grabbed from the server
 function autoSkills(){
     return skills;
 }
 
+//
 function getQuestions(question, callback){
     socket.emit('autoquestion', { question: question });
 
@@ -87,11 +125,12 @@ function getQuestions(question, callback){
     });
 }
 
-
+//return the array of questions that have been grabbed from the server
 function autoQuestions(){
     return questions;
 }
 
+//add skills to the server, in the expertise route
 function addSkills(skills, callback){
 
     console.log(skills);
@@ -114,6 +153,7 @@ function askQuestion(question, expertise, callback){
         callback();
     });
 }
+
 
 function answerQuestion(answer, qid){
     socket.emit('answerquestion', {answer : answer, qid: qid} );

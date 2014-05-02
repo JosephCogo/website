@@ -75,23 +75,6 @@ function program3(depth0,data) {
   
 });
 
-Ember.TEMPLATES["answer"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
-this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', helper, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
-
-
-  data.buffer.push("            <div class=\"question-help\">\r\n                <span class=\"arrow\"></span>\r\n                <div class=\"textwrap\">\r\n                    ");
-  data.buffer.push(escapeExpression((helper = helpers.textarea || (depth0 && depth0.textarea),options={hash:{
-    'valueBinding': ("answerText")
-  },hashTypes:{'valueBinding': "STRING"},hashContexts:{'valueBinding': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "textarea", options))));
-  data.buffer.push("\r\n                </div>\r\n                <div class=\"btnwrap\">\r\n                    <button><i class=\"fa fa-paperclip\"> </i> Attach Image</button>\r\n                    <button ");
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "answer", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push("><i class=\"fa fa-paperclip\"> </i> Send</button>\r\n                </div>\r\n            </div>");
-  return buffer;
-  
-});
-
 Ember.TEMPLATES["answeraquestion"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
@@ -135,7 +118,34 @@ function program4(depth0,data) {
   
 });
 
-Ember.TEMPLATES["ask"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+Ember.TEMPLATES["inputanswer"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var buffer = '', helper, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+
+
+  data.buffer.push("            <div class=\"question-help\">\r\n                <span class=\"arrow\"></span>\r\n                <div class=\"textwrap\">\r\n                    ");
+  data.buffer.push(escapeExpression((helper = helpers.textarea || (depth0 && depth0.textarea),options={hash:{
+    'valueBinding': ("answerText")
+  },hashTypes:{'valueBinding': "STRING"},hashContexts:{'valueBinding': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "textarea", options))));
+  data.buffer.push("\r\n                </div>\r\n                <div class=\"btnwrap\">\r\n                    <button><i class=\"fa fa-paperclip\"> </i> Attach Image</button>\r\n                    <button ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "answer", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push("><i class=\"fa fa-paperclip\"> </i> Send</button>\r\n                </div>\r\n            </div>");
+  return buffer;
+  
+});
+
+Ember.TEMPLATES["loading"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  
+
+
+  data.buffer.push("<body>\r\n<div class='sidebar'>\r\n    <h4></h4>\r\n\r\n</div>\r\n<div class='content-pane'>   \r\n    <div class='content'>\r\n            \r\n      LOADING!!!!!!!!!!!!!!!!!!!!!!!!!!!  \r\n\r\n    \r\n    </div>\r\n</div>\r\n\r\n</body>\r\n");
+  
+});
+
+Ember.TEMPLATES["askaquestion"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', stack1, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, self=this;
@@ -182,7 +192,7 @@ function program3(depth0,data) {
   
 });
 
-Ember.TEMPLATES["askaquestion"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+Ember.TEMPLATES["askaquestioncontent"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', stack1, escapeExpression=this.escapeExpression;
@@ -235,7 +245,50 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   
 });
 
-Ember.TEMPLATES["solvedindex"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+Ember.TEMPLATES["yourquestionsanswersprovided"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var buffer = '', stack1, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\r\n        <p class=\"solvedAnswersParagraph\">");
+  stack1 = helpers._triageMustache.call(depth0, "qbody", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("<p>\r\n        ");
+  stack1 = helpers.each.call(depth0, "answer", "in", "answers", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n    ");
+  return buffer;
+  }
+function program2(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\r\n            <p class=\"solvedAnswersParagraph\">");
+  stack1 = helpers._triageMustache.call(depth0, "answer.abody", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("<p>\r\n\r\n            ");
+  return buffer;
+  }
+
+function program4(depth0,data) {
+  
+  
+  data.buffer.push("\r\n            <p class=\"solvedAnswersParagraph\">nothing<p>\r\n        ");
+  }
+
+  data.buffer.push("<div class = 'question-stack'>\r\n    ");
+  stack1 = helpers.view.call(depth0, "App.YourAnswersView", {hash:{
+    'contentBinding': ("this")
+  },hashTypes:{'contentBinding': "STRING"},hashContexts:{'contentBinding': depth0},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n</div>\r\n\r\n           ");
+  return buffer;
+  
+});
+
+Ember.TEMPLATES["yourquestionsindex"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', stack1, escapeExpression=this.escapeExpression, self=this;
@@ -277,7 +330,7 @@ function program4(depth0,data) {
 function program5(depth0,data) {
   
   
-  data.buffer.push("\r\n                <p class = \"questionParagraph\">  You haven't asked any questions. You should.... </p>\r\n                ");
+  data.buffer.push("\r\n                    <p class = \"questionParagraph\">  You haven't asked any questions. You should.... </p>\r\n                ");
   }
 
   data.buffer.push("        <div class=\"question-stack\">\r\n            ");
@@ -288,50 +341,7 @@ function program5(depth0,data) {
   
 });
 
-Ember.TEMPLATES["solvedsolvedanswer"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
-this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', stack1, self=this;
-
-function program1(depth0,data) {
-  
-  var buffer = '', stack1;
-  data.buffer.push("\r\n        <p class=\"solvedAnswersParagraph\">");
-  stack1 = helpers._triageMustache.call(depth0, "solvedquestion.qbody", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("<p>\r\n        ");
-  stack1 = helpers.each.call(depth0, "answer", "in", "answers", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n    ");
-  return buffer;
-  }
-function program2(depth0,data) {
-  
-  var buffer = '', stack1;
-  data.buffer.push("\r\n            <p class=\"solvedAnswersParagraph\">");
-  stack1 = helpers._triageMustache.call(depth0, "answer.abody", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("<p>\r\n\r\n            ");
-  return buffer;
-  }
-
-function program4(depth0,data) {
-  
-  
-  data.buffer.push("\r\n            <p class=\"solvedAnswersParagraph\">nothing<p>\r\n        ");
-  }
-
-  data.buffer.push("<div class = 'question-stack'>\r\n    ");
-  stack1 = helpers.view.call(depth0, "App.YourAnswersView", {hash:{
-    'contentBinding': ("this")
-  },hashTypes:{'contentBinding': "STRING"},hashContexts:{'contentBinding': depth0},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n</div>\r\n\r\n           ");
-  return buffer;
-  
-});
-
-Ember.TEMPLATES["questionspage"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+Ember.TEMPLATES["questionshomepage"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', stack1, escapeExpression=this.escapeExpression;

@@ -20,18 +20,20 @@ App.LoginController = Ember.ObjectController.extend({
                 statusCode: {
                     200: function (data) {
                         localStorage.token = data.token;
+                        //is it the users first time logging in?
                         var firstTime = data.firsttime;
 
                         initSocket(this.store, function () {
                             console.info("Sockets connected");
 
                             $(".application-content").fadeTo(500, 0, function () {
-                                console.log(firstTime);
+                                //transition to inputting user expertise 
                                 if (firstTime) {
                                     router.replaceRoute('expertise');
                                 }
+                                //go straight to replace route if logged in before
                                 else {
-                                    router.replaceRoute('ask');
+                                    router.replaceRoute('askaquestion');
                                 }
                             });
                         });
@@ -45,63 +47,6 @@ App.LoginController = Ember.ObjectController.extend({
                     }
                 }
             });
-        },
-
-        register: function () {
-            var router = this;
-            console.log('register');
-            router.transitionToRoute('register');
         }
     }
 });
-
-App.RegisterRoute = Ember.Route.extend({
-   model: function() {
-    return {};
-   }
-});
-
-App.RegisterController = Ember.ObjectController.extend({
-    actions: {
-        //if user chooses to do registration
-        register: function () {
-
-        }
-    }
-});
-
-App.ExpertiseRoute = Ember.Route.extend({
-    setupController: function () {
-        //reset the connection on refresh
-        if (Ember.isEmpty(getSocket())) {
-            initSocket(this.store, function () {
-                console.info("Successfully Reconnected");
-            });
-        }
-        $(".application-content").fadeTo(500, 1);
-    }
-
-});
-
-App.ExpertiseController = Ember.ObjectController.extend({
-    actions: {
-
-
-        submit: function () {
-            var controller = this;
-            //send skills through on socket, getting all the inputted tokens.
-            //once successful, transition to asking a question
-            addSkills($('#tokenfield-typeahead').tokenfield('getTokensList'), function () {
-                $(".application-content").fadeTo(500, 0, function () {
-                    controller.replaceRoute('ask');
-                });
-            });
-        }
-
-    }
-});
-
-
-
-
-
