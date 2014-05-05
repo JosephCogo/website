@@ -24,7 +24,7 @@ function initSocket(store, callback){
 function connectSocket(callback) {
 
     //connect to socket io
-    socket = io.connect('http://localhost:3000', {
+    socket = io.connect('http://babblefishes.cloudapp.net:3000', {
         query: 'token=' + localStorage.token
     });
 
