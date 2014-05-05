@@ -42,18 +42,23 @@ function getSocket(){
 }
 
 function loadData(store, callback){
-    initSocket(store, function () {
-        console.info("Connected. Loading resources...");
+
+    socket.emit('loaddata');
 
         loadYourQuestions(function () {
             console.info("Your questions are loaded");
 
             loadQuestionsOthersAsk(function () {
-                console.info('others questions are loaded. Loading complete');
+                console.info('others questions are loaded. Setting up handling of new messages...');
+
+                handleUpdates();
+
+                console.info('Complete');
+
                 callback();
             });
         });
-    });
+
 }
 
 function loadYourQuestions(callback) {
@@ -84,6 +89,20 @@ function loadQuestionsOthersAsk(callback) {
     });
     
 }
+
+//handle updates to the questions ie new answer for your questions, questions
+//directed at you etc
+function handleUpdates(){
+
+    socket.on('newquestion', function (data) {
+        console.log(data.question);
+    });
+
+    //socket.on();
+
+}
+
+
 
 //these are the skills that you get from the server
 function getSkills(yourSkills, callback){
@@ -148,7 +167,7 @@ function askQuestion(question, expertise, callback){
 
     socket.emit('askquestion', {question : question, skills : expertise } );
 
-    socket.once('askedQuestion', function () {
+    socket.once('askedquestion', function () {
         console.info('asked success');
         callback();
     });

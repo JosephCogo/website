@@ -4,14 +4,20 @@ App.QuestionshomepageRoute = Ember.Route.extend({
     beforeModel: function () {
         var store = this.store;
         return new Ember.RSVP.Promise(function (resolve) {
-
             //reset the connection on refresh, and wait to load all the data
             if (Ember.isEmpty(getSocket())) {
-                console.log(store);
+                initSocket(store, function () {
+                    loadData(store, function () {
+                        resolve();
+                    });
+                });
+            }
+            else {
                 loadData(store, function () {
                     resolve();
-                })
+                });
             }
+
         });
     },
 

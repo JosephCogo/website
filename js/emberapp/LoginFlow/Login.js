@@ -23,7 +23,7 @@ App.LoginController = Ember.ObjectController.extend({
                         //is it the users first time logging in?
                         var firstTime = data.firsttime;
 
-                        initSocket(this.store, function () {
+                        initSocket(router.store, function () {
                             console.info("Sockets connected");
 
                             $(".application-content").fadeTo(500, 0, function () {

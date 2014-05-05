@@ -26,7 +26,7 @@ App.ExpertiseController = Ember.ObjectController.extend({
             //once successful, transition to asking a question
             addSkills($('#tokenfield-typeahead').tokenfield('getTokensList'), function () {
                 $(".application-content").fadeTo(500, 0, function () {
-                    controller.replaceRoute('ask');
+                    controller.replaceRoute('askaquestion');
                 });
             });
         }
