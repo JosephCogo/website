@@ -5,7 +5,7 @@ App.YourquestionsIndexRoute = Ember.Route.extend({
     },
 
     model: function () {
-        var store = this.store;
+        var store = this.store;    
         return store.find('questionsyouask');
     },
 
@@ -18,10 +18,10 @@ App.YourquestionsIndexRoute = Ember.Route.extend({
 });
 
 App.YourquestionsIndexController = Ember.ArrayController.extend({
-    actions : {
-        toSolvedAnswer : function(yourQuestion){
+    actions: {
+        toSolvedAnswer: function (yourQuestion) {
             var controller = this;
-            controller.transitionToRoute('yourquestions.answersprovided', yourQuestion);   
+            controller.transitionToRoute('yourquestions.answersprovided', yourQuestion);
         }
     }
 });
@@ -31,21 +31,23 @@ App.YourquestionsAnswersprovidedRoute = Ember.Route.extend({
         this.render('yourquestionsanswersprovided');
     },
 
-    model: function (params) {
-        console.log(params);
-        /*
-        //need to merge 2 promises into one
-        return Ember.RSVP.hash({
-        solvedquestion: this.store.find('questionsyouask', params.question_id),
-        answers : this.store.find('answer', [1,2])
-        });*/
 
-        // this.store.find('answer');
+
+    model: function (params) {
+        //console.log(params);
+
+        //need to merge 2 promises into one
+        //return Ember.RSVP.hash({
+        //    solvedquestion: this.store.find('questionsyouask', params.question_id),
+        //    answers: this.store.find('answer', [1])
+        //});
+        console.log('model');
 
         return this.store.find('questionsyouask', params.question_id);
     },
 
     setupController: function (controller, model) {
+        console.log(model.get('model'));
         controller.set('model', model);
     }
 });
@@ -63,18 +65,20 @@ App.QuestionView = Ember.View.extend({
 
 });
 
+
 App.Answer = DS.Model.extend({
-    abody : DS.attr('string')
+    abody: DS.attr('string')
 });
 
 App.Questionsyouask = DS.Model.extend({
-    qbody : DS.attr('string'),
-    answers : DS.hasMany('answer')
+    qbody: DS.attr('string'),
+    answers: DS.hasMany('answer', {async: true})
 });
 
-App.Questionsyouask.FIXTURES = [];
+App.Questionsyouask.FIXTURES = [{id : 1, qbody : "Other Awesome question 1", answers : [2]}];
 
 App.Answer.FIXTURES = [{id : 1, abody : "I'm afraid you are misunderstanding the term double-entry.  It does not mean that every item is recorded twice. That would be crazy, needlessly redundant and grossly inefficient.  Double-entry simply means that every action has a corresponding and equal reaction.\nLife is about balance.  So is accounting.\nExample:  I receive a check for $1,000,000  Single entry:  Okay, I'm done.  Huh? What? Did you borrow it?  Did a customer pay you?  Did you sell something for cash?  Did you collect on a loan?  Did it fall from the sky? Explain, damn it!"},
 {id : 2, abody : "Other Awesome answer 1"},
 {id : 3, abody : "Other Awesome answer 1"},
 {id : 4, abody : "Other Awesome answer 1"}];
+

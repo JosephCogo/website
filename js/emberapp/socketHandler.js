@@ -68,7 +68,7 @@ function loadYourQuestions(callback) {
         var questions = data.question;
         for (var i = 0; i < questions.length; i++) {
             var item = questions[i];
-            emberStore.push('questionsyouask', { id: item['q.qid'], qbody: item['q.qbody'], answers : [] });
+            emberStore.push('questionsyouask', { id: item['q.qid'], qbody: item['q.qbody'], answers : [1, 2] });
         }
         callback();
     });
