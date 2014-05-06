@@ -263,37 +263,37 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = '', stack1;
-  data.buffer.push("\r\n    <h4>Your Question </h4>\r\n        <p class=\"solvedAnswersParagraph\">");
-  stack1 = helpers._triageMustache.call(depth0, "qbody", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  data.buffer.push("\r\n            ");
+  stack1 = helpers.view.call(depth0, "App.YourAnswersView", {hash:{
+    'contentBinding': ("this")
+  },hashTypes:{'contentBinding': "STRING"},hashContexts:{'contentBinding': depth0},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("<p>\r\n        <h4>The Answers Provided </h4>\r\n        ");
-  stack1 = helpers.each.call(depth0, "answer", "in", "answers", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n    ");
+  data.buffer.push("\r\n        ");
   return buffer;
   }
 function program2(depth0,data) {
   
   var buffer = '', stack1;
-  data.buffer.push("\r\n            <p class=\"solvedAnswersParagraph\">");
+  data.buffer.push("\r\n                <p class=\"solvedAnswersParagraph\">");
   stack1 = helpers._triageMustache.call(depth0, "answer.abody", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("<p>\r\n            \r\n            ");
+  data.buffer.push("</p>\r\n            \r\n                ");
   return buffer;
   }
 
 function program4(depth0,data) {
   
   
-  data.buffer.push("\r\n            <p class=\"solvedAnswersParagraph\">nothing<p>\r\n        ");
+  data.buffer.push("\r\n                <p class=\"solvedAnswersParagraph\">nothing</p>\r\n            ");
   }
 
-  data.buffer.push("<div class = 'question-stack'>\r\n    ");
-  stack1 = helpers.view.call(depth0, "App.YourAnswersView", {hash:{
-    'contentBinding': ("this")
-  },hashTypes:{'contentBinding': "STRING"},hashContexts:{'contentBinding': depth0},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  data.buffer.push("<div class = 'question-stack'>\r\n   \r\n    <h4>Your Question </h4>\r\n        <p class=\"solvedAnswersParagraph\">");
+  stack1 = helpers._triageMustache.call(depth0, "qbody", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n</div>\r\n\r\n           ");
+  data.buffer.push("<p>\r\n        <h4>The Answers Provided </h4>\r\n        \r\n        ");
+  stack1 = helpers.each.call(depth0, "answer", "in", "answers", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n        \r\n</div>\r\n\r\n           ");
   return buffer;
   
 });

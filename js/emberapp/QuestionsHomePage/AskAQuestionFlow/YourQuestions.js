@@ -20,6 +20,7 @@ App.YourquestionsIndexRoute = Ember.Route.extend({
 App.YourquestionsIndexController = Ember.ArrayController.extend({
     actions: {
         toSolvedAnswer: function (yourQuestion) {
+
             var controller = this;
             controller.transitionToRoute('yourquestions.answersprovided', yourQuestion);
         }
@@ -47,8 +48,10 @@ App.YourquestionsAnswersprovidedRoute = Ember.Route.extend({
     },
 
     setupController: function (controller, model) {
-        console.log(model.get('model'));
+        // console.log(model.get('model'));
+        var store = this.store;
         controller.set('model', model);
+        //controller.set('answers', model.get('answers'));
     }
 });
 
@@ -64,7 +67,6 @@ App.QuestionView = Ember.View.extend({
     }
 
 });
-
 
 App.Answer = DS.Model.extend({
     abody: DS.attr('string')
