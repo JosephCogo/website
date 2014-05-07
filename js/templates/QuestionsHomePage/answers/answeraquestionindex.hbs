@@ -5,13 +5,12 @@
             {{#each questionsothersask in controller}}
                 
                     {{#view App.QuestionView contentBinding="this"}}
-                         <p class = "questionParagraph"> {{questionsothersask.qbody}} </p>
+                         <p class = "questionParagraph" {{action 'answerquestion' questionsothersask}}> {{questionsothersask.qbody}} </p>
                     {{/view}}
                     
                     {{else}}
                          <span>There are no questions to answer</span>
             {{/each}}
-            
-            {{outlet}}
+  
 
         </div>

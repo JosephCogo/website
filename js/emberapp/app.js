@@ -23,9 +23,9 @@ App.Router.map(function () {
         });
 
         this.resource('answeraquestion', function () {
-            //should be a route
-            this.resource('inputanswer', { path: '/:question_id' });
+            this.route('inputanswer', { path: '/:question_id' });
         });
+        this.resource('answersuccess');
     });
 });
 

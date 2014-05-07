@@ -68,7 +68,15 @@ function loadYourQuestions(callback) {
         var questions = data.question;
         for (var i = 0; i < questions.length; i++) {
             var item = questions[i];
-            emberStore.push('questionsyouask', { id: item['q.qid'], qbody: item['q.qbody'], answers : [1, 2] });
+
+            //push answers onto the store
+            /*for (var j = 0; j < questions[i].answers.length; j++) {
+                var ans = questions[i].answers[j];
+                emberStore.push('answer', { id: ans['a.aid'], qbody: ans['a.abody'] });
+            }*/
+
+            //push questions onto the store
+            emberStore.push('questionsyouask', { id: item['q.qid'], qbody: item['q.qbody'], answers: [1, 2] });
         }
         callback();
     });
@@ -95,10 +103,9 @@ function loadQuestionsOthersAsk(callback) {
 function handleUpdates(){
 
     socket.on('newquestion', function (data) {
-        console.log(data.question);
+        emberStore.push('questionsothersask', { id: data.qid, qbody: data.qbody });
     });
 
-    //socket.on();
 
 }
 
@@ -173,8 +180,12 @@ function askQuestion(question, expertise, callback){
     });
 }
 
-
-function answerQuestion(answer, qid){
+//send the answer to the server, passes in a model
+//for the deletion, the find method doesn't work???
+function answerQuestion(answer, qid, model){
     socket.emit('answerquestion', {answer : answer, qid: qid} );
+
+    //remove the model from the store as it has been answered
+    model.unloadRecord();
 }
     

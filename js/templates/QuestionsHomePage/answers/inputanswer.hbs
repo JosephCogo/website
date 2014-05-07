@@ -1,10 +1,20 @@
-            <div class="question-help">
-                <span class="arrow"></span>
-                <div class="textwrap">
-                    {{textarea valueBinding="answerText"}}
-                </div>
-                <div class="btnwrap">
-                    <button><i class="fa fa-paperclip"> </i> Attach Image</button>
-                    <button {{action 'answer'}}><i class="fa fa-paperclip"> </i> Send</button>
-                </div>
-            </div>
+<div class="actions">
+        </div>
+<div class = 'question-stack'>
+   
+    <h4>The Question </h4>
+    {{#view App.AnswerQuestionView contentBinding='this'}}
+        <p class="solvedAnswersParagraph">{{qbody}}</p>
+    {{/view}}
+        
+
+    <div class = "space"></div>
+        <h4>Your Answer </h4>
+    {{textarea class="form-control" id='answerText' rows="3" placeholder="Enter your answer here..." }}
+
+    <div class = "space"></div>
+
+    <form class="form text-center">
+        <button data-loading-text="ANSWERING..." class='btn' {{action 'answer'}} >ANSWER</button>
+    </form>
+</div>

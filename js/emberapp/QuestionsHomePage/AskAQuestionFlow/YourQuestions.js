@@ -35,15 +35,6 @@ App.YourquestionsAnswersprovidedRoute = Ember.Route.extend({
 
 
     model: function (params) {
-        //console.log(params);
-
-        //need to merge 2 promises into one
-        //return Ember.RSVP.hash({
-        //    solvedquestion: this.store.find('questionsyouask', params.question_id),
-        //    answers: this.store.find('answer', [1])
-        //});
-        console.log('model');
-
         return this.store.find('questionsyouask', params.question_id);
     },
 
@@ -64,6 +55,14 @@ App.QuestionView = Ember.View.extend({
 
     didInsertElement: function () {
         $('.questionParagraph').fadeTo(500, 1);
+    }
+
+});
+
+App.YourAnswersView = Ember.View.extend({
+
+    didInsertElement: function () {
+        $('.solvedAnswersParagraph').fadeTo(500, 1);
     }
 
 });

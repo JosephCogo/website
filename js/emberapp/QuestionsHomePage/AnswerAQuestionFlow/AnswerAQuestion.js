@@ -1,4 +1,12 @@
-App.AnsweraquestionRoute = Ember.Route.extend({
+/**
+    This handles all the answering to the questions
+**/
+
+App.AnsweraquestionIndexRoute = Ember.Route.extend({
+    renderTemplate : function(){
+      this.render('answeraquestionindex');  
+    },
+    
     model: function () {
         var store = this.store;
         
@@ -13,33 +21,45 @@ App.AnsweraquestionRoute = Ember.Route.extend({
     }
 });
 
-App.AnsweraquestionController = Ember.ArrayController.extend({
+App.AnsweraquestionIndexController = Ember.ArrayController.extend({
     actions: {
-        answer: function () {
-            console.log(this.get('answerText'));
+        answerquestion: function (questionsothersask) {
+            this.transitionToRoute('answeraquestion.inputanswer', questionsothersask);
         }
     }
 });
 
-App.InputanswerRoute = Ember.Route.extend({
+App.AnsweraquestionInputanswerRoute = Ember.Route.extend({
+    renderTemplate: function () {
+        this.render('inputanswer');
+    },
+    //if the user decides to refresh, this hook is called,
+    //and will make it so that the model is loaded before 
+    //anything happens
+    model: function (params) {
+        console.log(params);
+        return this.store.find('questionsothersask', params.question_id);
+    },
 
-    setupController: function () {
-
+    setupController: function (controller, model) {
+        controller.set('model', model);
     }
 
 });
 
-App.InputanswerController = Ember.ObjectController.extend({
+App.AnsweraquestionInputanswerController = Ember.ObjectController.extend({
 
     actions: {
         answer: function () {
-            answerQuestion(this.get('answerText'), this.get('id'));
+
+            answerQuestion($('#answerText').val(), this.get('id'), this.get('model'));
+            this.replaceRoute('answersuccess');
         }
     }
 
 });
 
-App.YourAnswersView = Ember.View.extend({
+App.AnswerQuestionView = Ember.View.extend({
 
     didInsertElement: function () {
         $('.solvedAnswersParagraph').fadeTo(500, 1);
