@@ -21,18 +21,6 @@ App.QuestionshomepageRoute = Ember.Route.extend({
         });
     },
 
-    setupController: function () {
-
-    },
-
-    activate: function () {
-        var havePermission = window.webkitNotifications.checkPermission();
-        if (havePermission != 0) {
-            console.log(havePermission);
-            window.webkitNotifications.requestPermission();
-        }
-        
-    }
 });
 
 App.QuestionshomepageController = Ember.Controller.extend({
