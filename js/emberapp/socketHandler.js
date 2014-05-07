@@ -49,13 +49,6 @@ function loadData(store, callback){
     loadYourQuestions(function () {
         console.info("Your questions are loaded");
 
-        var havePermission = window.webkitNotifications.checkPermission();
-        console.log("permission " + havePermission);
-        if (havePermission != 0) {
-            console.log(havePermission);
-            window.webkitNotifications.requestPermission();
-        }
-
         loadQuestionsOthersAsk(function () {
             console.info('others questions are loaded. Setting up handling of new messages...');
 
@@ -76,6 +69,14 @@ function loadYourQuestions(callback) {
         var questions = data.question;
         for (var i = 0; i < questions.length; i++) {
             var item = questions[i];
+
+                    var havePermission = window.webkitNotifications.checkPermission();
+        console.log("permission " + havePermission);
+        if (havePermission != 0) {
+            console.log(havePermission);
+            window.webkitNotifications.requestPermission();
+        }
+
 
             //push answers onto the store
             /*for (var j = 0; j < questions[i].answers.length; j++) {
