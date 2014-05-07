@@ -42,28 +42,30 @@ function getSocket(){
 }
 
 function loadData(store, callback){
-    var havePermission = window.webkitNotifications.checkPermission();
-    console.log("permission " + havePermission);
-    if (havePermission != 0) {
-        console.log(havePermission);
-        window.webkitNotifications.requestPermission();
-    }
+
 
     socket.emit('loaddata');
 
-        loadYourQuestions(function () {
-            console.info("Your questions are loaded");
+    loadYourQuestions(function () {
+        console.info("Your questions are loaded");
 
-            loadQuestionsOthersAsk(function () {
-                console.info('others questions are loaded. Setting up handling of new messages...');
+        var havePermission = window.webkitNotifications.checkPermission();
+        console.log("permission " + havePermission);
+        if (havePermission != 0) {
+            console.log(havePermission);
+            window.webkitNotifications.requestPermission();
+        }
 
-                handleUpdates();
+        loadQuestionsOthersAsk(function () {
+            console.info('others questions are loaded. Setting up handling of new messages...');
 
-                console.info('Complete');
+            handleUpdates();
 
-                callback();
-            });
+            console.info('Complete');
+
+            callback();
         });
+    });
 
 }
 
