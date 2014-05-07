@@ -66,18 +66,26 @@ function loadYourQuestions(callback) {
     console.info('loading your questions');
     //these are the questions that you have asked!
     socket.once('questions-you-ask', function (data) {
+        console.log(data);
         var questions = data.question;
         for (var i = 0; i < questions.length; i++) {
             var item = questions[i];
 
+            //this is for the hasMany relationship
+            var answerIds = [];
+
             //push answers onto the store
-            /*for (var j = 0; j < questions[i].answers.length; j++) {
+            for (var j = 0; j < questions[i].answers.length; j++) {
                 var ans = questions[i].answers[j];
-                emberStore.push('answer', { id: ans['a.aid'], qbody: ans['a.abody'] });
-            }*/
+                if (ans[0] != null && ans[1] != null) {
+                    //console.log(emberStore);
+                    //answerIds.push(ans);
+                    emberStore.push('answer', { id: ans[1], qbody: ans[0] });
+                }
+            }
 
             //push questions onto the store
-            emberStore.push('questionsyouask', { id: item['q.qid'], qbody: item['q.qbody'], answers: [1, 2] });
+            emberStore.push('questionsyouask', { id: item['q.qid'], qbody: item['q.qbody'], answers: [1,2] });
         }
         callback();
     });
@@ -124,9 +132,7 @@ function handleUpdates(){
             setTimeout(function () {
                 notification.cancel();
             }, 5000);
-        }else{
-            window.webkitNotifications.requestPermission();
-        } 
+        }
     });
 
 
