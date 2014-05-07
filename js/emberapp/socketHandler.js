@@ -70,14 +70,6 @@ function loadYourQuestions(callback) {
         for (var i = 0; i < questions.length; i++) {
             var item = questions[i];
 
-                    var havePermission = window.webkitNotifications.checkPermission();
-        console.log("permission " + havePermission);
-        if (havePermission != 0) {
-            console.log(havePermission);
-            window.webkitNotifications.requestPermission();
-        }
-
-
             //push answers onto the store
             /*for (var j = 0; j < questions[i].answers.length; j++) {
                 var ans = questions[i].answers[j];
@@ -132,6 +124,8 @@ function handleUpdates(){
             setTimeout(function () {
                 notification.cancel();
             }, 5000);
+        }else{
+            window.webkitNotifications.requestPermission();
         } 
     });
 
