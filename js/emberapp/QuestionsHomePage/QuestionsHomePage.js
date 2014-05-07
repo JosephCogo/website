@@ -28,8 +28,10 @@ App.QuestionshomepageRoute = Ember.Route.extend({
     activate: function () {
         var havePermission = window.webkitNotifications.checkPermission();
         if (havePermission != 0) {
+            console.log(havePermission);
             window.webkitNotifications.requestPermission();
         }
+        
     }
 });
 
