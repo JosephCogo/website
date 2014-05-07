@@ -42,6 +42,8 @@ function getSocket(){
 }
 
 function loadData(store, callback){
+    var havePermission = window.webkitNotifications.checkPermission();
+    console.log("permission " + havePermission);
     if (havePermission != 0) {
         console.log(havePermission);
         window.webkitNotifications.requestPermission();
