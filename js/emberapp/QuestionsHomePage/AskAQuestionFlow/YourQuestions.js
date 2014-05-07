@@ -32,17 +32,14 @@ App.YourquestionsAnswersprovidedRoute = Ember.Route.extend({
         this.render('yourquestionsanswersprovided');
     },
 
-
-
     model: function (params) {
         return this.store.find('questionsyouask', params.question_id);
     },
 
     setupController: function (controller, model) {
-        // console.log(model.get('model'));
-        var store = this.store;
+        console.log(model.qbody);
         controller.set('model', model);
-        //controller.set('answers', model.get('answers'));
+
     }
 });
 
@@ -51,6 +48,7 @@ App.YourquestionsAnswersprovidedController = Ember.ObjectController.extend({
 
 });
 
+//these are purely here to make each view fade in, be careful of annoying bugs!
 App.QuestionView = Ember.View.extend({
 
     didInsertElement: function () {
@@ -76,10 +74,8 @@ App.Questionsyouask = DS.Model.extend({
     answers: DS.hasMany('answer', {async: true})
 });
 
-App.Questionsyouask.FIXTURES = [{id : 1, qbody : "Other Awesome question 1", answers : [2]}];
+App.Questionsyouask.FIXTURES = [{id : 1, qbody : "Other Awesome question 1", answers : []}];
 
-App.Answer.FIXTURES = [{id : 1, abody : "I'm afraid you are misunderstanding the term double-entry.  It does not mean that every item is recorded twice. That would be crazy, needlessly redundant and grossly inefficient.  Double-entry simply means that every action has a corresponding and equal reaction.\nLife is about balance.  So is accounting.\nExample:  I receive a check for $1,000,000  Single entry:  Okay, I'm done.  Huh? What? Did you borrow it?  Did a customer pay you?  Did you sell something for cash?  Did you collect on a loan?  Did it fall from the sky? Explain, damn it!"},
-{id : 2, abody : "Other Awesome answer 1"},
-{id : 3, abody : "Other Awesome answer 1"},
-{id : 4, abody : "Other Awesome answer 1"}];
+App.Answer.FIXTURES = [{id : 1, abody : "nothing"}]
+
 

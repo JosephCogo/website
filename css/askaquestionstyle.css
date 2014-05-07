@@ -142,7 +142,7 @@ body, html {
 
 .questionParagraph {
     background-color: #FFFFFF;
-    width: 60%;
+    width: 100%;
     padding: 15px 10px;
     text-align: left;
     cursor: pointer;
@@ -155,7 +155,7 @@ body, html {
 .solvedAnswersParagraph {
     opacity: 0;
     background-color: #FFFFFF;
-    width: 60%;
+    width: 100%;
     padding: 15px 10px;
     text-align: left;
     text-decoration: none;

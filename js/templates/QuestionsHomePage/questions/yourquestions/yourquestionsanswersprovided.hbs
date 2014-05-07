@@ -1,18 +1,20 @@
 <div class = 'question-stack'>
    
     <h4>Your Question </h4>
-        <p class="solvedAnswersParagraph">{{qbody}}<p>
+    {{#view App.YourAnswersView contentBinding="this"}}
+        <p class="solvedAnswersParagraph">{{qbody}}</p>
+    {{/view}}
         <h4>The Answers Provided </h4>
         
         {{#each answer in answers}}
             {{#view App.YourAnswersView contentBinding="this"}}
                 <p class="solvedAnswersParagraph">{{answer.abody}}</p>
-            
+            {{/view}}
                 {{else}}
+            {{#view App.YourAnswersView contentBinding="this"}}
                 <p class="solvedAnswersParagraph">nothing</p>
             {{/view}}
         {{/each}}
-        
 </div>
 
            

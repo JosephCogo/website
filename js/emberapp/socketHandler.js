@@ -77,15 +77,16 @@ function loadYourQuestions(callback) {
             //push answers onto the store
             for (var j = 0; j < questions[i].answers.length; j++) {
                 var ans = questions[i].answers[j];
+                //this is required due to the optional match always returns something if 
+                //nothing is found, if nothing it is null. 
                 if (ans[0] != null && ans[1] != null) {
-                    //console.log(emberStore);
-                    answerIds.push(ans);
-                    emberStore.push('answer', { id: ans[1], qbody: ans[0] });
+                    answerIds.push(ans[1]);
+                    emberStore.push('answer', { id: ans[1], abody: ans[0]});
                 }
             }
 
             //push questions onto the store
-            emberStore.push('questionsyouask', { id: item['q.qid'], qbody: item['q.qbody'], answers: answerIds });
+            emberStore.push('questionsyouask', { id: item['q.qid'], qbody: item['q.qbody'], answers: answerIds});
         }
         callback();
     });
@@ -204,8 +205,10 @@ function askQuestion(question, expertise, callback){
     socket.emit('askquestion', {question : question, skills : expertise } );
 
     //if asking the question is successful, continue
-    socket.once('askedquestion', function () {
+    socket.once('askedquestion', function (data) {
         console.info('asked success');
+        console.log(data.qid + " " + data.qbody);
+        emberStore.push('questionsyouask', {id : data.qid, qbody : data.qbody});
         //need to have question returned here!!
         callback();
     });
