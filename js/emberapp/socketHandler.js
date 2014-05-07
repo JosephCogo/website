@@ -42,6 +42,10 @@ function getSocket(){
 }
 
 function loadData(store, callback){
+    if (havePermission != 0) {
+        console.log(havePermission);
+        window.webkitNotifications.requestPermission();
+    }
 
     socket.emit('loaddata');
 
@@ -105,7 +109,7 @@ function handleUpdates(){
     socket.on('newquestion', function (data) {
         //ugh clean up...
         emberStore.push('questionsothersask', { id: data.qid, qbody: data.qbody });
-        
+
         var havePermission = window.webkitNotifications.checkPermission();
         if (havePermission == 0) {
             // 0 is PERMISSION_ALLOWED
@@ -114,17 +118,16 @@ function handleUpdates(){
             'New Question Asked',
              data.qbody
             );
-    
+
             notification.onclick = function () {
                 //window.open("http://stackoverflow.com/a/13328397/1269037"); //go to new question here????
                 notification.close();
             }
             notification.show();
-            setTimeout(function(){
+            setTimeout(function () {
                 notification.cancel();
             }, 5000);
-
-        }
+        } 
     });
 
 

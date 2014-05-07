@@ -25,13 +25,8 @@ App.ExpertiseController = Ember.ObjectController.extend({
             //send skills through on socket, getting all the inputted tokens.
             //once successful, transition to asking a question
             addSkills($('#tokenfield-typeahead').tokenfield('getTokensList'), function () {
-                //set the permissions for ember
-                var havePermission = window.webkitNotifications.checkPermission();
-                console.log("permission " + havePermission);
-                if (havePermission != 0) {
-                    console.log(havePermission);
-                    window.webkitNotifications.requestPermission();
-                }
+
+                //move to ask a question
                 $(".application-content").fadeTo(500, 0, function () {
                     controller.replaceRoute('askaquestion');
                 });
