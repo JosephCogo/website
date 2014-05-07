@@ -79,13 +79,13 @@ function loadYourQuestions(callback) {
                 var ans = questions[i].answers[j];
                 if (ans[0] != null && ans[1] != null) {
                     //console.log(emberStore);
-                    //answerIds.push(ans);
+                    answerIds.push(ans);
                     emberStore.push('answer', { id: ans[1], qbody: ans[0] });
                 }
             }
 
             //push questions onto the store
-            emberStore.push('questionsyouask', { id: item['q.qid'], qbody: item['q.qbody'], answers: [1,2] });
+            emberStore.push('questionsyouask', { id: item['q.qid'], qbody: item['q.qbody'], answers: answerIds });
         }
         callback();
     });
