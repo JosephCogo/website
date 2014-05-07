@@ -103,7 +103,28 @@ function loadQuestionsOthersAsk(callback) {
 function handleUpdates(){
 
     socket.on('newquestion', function (data) {
+        //ugh clean up...
         emberStore.push('questionsothersask', { id: data.qid, qbody: data.qbody });
+        
+        var havePermission = window.webkitNotifications.checkPermission();
+        if (havePermission == 0) {
+            // 0 is PERMISSION_ALLOWED
+            var notification = window.webkitNotifications.createNotification(
+            'img/logogreensmal_.png',
+            'New Question Asked',
+             data.qbody
+            );
+    
+            notification.onclick = function () {
+                //window.open("http://stackoverflow.com/a/13328397/1269037"); //go to new question here????
+                notification.close();
+            }
+            notification.show();
+            setTimeout(function(){
+                notification.cancel();
+            }, 5000);
+
+        }
     });
 
 
