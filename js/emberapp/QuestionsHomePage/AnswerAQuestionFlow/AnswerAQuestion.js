@@ -50,6 +50,8 @@ App.AnsweraquestionInputanswerRoute = Ember.Route.extend({
 App.AnsweraquestionInputanswerController = Ember.ObjectController.extend({
 
     actions: {
+        //action controller for answering a question. Passes in the current model
+        //as well as the answer and its id to send to the server
         answer: function () {
 
             answerQuestion($('#answerText').val(), this.get('id'), this.get('model'));

@@ -174,8 +174,10 @@ function askQuestion(question, expertise, callback){
 
     socket.emit('askquestion', {question : question, skills : expertise } );
 
+    //if asking the question is successful, continue
     socket.once('askedquestion', function () {
         console.info('asked success');
+        //need to have question returned here!!
         callback();
     });
 }
