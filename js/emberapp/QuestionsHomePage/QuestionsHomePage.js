@@ -9,11 +9,13 @@ App.QuestionshomepageRoute = Ember.Route.extend({
                 initSocket(store, function () {
                     loadData(store, function () {
                         resolve();
+                        console.log('load');
                     });
                 });
             }
             else {
                 loadData(store, function () {
+                    console.log('load');
                     resolve();
                 });
             }

@@ -51,10 +51,15 @@ App.ExpertiseView = Ember.View.extend({
 
     didInsertElement: function () {
 
-        $('#tokenfield-typeahead').on('tokenfield:createdtoken', function (e) {
-            //if ($('#tokenfield-typeahead').tokenfield('getTokens') >= 5) {
-                console.log('ok');
-            //}
+        $('#tokenfield-typeahead').on('tokenfield:createtoken', function (e) {
+            //console.log('fvds');
+            if ($('#tokenfield-typeahead').tokenfield('getTokens').length >= 5) {
+                $('#tick').attr("src", 'img/tickwhite.png');
+            }
+        }).on('tokenfield:removetoken', function (e) {
+            if ($('#tokenfield-typeahead').tokenfield('getTokens').length <= 5) {
+                $('#tick').attr("src", 'img/tick.png');
+            }
         }).tokenfield({
             beautify: false, //remove the space between entries
             typeahead: {

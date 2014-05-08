@@ -116,6 +116,7 @@ function loadQuestionsOthersAsk(callback) {
 //directed at you etc
 function handleUpdates(){
 
+    //BUG HERE
     socket.on('newquestion', function (data) {
         //ugh clean up...
         emberStore.push('questionsothersask', { id: data.qid, qbody: data.qbody });
@@ -253,6 +254,7 @@ function askQuestion(question, expertise, callback){
 //send the answer to the server, passes in a model
 //for the deletion, the find method doesn't work???
 function answerQuestion(answer, qid, model){
+    console.log('answer');
     socket.emit('answerquestion', {answer : answer, qid: qid} );
 
     //remove the model from the store as it has been answered

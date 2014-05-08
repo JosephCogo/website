@@ -22,7 +22,7 @@ function program1(depth0,data) {
 function program3(depth0,data) {
   
   
-  data.buffer.push("\n            <div class=\"input-group\"><input class=\"form-control\" id=\"tokenfield-typeahead\" type=\"text\" placeholder=\"Enter your expertise\"><span class=\"input-group-addon\"><img src='img/tickwhite.png'/ id=\"tick\"></span></div>\n        ");
+  data.buffer.push("\n            <div class=\"input-group\"><input class=\"form-control\" id=\"tokenfield-typeahead\" type=\"text\" placeholder=\"Enter your expertise\"><span class=\"input-group-addon\"><img src='img/tick.png'/ id=\"tick\"></span></div>\n        ");
   }
 
   data.buffer.push("\n");
