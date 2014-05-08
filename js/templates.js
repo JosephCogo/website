@@ -16,27 +16,26 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   
-  data.buffer.push("\n            <div class=\"input-group\"><input class=\"form-control\" id=\"tokenfield-typeahead\" type=\"text\" placeholder=\"Enter your expertise\"><span class=\"input-group-addon\"><img src='img/tickwhite.png'/></span></div>\n        ");
+  data.buffer.push("\n        <div class=\"alert alert-danger hide fade in\" id = \"expertiseerror\">\n            <button type=\"button\" class=\"close\" aria-hidden=\"true\">&times;</button>\n            <strong>Pssst. </strong> Try entering at least 5 skills. Awesome things will happen....\n        </div>\n    ");
   }
 
 function program3(depth0,data) {
   
-  var buffer = '';
-  data.buffer.push("\n            <button ");
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "submit", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(" data-loading-text=\"Updating...\" class='btn btnsmall pull-right submit'>Finish</button>\n        ");
-  return buffer;
+  
+  data.buffer.push("\n            <div class=\"input-group\"><input class=\"form-control\" id=\"tokenfield-typeahead\" type=\"text\" placeholder=\"Enter your expertise\"><span class=\"input-group-addon\"><img src='img/tickwhite.png'/ id=\"tick\"></span></div>\n        ");
   }
 
   data.buffer.push("\n");
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "App.LightbulbhelperView", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data})));
-  data.buffer.push("\n\n<div class=\"holder\">\n    <div class=\"mast\">\n        <h4>Expertise</h4>\n    </div>\n    <form class=\"form expertise\">\n        ");
-  stack1 = helpers.view.call(depth0, "App.ExpertiseView", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  data.buffer.push("\n\n<div class=\"holder\">\n    <div class=\"mast\">\n        <h4>Expertise</h4>\n    </div>\n    \n    ");
+  stack1 = helpers.view.call(depth0, "App.AlertView", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n        ");
-  stack1 = helpers.view.call(depth0, "App.SubmitButtonView", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],data:data});
+  data.buffer.push("\n    \n    <form class=\"form expertise\">\n        ");
+  stack1 = helpers.view.call(depth0, "App.ExpertiseView", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n    </form>\n</div>\n");
+  data.buffer.push("\n        \n        <button ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "submit", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push(" data-loading-text=\"Updating...\" class='btn btnsmall pull-right submit'>Finish</button>\n        \n    </form>\n</div>\n");
   return buffer;
   
 });
@@ -44,21 +43,12 @@ function program3(depth0,data) {
 Ember.TEMPLATES["login"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', stack1, helper, options, escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+  var buffer = '', stack1, helper, options, self=this, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
 
 function program1(depth0,data) {
   
   
   data.buffer.push("\n    <div class=\"alert alert-danger hide fade in\" id = \"loginerror\">\n        <button type=\"button\" class=\"close\" aria-hidden=\"true\">&times;</button>\n        <strong>Whoa!</strong> Sorry buddy we don't have that user name or password. Try again!\n    </div>\n    ");
-  }
-
-function program3(depth0,data) {
-  
-  var buffer = '';
-  data.buffer.push("\n            <button ");
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "login", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(" class='btn btnsmall pull-right submit' data-loading-text=\"Logging In...\">Enter</button>\n        ");
-  return buffer;
   }
 
   data.buffer.push("<div class=\"holder\">\n    <div class=\"mast login-mast\">\n    <img src='img/logogreensmal_.png'/>\n    <h4>LOGIN</h4>\n</div>\n    \n    ");
@@ -77,10 +67,9 @@ function program3(depth0,data) {
     'type': ("password"),
     'valueBinding': ("password")
   },hashTypes:{'class': "STRING",'placeholder': "STRING",'type': "STRING",'valueBinding': "STRING"},hashContexts:{'class': depth0,'placeholder': depth0,'type': depth0,'valueBinding': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "input", options))));
-  data.buffer.push("\n        \n        ");
-  stack1 = helpers.view.call(depth0, "App.SubmitButtonView", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n    </form>\n\n</div>\n\n\n");
+  data.buffer.push("\n        \n\n        <button ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "login", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push(" class='btn btnsmall pull-right submit' data-loading-text=\"Logging In...\">Enter</button>\n       \n    </form>\n\n</div>\n\n\n");
   return buffer;
   
 });

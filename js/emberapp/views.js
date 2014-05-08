@@ -14,14 +14,6 @@ App.LightbulbhelperView = Ember.View.extend({
 
 });
 
-App.SubmitButtonView = Ember.View.extend({
-
-    click: function (evt) {
-        var btn = $('.submit');
-        btn.button('loading');
-    }
-
-});
 
 
 
@@ -30,7 +22,9 @@ App.AlertView = Ember.View.extend({
 
     didInsertElement: function () {
         $(".alert").find(".close").on("click", function (e) {
+            //yeah this is pretty terrible...
             $('#loginerror').addClass("hide");
+            $('#expertiseerror').addClass("hide");
         });
     }
 

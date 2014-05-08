@@ -24,13 +24,24 @@ App.ExpertiseController = Ember.ObjectController.extend({
             var controller = this;
             //send skills through on socket, getting all the inputted tokens.
             //once successful, transition to asking a question
-            addSkills($('#tokenfield-typeahead').tokenfield('getTokensList'), function () {
 
-                //move to ask a question
-                $(".application-content").fadeTo(500, 0, function () {
-                    controller.replaceRoute('askaquestion');
+            var tokens = $('#tokenfield-typeahead').tokenfield('getTokens');
+            console.log(tokens.length);
+
+            //if the user has entered enough tokens, proceed, else show error
+            if (tokens.length >= 5) {
+                var btn = $('.submit');
+                btn.button('loading');
+
+                addSkills($('#tokenfield-typeahead').tokenfield('getTokensList'), function () {
+                    //move to ask a question
+                    $(".application-content").fadeTo(500, 0, function () {
+                        controller.replaceRoute('askaquestion');
+                    });
                 });
-            });
+            } else {
+                $('#expertiseerror').removeClass("hide")
+            }
         }
     }
 });
@@ -40,13 +51,17 @@ App.ExpertiseView = Ember.View.extend({
 
     didInsertElement: function () {
 
-        $('#tokenfield-typeahead').tokenfield({
-            beautify : false, //remove the space between entries
+        $('#tokenfield-typeahead').on('tokenfield:createdtoken', function (e) {
+            //if ($('#tokenfield-typeahead').tokenfield('getTokens') >= 5) {
+                console.log('ok');
+            //}
+        }).tokenfield({
+            beautify: false, //remove the space between entries
             typeahead: {
                 minLength: 1,
                 source: function (query, cb) {
                     //every time that user input is registered, send a request via socket to the server, and wait
-                    //callback triggered by a socket.once event
+                    //callback triggered by a socket.once event. callback MUST contain the array of skills that you need
                     getSkills($('#tokenfield-typeahead').data('bs.tokenfield').$input.val(), function () {
                         cb(autoSkills());
                     });

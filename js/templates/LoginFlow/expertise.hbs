@@ -5,12 +5,20 @@
     <div class="mast">
         <h4>Expertise</h4>
     </div>
+    
+    {{#view App.AlertView}}
+        <div class="alert alert-danger hide fade in" id = "expertiseerror">
+            <button type="button" class="close" aria-hidden="true">&times;</button>
+            <strong>Pssst. </strong> Try entering at least 5 skills. Awesome things will happen....
+        </div>
+    {{/view}}
+    
     <form class="form expertise">
         {{#view App.ExpertiseView}}
-            <div class="input-group"><input class="form-control" id="tokenfield-typeahead" type="text" placeholder="Enter your expertise"><span class="input-group-addon"><img src='img/tickwhite.png'/></span></div>
+            <div class="input-group"><input class="form-control" id="tokenfield-typeahead" type="text" placeholder="Enter your expertise"><span class="input-group-addon"><img src='img/tickwhite.png'/ id="tick"></span></div>
         {{/view}}
-        {{#view App.SubmitButtonView}}
-            <button {{action 'submit'}} data-loading-text="Updating..." class='btn btnsmall pull-right submit'>Finish</button>
-        {{/view}}
+        
+        <button {{action 'submit'}} data-loading-text="Updating..." class='btn btnsmall pull-right submit'>Finish</button>
+        
     </form>
 </div>

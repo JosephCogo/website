@@ -31,7 +31,7 @@ function connectSocket(callback) {
     //if the server responds, transition to ask
     //NOTE: NEED TO HAVE A FAILURE EVENT
     socket.on('connect', function (data) {
-        console.log('connect');
+        //console.log('connect');
         callback(null, data);
     });
 
@@ -47,14 +47,14 @@ function loadData(store, callback){
     socket.emit('loaddata');
 
     loadYourQuestions(function () {
-        console.info("Your questions are loaded");
+        //console.info("Your questions are loaded");
 
         loadQuestionsOthersAsk(function () {
-            console.info('others questions are loaded. Setting up handling of new messages...');
+            //console.info('others questions are loaded. Setting up handling of new messages...');
 
             handleUpdates();
 
-            console.info('Complete');
+            //console.info('Complete');
 
             callback();
         });
@@ -66,7 +66,7 @@ function loadYourQuestions(callback) {
     console.info('loading your questions');
     //these are the questions that you have asked!
     socket.once('questions-you-ask', function (data) {
-        console.log(data);
+        //console.log(data);
         var questions = data.question;
         for (var i = 0; i < questions.length; i++) {
             var item = questions[i];
@@ -96,15 +96,15 @@ function loadYourQuestions(callback) {
 }
 
 function loadQuestionsOthersAsk(callback) {
-    console.info('loading questions others ask');
+    //console.info('loading questions others ask');
 
     //these are questions that need your expertise!!
     socket.once('questions-others-ask', function (data) {
         var questions = data.question;
-        console.log(data.question);
+        //console.log(data.question);
         for (var i = 0; i < questions.length; i++) {
             var item = questions[i];
-            console.log(item['q.qbody']);
+            //console.log(item['q.qbody']);
             emberStore.push('questionsothersask', { id: item['q.qid'], qbody: item['q.qbody'] });
         }
         callback();
@@ -141,8 +141,8 @@ function handleUpdates(){
     });
 
     socket.on('newanswer', function (data) {
-        console.log('newanswer');
-        console.log(data);
+        //console.log('newanswer');
+        //console.log(data);
 
         emberStore.push('answer', { id : data.aid, abody : data.abody});
 
@@ -184,9 +184,9 @@ function getSkills(yourSkills, callback){
     socket.emit('autoskill', { skill: yourSkills });
 
     socket.once('autoskill', function (data) {
-        console.log(data.m);
+        //console.log(data.m);
         var s = data.message.suggest[0];
-        console.log(s);
+        //console.log(s);
 
         skills = [];
         
@@ -227,18 +227,18 @@ function autoQuestions(){
 //add skills to the server, in the expertise route
 function addSkills(skills, callback){
 
-    console.log(skills);
+    //console.log(skills);
     socket.emit('addskill', {skills : skills});
 
     socket.once('addedskills', function (data) {
-        console.info('successfully added skills');
+        //console.info('successfully added skills');
         callback();
     });
 
 }
 
 function askQuestion(question, expertise, callback){
-    console.log(question + " " + expertise);
+    //console.log(question + " " + expertise);
 
     socket.emit('askquestion', {question : question, skills : expertise } );
 
