@@ -21,11 +21,16 @@ App.QuestionshomepageRoute = Ember.Route.extend({
         });
     },
 
+    setupController: function (controller, model) {
+        controller.set('username', localStorage.username);
+    }
+
 });
 
 App.QuestionshomepageController = Ember.Controller.extend({
     ask: false,
     answer: false,
+    username : '',
 
     actions: {
 
