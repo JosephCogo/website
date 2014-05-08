@@ -39,7 +39,8 @@ App.YourquestionsAnswersprovidedRoute = Ember.Route.extend({
     setupController: function (controller, model) {
         console.log(model.qbody);
         controller.set('model', model);
-
+        this.controllerFor('askaquestioncontent').set('askSelected', false);
+        this.controllerFor('askaquestioncontent').set('solvedSelected', 'selected');
     }
 });
 

@@ -1,12 +1,12 @@
 App.AskaquestionRoute = Ember.Route.extend({
 
     setupController: function (controller, model) {
-        console.log('hr');
         $('.application-content').fadeTo(300, 1);
         $('.content').fadeTo(300, 1);
         $('.questionsOutlet').fadeTo(200, 1);
         this.controllerFor('askaquestioncontent').set('askSelected', 'selected');
         this.controllerFor('askaquestioncontent').set('solvedSelected', false);
+        this.controllerFor('questionshomepage').set('ask', 'active-link');
     }
 
 });

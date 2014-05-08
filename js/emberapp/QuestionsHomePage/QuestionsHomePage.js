@@ -31,20 +31,23 @@ App.QuestionshomepageController = Ember.Controller.extend({
 
         toAnswers: function () {
             var controller = this;
-
-            $('.content').fadeTo(200, 0, function () {
-                controller.transitionToRoute('answeraquestion');
-            });
+            if(this.get('answer') == false){
+                $('.content').fadeTo(200, 0, function () {
+                    controller.transitionToRoute('answeraquestion');
+                });
+            }
         },
 
         toQuestions: function () {
-            answer = false;
-            this.set("answer", false);
-            this.set("ask", "active-link");
-            var controller = this;
-            $('.content').fadeTo(200, 0, function () {
-                controller.transitionToRoute('askaquestion');
-            });
+            if(this.get('ask') == false){
+                this.set("answer", false);
+                this.set("ask", "active-link");
+                var controller = this;
+            
+                $('.content').fadeTo(200, 0, function () {
+                    controller.transitionToRoute('askaquestion');
+                });
+            }
         }
 
     }
