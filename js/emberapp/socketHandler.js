@@ -31,7 +31,7 @@ function connectSocket(callback) {
     //if the server responds, transition to ask
     //NOTE: NEED TO HAVE A FAILURE EVENT
     socket.on('connect', function (data) {
-        //console.log(data);
+        console.log('connect');
         callback(null, data);
     });
 
@@ -81,12 +81,14 @@ function loadYourQuestions(callback) {
                 //nothing is found, if nothing it is null. 
                 if (ans[0] != null && ans[1] != null) {
                     answerIds.push(ans[1]);
-                    emberStore.push('answer', { id: ans[1], abody: ans[0]});
+                    emberStore.push('answer', { id: ans[1], abody: ans[0] });
                 }
             }
 
             //push questions onto the store
-            emberStore.push('questionsyouask', { id: item['q.qid'], qbody: item['q.qbody'], answers: answerIds});
+            emberStore.push('questionsyouask', { id: item['q.qid'], qbody: item['q.qbody'], answers: answerIds });
+
+            //q.get('answers').pushObject(App.Answer.find(10));
         }
         callback();
     });
@@ -99,8 +101,10 @@ function loadQuestionsOthersAsk(callback) {
     //these are questions that need your expertise!!
     socket.once('questions-others-ask', function (data) {
         var questions = data.question;
+        console.log(data.question);
         for (var i = 0; i < questions.length; i++) {
             var item = questions[i];
+            console.log(item['q.qbody']);
             emberStore.push('questionsothersask', { id: item['q.qid'], qbody: item['q.qbody'] });
         }
         callback();
@@ -123,6 +127,40 @@ function handleUpdates(){
             'img/logogreensmal_.png',
             'New Question Asked',
              data.qbody
+            );
+
+            notification.onclick = function () {
+                //window.open("http://stackoverflow.com/a/13328397/1269037"); //go to new question here????
+                notification.close();
+            }
+            notification.show();
+            setTimeout(function () {
+                notification.cancel();
+            }, 5000);
+        }
+    });
+
+    socket.on('newanswer', function (data) {
+        console.log('newanswer');
+        console.log(data);
+
+        emberStore.push('answer', { id : data.aid, abody : data.abody});
+
+        emberStore.find('questionsyouask', data.qid).then(function (question) {
+            emberStore.find('answer', data.aid).then(function (answer) {
+                question.get('answers').then(function (answerList) {
+                    answerList.pushObject(answer);
+                });
+            });
+        });
+
+        var havePermission = window.webkitNotifications.checkPermission();
+        if (havePermission == 0) {
+            // 0 is PERMISSION_ALLOWED
+            var notification = window.webkitNotifications.createNotification(
+            'img/logogreensmal_.png',
+            'New Answer',
+             data.abody
             );
 
             notification.onclick = function () {
@@ -206,8 +244,6 @@ function askQuestion(question, expertise, callback){
 
     //if asking the question is successful, continue
     socket.once('askedquestion', function (data) {
-        console.info('asked success');
-        console.log(data.qid + " " + data.qbody);
         emberStore.push('questionsyouask', {id : data.qid, qbody : data.qbody});
         //need to have question returned here!!
         callback();
