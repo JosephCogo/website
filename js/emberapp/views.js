@@ -31,3 +31,6 @@ App.AlertView = Ember.View.extend({
 });
 
 
+App.TutorialComponent = Ember.Component.extend({
+    templateName: "tutorial"
+});

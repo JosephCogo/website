@@ -75,8 +75,8 @@ App.Questionsyouask = DS.Model.extend({
     answers: DS.hasMany('answer', {async: true})
 });
 
-App.Questionsyouask.FIXTURES = [{id : 1, qbody : "Other Awesome question 1", answers : []}];
+App.Questionsyouask.FIXTURES = [];
 
-App.Answer.FIXTURES = [{id : 1, abody : "nothing"}]
+App.Answer.FIXTURES = [];
 
 

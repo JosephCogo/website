@@ -27,7 +27,7 @@ function program3(depth0,data) {
 
   data.buffer.push("\n");
   data.buffer.push(escapeExpression(helpers.view.call(depth0, "App.LightbulbhelperView", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data})));
-  data.buffer.push("\n\n<div class=\"holder\">\n    <div class=\"mast\">\n        <h4>Expertise</h4>\n    </div>\n    \n    ");
+  data.buffer.push("\n\n<div class=\"holder\">\n    <div class=\"mast\">\n        <h4>Expertise</h4>\n    </div>\n\n    ");
   stack1 = helpers.view.call(depth0, "App.AlertView", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n    \n    <form class=\"form expertise\">\n        ");
