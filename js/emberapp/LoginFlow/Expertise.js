@@ -18,6 +18,9 @@ App.ExpertiseRoute = Ember.Route.extend({
 });
 
 App.ExpertiseController = Ember.ObjectController.extend({
+    username : localStorage.username,
+    userPressedEnter : false,
+    
     actions: {
         //will handle the submit event sent from the button in the expertise template
         submit: function () {
@@ -43,6 +46,8 @@ App.ExpertiseController = Ember.ObjectController.extend({
                 $('#expertiseerror').removeClass("hide")
             }
         }
+
+
     }
 });
 
@@ -51,11 +56,13 @@ App.ExpertiseView = Ember.View.extend({
 
     didInsertElement: function () {
 
+        var controller = this.get('controller');
+
         $('#tokenfield-typeahead').on('tokenfield:createtoken', function (e) {
-            //console.log('fvds');
             if ($('#tokenfield-typeahead').tokenfield('getTokens').length >= 5) {
                 $('#tick').attr("src", 'img/tickwhite.png');
             }
+            controller.set('userPressedEnter', true);
         }).on('tokenfield:removetoken', function (e) {
             if ($('#tokenfield-typeahead').tokenfield('getTokens').length <= 5) {
                 $('#tick').attr("src", 'img/tick.png');
@@ -76,4 +83,54 @@ App.ExpertiseView = Ember.View.extend({
     }
 });
 
+App.TutorialComponentComponent = Ember.Component.extend({
+    username: localStorage.username,
+    userPressedEnter: '',
+
+    firstExpertiseEnteredChanged: function () {
+        this.toggleProperty("fourthBody");
+        this.toggleProperty("fifthBody");
+    } .observes('userPressedEnter'),
+
+
+    actions: {
+
+        tutorialFirst: function () {
+            this.toggleProperty("firstBody");
+            this.toggleProperty("secondBody");
+        },
+
+        tutorialSecond: function () {
+            this.toggleProperty("secondBody");
+            this.toggleProperty("thirdBody");
+        },
+
+        tutorialThird: function () {
+            var com = this;
+            $("#expertise").fadeTo(300, 1, function () {
+                setTimeout(function () {
+                    com.toggleProperty("thirdBody");
+                    com.toggleProperty("fourthBody");
+                }, 600);
+            });
+        },
+
+        tutorialFifth: function () {
+            this.toggleProperty("fifthBody");
+            this.toggleProperty("sixthBody");
+        },
+        tutorialSixth: function () {
+            this.toggleProperty("sixthBody");
+            this.toggleProperty("seventhBody");
+        }
+    },
+
+    didInsertElement: function () {
+        this.toggleProperty("firstBody");
+        console.log(this.userPressedEnter);
+        $(".tutorialBox").fadeTo(700, 1);
+        var data = this.get('data');
+    }
+
+});
 

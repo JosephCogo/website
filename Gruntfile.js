@@ -18,7 +18,12 @@ module.exports = function (grunt) {
 
                     templateName: function (name) {
                         var tempArray = name.split('/');
-                        return tempArray[(tempArray.length) - 1];
+                        if (tempArray[(tempArray.length) - 2] != 'components') {
+                            return tempArray[(tempArray.length) - 1];
+                        }
+                        else {
+                            return name;
+                        }
                     }
                 },
                 files: {
@@ -26,26 +31,11 @@ module.exports = function (grunt) {
                 }
             }
         },
-        compileComponents: {
-            compile: {
-                options: {
-                    templateBasePath: /js\/templates\//,
-
-                    templateName: function (name) {
-                        var tempArray = name.split('/');
-                        return tempArray[(tempArray.length) - 1];
-                    }
-                },
-                files: {
-                    'js/templates.js': ['js/templates/components/**/*.hbs']
-                }
-            }
-        },
 
         watch: {
             emberTemplates: {
-                files: ['js/templates/**/*.hbs', 'js/templates/views/**/*.hbs'],
-                tasks: ['emberTemplates', 'compileComponents'],
+                files: ['js/templates/**/*.hbs'],
+                tasks: ['emberTemplates'],
                 options: {
                     livereload: true
                 }

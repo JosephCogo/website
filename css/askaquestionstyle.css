@@ -273,9 +273,9 @@ body, html {
 }
 
 .holder {
-    padding-top: 10%;
+    padding-top: 0%;
     width: 80%;
-    max-width: 768px;
+    width: 768px;
     margin: 0 auto;
 }
 textarea {
@@ -304,7 +304,7 @@ textarea {
     text-align: center;
 }
 .login-mast {
-    margin-top: 20px;
+    margin-top: 30%;
 }
 .login-mast > img {
     width: 45px;
@@ -351,3 +351,53 @@ textarea {
     height: 30px;
 }
 
+.tutorialBox {
+  padding-top:15px;
+  display:  inline-block;
+  margin-top: 50px;
+  background:#FFFFFF;
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
+  font-family: 'Lato', sans-serif;
+  font-style: italic; 
+  text-align: center;
+  width : 300px;
+}
+
+.tutorialBox:after {
+  content:"";
+  display:inline-block;
+  border-style:solid;
+  border-color:#FFFFFF transparent;
+  display:block;
+  width:0;
+  top:16px; /* controls vertical position */
+  left:-25px; /* value = - border-left-width - border-right-width */
+  bottom:auto;
+  border-width:10px 30px 10px 0;
+  border-color:transparent #FFFFFF;
+}
+
+#expertise{
+    opacity: 0;
+}
+
+#marcelo{
+    float: left;
+    margin-left: 20%;
+    height: 30%;
+    min-height: 200px;
+    display: block;
+}
+
+.helpContainer{
+    margin:0 auto;
+    width:  50%;
+    min-width: 580px;
+    height:  200px;
+}
+
+.tutorialDiv{
+    margin:0 auto;
+}

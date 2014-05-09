@@ -11,31 +11,33 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 Ember.TEMPLATES["expertise"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', stack1, escapeExpression=this.escapeExpression, self=this;
+  var buffer = '', stack1, helper, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, self=this;
 
 function program1(depth0,data) {
   
   
-  data.buffer.push("\n        <div class=\"alert alert-danger hide fade in\" id = \"expertiseerror\">\n            <button type=\"button\" class=\"close\" aria-hidden=\"true\">&times;</button>\n            <strong>Pssst. </strong> Try entering at least 5 skills. Awesome things will happen....\n        </div>\n    ");
+  data.buffer.push("\n            <div class=\"alert alert-danger hide fade in\" id = \"expertiseerror\">\n                <button type=\"button\" class=\"close\" aria-hidden=\"true\">&times;</button>\n                <strong>Pssst. </strong> Try entering at least 5 skills. Awesome things will happen....\n            </div>\n        ");
   }
 
 function program3(depth0,data) {
   
   
-  data.buffer.push("\n            <div class=\"input-group\"><input class=\"form-control\" id=\"tokenfield-typeahead\" type=\"text\" placeholder=\"Enter your expertise\"><span class=\"input-group-addon\"><img src='img/tick.png'/ id=\"tick\"></span></div>\n        ");
+  data.buffer.push("\n                <div class=\"input-group\"><input class=\"form-control\" id=\"tokenfield-typeahead\" type=\"text\" placeholder=\"Enter your expertise\"><span class=\"input-group-addon\"><img src='img/tick.png'/ id=\"tick\"></span></div>\n            ");
   }
 
-  data.buffer.push("\n");
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "App.LightbulbhelperView", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data})));
-  data.buffer.push("\n\n<div class=\"holder\">\n    <div class=\"mast\">\n        <h4>Expertise</h4>\n    </div>\n\n    ");
+  data.buffer.push("    ");
+  data.buffer.push(escapeExpression((helper = helpers['tutorial-component'] || (depth0 && depth0['tutorial-component']),options={hash:{
+    'userPressedEnter': ("userPressedEnter")
+  },hashTypes:{'userPressedEnter': "ID"},hashContexts:{'userPressedEnter': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "tutorial-component", options))));
+  data.buffer.push("\n<div class=\"holder\">\n    \n    <div id = \"expertise\">\n        <div class=\"mast\">\n            <h4>Expertise</h4>\n        </div>\n\n\n        ");
   stack1 = helpers.view.call(depth0, "App.AlertView", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n    \n    <form class=\"form expertise\">\n        ");
+  data.buffer.push("\n    \n        <form class=\"form expertise\">\n            ");
   stack1 = helpers.view.call(depth0, "App.ExpertiseView", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n        \n        <button ");
+  data.buffer.push("\n        \n            <button ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "submit", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(" data-loading-text=\"Updating...\" class='btn btnsmall pull-right submit'>Finish</button>\n        \n    </form>\n</div>\n");
+  data.buffer.push(" data-loading-text=\"Updating...\" class='btn btnsmall pull-right submit'>Finish</button>\n        \n        </form>\n    </div>\n</div>\n");
   return buffer;
   
 });
@@ -427,12 +429,101 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},contexts:[],types:[],data:data})));
   data.buffer.push(" ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "toAnswers", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(">Answer A Question</a><span></span></li>\n    </ul>\n</div>\n<div class='content-pane'>\n");
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "App.LightbulbhelperView", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data})));
-  data.buffer.push("    \n    <div class='content'>\n            \n        \n        \n        ");
+  data.buffer.push(">Answer A Question</a><span></span></li>\n    </ul>\n</div>\n<div class='content-pane'>\n    <div class='content'>\n            \n        \n        \n        ");
   stack1 = helpers._triageMustache.call(depth0, "outlet", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n        \n    </div>\n</div>\n\n</body>\n");
+  return buffer;
+  
+});
+
+Ember.TEMPLATES["components/tutorial-component"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var buffer = '', stack1, escapeExpression=this.escapeExpression, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\r\n                <p class = \"tutorialBox\">Hey ");
+  stack1 = helpers._triageMustache.call(depth0, "username", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("! Nice to meet you!<button  ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "tutorialFirst", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push(">n</button></p>\r\n            ");
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = '';
+  data.buffer.push("\r\n                <p class = \"tutorialBox\"> I'm Jeffrey Cogo, and I'm here to help you out!<button ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "tutorialSecond", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push(">n</button></p>\r\n            ");
+  return buffer;
+  }
+
+function program5(depth0,data) {
+  
+  var buffer = '';
+  data.buffer.push("\r\n                <p class = \"tutorialBox\">Lets get started...<button  ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "tutorialThird", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push(">n</button></p>\r\n            ");
+  return buffer;
+  }
+
+function program7(depth0,data) {
+  
+  
+  data.buffer.push("\r\n                <p class = \"tutorialBox\">Awesome! Here is how you can help your organisation! Try typing in anything\r\n                that you think you are good at and press enter.</p>\r\n            ");
+  }
+
+function program9(depth0,data) {
+  
+  var buffer = '';
+  data.buffer.push("\r\n                <p class = \"tutorialBox\">Wow! See that? <button  ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "tutorialFifth", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push(">n</button></p>\r\n            ");
+  return buffer;
+  }
+
+function program11(depth0,data) {
+  
+  var buffer = '';
+  data.buffer.push("\r\n                <p class = \"tutorialBox\">You added a skill to the list. Skills that are already in the organisation will appear in the box underneath.<button  ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "tutorialSixth", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push(">n</button></p>\r\n            ");
+  return buffer;
+  }
+
+function program13(depth0,data) {
+  
+  
+  data.buffer.push("\r\n                <p class = \"tutorialBox\">Add at least 4 more skills, and we will be ready to go on</p>\r\n            ");
+  }
+
+  data.buffer.push("       <div class = 'helpContainer'>\r\n            <img src = \"img/Marcelo.png\" id=\"marcelo\"/>\r\n\r\n            ");
+  stack1 = helpers['if'].call(depth0, "firstBody", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n            ");
+  stack1 = helpers['if'].call(depth0, "secondBody", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n            ");
+  stack1 = helpers['if'].call(depth0, "thirdBody", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n            ");
+  stack1 = helpers['if'].call(depth0, "fourthBody", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n            ");
+  stack1 = helpers['if'].call(depth0, "fifthBody", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n            ");
+  stack1 = helpers['if'].call(depth0, "sixthBody", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(11, program11, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("    \n            ");
+  stack1 = helpers['if'].call(depth0, "seventhBody", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(13, program13, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("                 \n\n        </div>");
   return buffer;
   
 });
