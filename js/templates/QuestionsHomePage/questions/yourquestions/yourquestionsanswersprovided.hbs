@@ -7,14 +7,20 @@
         <h4>The Answers Provided </h4>
         
         {{#each answer in answers}}
-            {{#view App.YourAnswersView contentBinding="this"}}
-                <p class="solvedAnswersParagraph">{{answer.abody}}</p>
-            {{/view}}
-                {{else}}
+            {{#if answer.read}}
+                {{#view App.YourAnswersView contentBinding="this"}}
+                    <p class="solvedAnswersParagraph">{{answer.abody}}</p>
+                {{/view}}
+            {{else}}
+            <h5>New Answers</h5>
+                {{#view App.YourAnswersView contentBinding="this"}}
+                    <p class="solvedAnswersParagraph">{{answer.abody}}</p>
+                {{/view}}
+            {{/if}}
+            
+            {{else}}
             {{#view App.YourAnswersView contentBinding="this"}}
                 <p class="solvedAnswersParagraph">nothing</p>
             {{/view}}
         {{/each}}
 </div>
-
-           

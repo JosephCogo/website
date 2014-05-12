@@ -67,5 +67,19 @@ App.IndexRoute = Ember.Route.extend({
             });
         }
     }
-}); 
+});
 
+
+$(document).ready(function () {
+    $(window).on('beforeunload', function () {
+
+    });
+
+    $(window).on("blur", function (e) {
+        //console.log("blur");
+    });
+
+    $(window).on("focus", function (e) {
+        //console.log("focus");
+    });
+});

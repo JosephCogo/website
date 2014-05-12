@@ -14,13 +14,14 @@ App.YourquestionsIndexRoute = Ember.Route.extend({
         $('.questionsOutlet').fadeTo(200, 1);
         this.controllerFor('askaquestioncontent').set('askSelected', false);
         this.controllerFor('askaquestioncontent').set('solvedSelected', 'selected');
+        this.controllerFor('questionshomepage').set('ask', 'active-link');
+        this.controllerFor('questionshomepage').set('answer', false);
     }
 });
 
 App.YourquestionsIndexController = Ember.ArrayController.extend({
     actions: {
         toSolvedAnswer: function (yourQuestion) {
-
             var controller = this;
             controller.transitionToRoute('yourquestions.answersprovided', yourQuestion);
         }
@@ -37,14 +38,30 @@ App.YourquestionsAnswersprovidedRoute = Ember.Route.extend({
     },
 
     setupController: function (controller, model) {
-        console.log(model.qbody);
+        //console.log(model.qbody);
         controller.set('model', model);
         this.controllerFor('askaquestioncontent').set('askSelected', false);
         this.controllerFor('askaquestioncontent').set('solvedSelected', 'selected');
+        this.controllerFor('questionshomepage').set('ask', 'active-link');
+        this.controllerFor('questionshomepage').set('answer', false);
+
+
+    },
+
+    deactivate: function () {
+        this.store.find('questionsyouask', this.currentModel.get('id')).then(function (question) {
+            question.get('answers').then(function (answerList) {
+                answerList.forEach(function (item) {
+                    console.log(item.get('id'));
+                    item.set('read', true);
+                });
+            });
+        });
     }
 });
 
 App.YourquestionsAnswersprovidedController = Ember.ObjectController.extend({
+
 
 
 });
@@ -67,12 +84,24 @@ App.YourAnswersView = Ember.View.extend({
 });
 
 App.Answer = DS.Model.extend({
-    abody: DS.attr('string')
+    abody: DS.attr('string'),
+    read : DS.attr('boolean')
 });
 
 App.Questionsyouask = DS.Model.extend({
     qbody: DS.attr('string'),
-    answers: DS.hasMany('answer', {async: true})
+    answers: DS.hasMany('answer', { async: true }),
+    newAnswers: function () {
+        var newAnswers = 0;
+
+        this.get("answers").forEach(function(answer){
+            if(answer.get('read') == false){
+                newAnswers++;
+            }
+            });  
+
+        return newAnswers;
+    }.property('answers.@each.read')
 });
 
 App.Questionsyouask.FIXTURES = [];

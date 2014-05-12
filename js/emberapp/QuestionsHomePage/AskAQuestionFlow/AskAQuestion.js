@@ -7,6 +7,7 @@ App.AskaquestionRoute = Ember.Route.extend({
         this.controllerFor('askaquestioncontent').set('askSelected', 'selected');
         this.controllerFor('askaquestioncontent').set('solvedSelected', false);
         this.controllerFor('questionshomepage').set('ask', 'active-link');
+        
     }
 
 });
@@ -40,7 +41,6 @@ App.AsksuccessRoute = Ember.Route.extend({
 App.AsksuccessController = Ember.Controller.extend({
     actions: {
         askAnotherQuestion: function () {
-            console.log('bang');
             var controller = this;
             $('.questionsOutlet').fadeTo(200, 0, function () {
                 controller.replaceRoute('askaquestion');

@@ -17,7 +17,7 @@ App.AskaquestioncontentRoute = Ember.Route.extend({
 App.AskaquestioncontentController = Ember.ArrayController.extend({
     askSelected: "selected",
     solvedSelected: false,
-    solved: "(2)",
+    solved: "",
 
     actions: {
 

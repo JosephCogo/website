@@ -7,6 +7,9 @@ module.exports = function (grunt) {
                 files: { 'js/emberapplication.js': 'js/emberapp/**/*.js' },
                 options: {
                     preserveComments: false
+                },
+                compress: {
+                    drop_console: true 
                 }
             }
         },

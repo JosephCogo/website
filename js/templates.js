@@ -25,7 +25,6 @@ function program3(depth0,data) {
   data.buffer.push("\n                <div class=\"input-group\"><input class=\"form-control\" id=\"tokenfield-typeahead\" type=\"text\" placeholder=\"Enter your expertise\"><span class=\"input-group-addon\"><img src='img/tick.png'/ id=\"tick\"></span></div>\n            ");
   }
 
-  data.buffer.push("    ");
   data.buffer.push(escapeExpression((helper = helpers['tutorial-component'] || (depth0 && depth0['tutorial-component']),options={hash:{
     'userPressedEnter': ("userPressedEnter")
   },hashTypes:{'userPressedEnter': "ID"},hashContexts:{'userPressedEnter': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "tutorial-component", options))));
@@ -172,9 +171,9 @@ function program1(depth0,data) {
     'rows': ("3"),
     'placeholder': ("Enter your answer here...")
   },hashTypes:{'class': "STRING",'id': "STRING",'rows': "STRING",'placeholder': "STRING"},hashContexts:{'class': depth0,'id': depth0,'rows': depth0,'placeholder': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "textarea", options))));
-  data.buffer.push("\n\n    <div class = \"space\"></div>\n\n    <form class=\"form text-center\">\n        <button data-loading-text=\"ANSWERING...\" class='btn' ");
+  data.buffer.push("\n\n    <div class = \"space\"></div>\n\n    <form class=\"form text-center\">\n        <button data-loading-text=\"Answering...\" class='btn' ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "answer", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(" >ANSWER</button>\n    </form>\n</div>\n");
+  data.buffer.push(" >Answer</button>\n    </form>\n</div>\n");
   return buffer;
   
 });
@@ -229,9 +228,9 @@ function program3(depth0,data) {
   data.buffer.push("\n                <div class = \"space\"></div>\n                ");
   stack1 = helpers.view.call(depth0, "App.TagquestionView", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n                <div class = \"space\"></div>\n            <form class=\"form text-center\">\n                <button data-loading-text=\"SUBMITTING...\" class='btn' ");
+  data.buffer.push("\n                <div class = \"space\"></div>\n            <form class=\"form text-center\">\n                <button data-loading-text=\"Asking...\" class='btn' ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "askquestion", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(" >SUBMIT QUESTION</button>\n            </form>\n</div> \n\n\n");
+  data.buffer.push(" >Ask Question</button>\n            </form>\n\n</div> \n\n\n");
   return buffer;
   
 });
@@ -297,60 +296,81 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = '', stack1;
-  data.buffer.push("\n        <p class=\"solvedAnswersParagraph\">");
+  data.buffer.push("\r\n        <p class=\"solvedAnswersParagraph\">");
   stack1 = helpers._triageMustache.call(depth0, "qbody", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</p>\n    ");
+  data.buffer.push("</p>\r\n    ");
   return buffer;
   }
 
 function program3(depth0,data) {
   
   var buffer = '', stack1;
-  data.buffer.push("\n            ");
-  stack1 = helpers.view.call(depth0, "App.YourAnswersView", {hash:{
-    'contentBinding': ("this")
-  },hashTypes:{'contentBinding': "STRING"},hashContexts:{'contentBinding': depth0},inverse:self.noop,fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],data:data});
+  data.buffer.push("\r\n            ");
+  stack1 = helpers['if'].call(depth0, "answer.read", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(7, program7, data),fn:self.program(4, program4, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n                ");
+  data.buffer.push("\r\n            \r\n            ");
   return buffer;
   }
 function program4(depth0,data) {
   
   var buffer = '', stack1;
-  data.buffer.push("\n                <p class=\"solvedAnswersParagraph\">");
-  stack1 = helpers._triageMustache.call(depth0, "answer.abody", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("</p>\n            ");
-  return buffer;
-  }
-
-function program6(depth0,data) {
-  
-  var buffer = '', stack1;
-  data.buffer.push("\n            ");
+  data.buffer.push("\r\n                ");
   stack1 = helpers.view.call(depth0, "App.YourAnswersView", {hash:{
     'contentBinding': ("this")
-  },hashTypes:{'contentBinding': "STRING"},hashContexts:{'contentBinding': depth0},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],data:data});
+  },hashTypes:{'contentBinding': "STRING"},hashContexts:{'contentBinding': depth0},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n        ");
+  data.buffer.push("\r\n            ");
   return buffer;
   }
-function program7(depth0,data) {
+function program5(depth0,data) {
   
-  
-  data.buffer.push("\n                <p class=\"solvedAnswersParagraph\">nothing</p>\n            ");
+  var buffer = '', stack1;
+  data.buffer.push("\r\n                    <p class=\"solvedAnswersParagraph\">");
+  stack1 = helpers._triageMustache.call(depth0, "answer.abody", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</p>\r\n                ");
+  return buffer;
   }
 
-  data.buffer.push("<div class = 'question-stack'>\n   \n    <h4>Your Question </h4>\n    ");
+function program7(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\r\n            <h5>New Answers</h5>\r\n                ");
+  stack1 = helpers.view.call(depth0, "App.YourAnswersView", {hash:{
+    'contentBinding': ("this")
+  },hashTypes:{'contentBinding': "STRING"},hashContexts:{'contentBinding': depth0},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n            ");
+  return buffer;
+  }
+
+function program9(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\r\n            ");
+  stack1 = helpers.view.call(depth0, "App.YourAnswersView", {hash:{
+    'contentBinding': ("this")
+  },hashTypes:{'contentBinding': "STRING"},hashContexts:{'contentBinding': depth0},inverse:self.noop,fn:self.program(10, program10, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n        ");
+  return buffer;
+  }
+function program10(depth0,data) {
+  
+  
+  data.buffer.push("\r\n                <p class=\"solvedAnswersParagraph\">nothing</p>\r\n            ");
+  }
+
+  data.buffer.push("<div class = 'question-stack'>\r\n   \r\n    <h4>Your Question </h4>\r\n    ");
   stack1 = helpers.view.call(depth0, "App.YourAnswersView", {hash:{
     'contentBinding': ("this")
   },hashTypes:{'contentBinding': "STRING"},hashContexts:{'contentBinding': depth0},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n        <h4>The Answers Provided </h4>\n        \n        ");
-  stack1 = helpers.each.call(depth0, "answer", "in", "answers", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(6, program6, data),fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  data.buffer.push("\r\n        <h4>The Answers Provided </h4>\r\n        \r\n        ");
+  stack1 = helpers.each.call(depth0, "answer", "in", "answers", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(9, program9, data),fn:self.program(3, program3, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n</div>\n\n           ");
+  data.buffer.push("\r\n</div>");
   return buffer;
   
 });
@@ -379,7 +399,10 @@ function program2(depth0,data) {
   data.buffer.push(">  ");
   stack1 = helpers._triageMustache.call(depth0, "questionsyouask.qbody", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push(" </p>\n                ");
+  data.buffer.push(" <br/> New answers: ");
+  stack1 = helpers._triageMustache.call(depth0, "questionsyouask.newAnswers", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</p>\n                ");
   return buffer;
   }
 
@@ -429,7 +452,7 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},contexts:[],types:[],data:data})));
   data.buffer.push(" ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "toAnswers", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(">Answer A Question</a><span></span></li>\n    </ul>\n</div>\n<div class='content-pane'>\n    <div class='content'>\n            \n        \n        \n        ");
+  data.buffer.push(">Answer A Question</a><span></span></li>\n    </ul>\n</div>\n<div class='content-pane'>\n    <div class='content'>\n           \n        ");
   stack1 = helpers._triageMustache.call(depth0, "outlet", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n        \n    </div>\n</div>\n\n</body>\n");

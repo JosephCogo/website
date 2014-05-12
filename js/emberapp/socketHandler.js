@@ -81,14 +81,12 @@ function loadYourQuestions(callback) {
                 //nothing is found, if nothing it is null. 
                 if (ans[0] != null && ans[1] != null) {
                     answerIds.push(ans[1]);
-                    emberStore.push('answer', { id: ans[1], abody: ans[0] });
+                    emberStore.push('answer', { id: ans[1], abody: ans[0], read : false });
                 }
             }
 
             //push questions onto the store
             emberStore.push('questionsyouask', { id: item['q.qid'], qbody: item['q.qbody'], answers: answerIds });
-
-            //q.get('answers').pushObject(App.Answer.find(10));
         }
         callback();
     });

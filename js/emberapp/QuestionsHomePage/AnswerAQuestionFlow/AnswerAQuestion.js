@@ -43,6 +43,8 @@ App.AnsweraquestionInputanswerRoute = Ember.Route.extend({
 
     setupController: function (controller, model) {
         controller.set('model', model);
+        this.controllerFor('questionshomepage').set('answer', 'active-link');
+        this.controllerFor('questionshomepage').set('ask', false);
     }
 
 });
@@ -60,6 +62,13 @@ App.AnsweraquestionInputanswerController = Ember.ObjectController.extend({
 
 });
 
+App.AnswerSuccessRoute = Em.Route.extend({
+    setupController : function(){
+        this.controllerFor('questionshomepage').set('answer', 'active-link');
+        this.controllerFor('questionshomepage').set('ask', false);
+    }
+});
+
 App.AnswerQuestionView = Ember.View.extend({
 
     didInsertElement: function () {
@@ -67,6 +76,7 @@ App.AnswerQuestionView = Ember.View.extend({
     }
 
 });
+
 
 App.Questionsothersask = DS.Model.extend({
     qbody : DS.attr('string') 
