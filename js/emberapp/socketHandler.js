@@ -31,7 +31,6 @@ function connectSocket(callback) {
     //if the server responds, transition to ask
     //NOTE: NEED TO HAVE A FAILURE EVENT
     socket.on('connect', function (data) {
-        //console.log('connect');
         callback(null, data);
     });
 
@@ -47,14 +46,10 @@ function loadData(store, callback){
     socket.emit('loaddata');
 
     loadYourQuestions(function () {
-        //console.info("Your questions are loaded");
 
         loadQuestionsOthersAsk(function () {
-            //console.info('others questions are loaded. Setting up handling of new messages...');
 
             handleUpdates();
-
-            //console.info('Complete');
 
             callback();
         });
@@ -84,7 +79,6 @@ function loadYourQuestions(callback) {
                     emberStore.push('answer', { id: ans[1], abody: ans[0], read: ans[2] });
                 }
             }
-
             //push questions onto the store
             emberStore.push('questionsyouask', { id: item['q.qid'], qbody: item['q.qbody'], answers: answerIds });
         }
@@ -99,10 +93,8 @@ function loadQuestionsOthersAsk(callback) {
     //these are questions that need your expertise!!
     socket.once('questions-others-ask', function (data) {
         var questions = data.question;
-        //console.log(data.question);
         for (var i = 0; i < questions.length; i++) {
             var item = questions[i];
-            //console.log(item['q.qbody']);
             emberStore.push('questionsothersask', { id: item['q.qid'], qbody: item['q.qbody'] });
         }
         callback();
@@ -140,15 +132,30 @@ function handleUpdates(){
     });
 
     socket.on('newanswer', function (data) {
-        //console.log('newanswer');
-        //console.log(data);
 
-        emberStore.push('answer', { id : data.aid, abody : data.abody});
+        emberStore.push('answer', { id: data.aid, abody: data.abody });
 
         emberStore.find('questionsyouask', data.qid).then(function (question) {
             emberStore.find('answer', data.aid).then(function (answer) {
                 question.get('answers').then(function (answerList) {
                     answerList.pushObject(answer);
+                });
+                //this is not that nice, but update the number of new answers.
+                //only have to do this because of the fact that the observer does not
+                //work 
+                this.store.find("answer").then(function (results) {
+                    var newAnswers = 0;
+                    results.forEach(function (answer) {
+                        if (answer.get('read') == false) {
+                            newAnswers++;
+                        }
+                    });
+                    //set the number of unread messages
+                    if (newAnswers > 0) {
+                        controller.controllerFor('askaquestioncontent').set('solved', '(' + newAnswers + ')');
+                    } else {
+                        controller.controllerFor('askaquestioncontent').set('solved', '');
+                    }
                 });
             });
         });
@@ -172,8 +179,6 @@ function handleUpdates(){
             }, 5000);
         }
     });
-
-
 }
 
 

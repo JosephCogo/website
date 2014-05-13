@@ -184,7 +184,7 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   
 
 
-  data.buffer.push("<body>\n<div class='sidebar'>\n    <h4></h4>\n\n</div>\n<div class='content-pane'>   \n    <div class='content'>\n            \n      LOADING!!!!!!!!!!!!!!!!!!!!!!!!!!!  \n\n    \n    </div>\n</div>\n\n</body>\n");
+  data.buffer.push("<body>\n<div class='sidebar'>\n    <h4></h4>\n\n</div>\n<div class='content-pane'>   \n    <div class='content'>\n            \n      <img src='img/loading-page.gif'></img>\n\n    \n    </div>\n</div>\n\n</body>\n");
   
 });
 
