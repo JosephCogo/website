@@ -24,7 +24,7 @@ function initSocket(store, callback){
 function connectSocket(callback) {
 
     //connect to socket io
-    socket = io.connect('http://babblefishes.cloudapp.net:3000', {
+    socket = io.connect('http://localhost:3000', {
         query: 'token=' + localStorage.token
     });
 
@@ -95,7 +95,7 @@ function loadQuestionsOthersAsk(callback) {
         var questions = data.question;
         for (var i = 0; i < questions.length; i++) {
             var item = questions[i];
-            emberStore.push('questionsothersask', { id: item['q.qid'], qbody: item['q.qbody'] });
+            emberStore.push('questionsothersask', { id: item['q.qid'], qbody: item['q.qbody'], seen : item['seen'] });
         }
         callback();
     });
@@ -109,7 +109,7 @@ function handleUpdates(){
     //BUG HERE
     socket.on('newquestion', function (data) {
         //ugh clean up...
-        emberStore.push('questionsothersask', { id: data.qid, qbody: data.qbody });
+        emberStore.push('questionsothersask', { id: data.qid, qbody: data.qbody, seen : false });
 
         var havePermission = window.webkitNotifications.checkPermission();
         if (havePermission == 0) {
@@ -133,7 +133,7 @@ function handleUpdates(){
 
     socket.on('newanswer', function (data) {
 
-        emberStore.push('answer', { id: data.aid, abody: data.abody });
+        emberStore.push('answer', { id: data.aid, abody: data.abody, read : false });
 
         emberStore.find('questionsyouask', data.qid).then(function (question) {
             emberStore.find('answer', data.aid).then(function (answer) {
@@ -267,7 +267,7 @@ function answerQuestion(answer, qid, model){
 function readAnswers(model){
     //get answers from model, check to see what ones have
     //been read, if not read, add them to the a list to send to 
-    //a server
+    //the server
     model.get("answers").then(function (answerList) {
         var aids = [];
         answerList.forEach(function (item) {
@@ -278,5 +278,9 @@ function readAnswers(model){
         });
         socket.emit('readanswers', {aids : aids});
     });
+}
+
+function readQuestions(model){
+
 }
     

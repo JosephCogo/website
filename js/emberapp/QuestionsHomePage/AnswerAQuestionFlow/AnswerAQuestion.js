@@ -79,7 +79,8 @@ App.AnswerQuestionView = Ember.View.extend({
 
 
 App.Questionsothersask = DS.Model.extend({
-    qbody : DS.attr('string') 
+    qbody : DS.attr('string'),
+    seen : DS.attr('boolean') 
 });
 
 App.Questionsothersask.FIXTURES = [];
