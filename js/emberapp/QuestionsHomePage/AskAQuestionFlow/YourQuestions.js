@@ -43,12 +43,13 @@ App.YourquestionsAnswersprovidedRoute = Ember.Route.extend({
         this.controllerFor('askaquestioncontent').set('solvedSelected', 'selected');
         this.controllerFor('questionshomepage').set('ask', 'active-link');
         this.controllerFor('questionshomepage').set('answer', false);
-        
+
         //indicate that the answers have been read
         readAnswers(model);
     },
 
     deactivate: function () {
+        var controller = this;
         //change all the new answers to read
         this.store.find('questionsyouask', this.currentModel.get('id')).then(function (question) {
             question.get('answers').then(function (answerList) {
@@ -57,6 +58,21 @@ App.YourquestionsAnswersprovidedRoute = Ember.Route.extend({
                     item.set('read', true);
                 });
             });
+        });
+        //have to do this here as the observer pattern is not working with the computed property
+        this.store.find("answer").then(function (results) {
+            var newAnswers = 0;
+            results.forEach(function (answer) {
+                if (answer.get('read') == false) {
+                    newAnswers++;
+                }
+            });
+            //set the number of unread messages
+            if (newAnswers > 0) {
+                controller.controllerFor('askaquestioncontent').set('solved', '(' + newAnswers + ')');
+            } else {
+                controller.controllerFor('askaquestioncontent').set('solved', '');
+            }
         });
     }
 });
