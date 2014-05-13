@@ -38,17 +38,18 @@ App.YourquestionsAnswersprovidedRoute = Ember.Route.extend({
     },
 
     setupController: function (controller, model) {
-        //console.log(model.qbody);
         controller.set('model', model);
         this.controllerFor('askaquestioncontent').set('askSelected', false);
         this.controllerFor('askaquestioncontent').set('solvedSelected', 'selected');
         this.controllerFor('questionshomepage').set('ask', 'active-link');
         this.controllerFor('questionshomepage').set('answer', false);
-
-
+        
+        //indicate that the answers have been read
+        readAnswers(model);
     },
 
     deactivate: function () {
+        //change all the new answers to read
         this.store.find('questionsyouask', this.currentModel.get('id')).then(function (question) {
             question.get('answers').then(function (answerList) {
                 answerList.forEach(function (item) {
@@ -91,9 +92,10 @@ App.Answer = DS.Model.extend({
 App.Questionsyouask = DS.Model.extend({
     qbody: DS.attr('string'),
     answers: DS.hasMany('answer', { async: true }),
+    //function to count the number of new answers from the server
     newAnswers: function () {
         var newAnswers = 0;
-
+        //get all the answers from the store, and then count the new ones!
         this.get("answers").forEach(function(answer){
             if(answer.get('read') == false){
                 newAnswers++;

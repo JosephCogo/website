@@ -81,7 +81,7 @@ function loadYourQuestions(callback) {
                 //nothing is found, if nothing it is null. 
                 if (ans[0] != null && ans[1] != null) {
                     answerIds.push(ans[1]);
-                    emberStore.push('answer', { id: ans[1], abody: ans[0], read : false });
+                    emberStore.push('answer', { id: ans[1], abody: ans[0], read: ans[2] });
                 }
             }
 
@@ -257,5 +257,21 @@ function answerQuestion(answer, qid, model){
 
     //remove the model from the store as it has been answered
     model.unloadRecord();
+}
+
+function readAnswers(model){
+    //get answers from model, check to see what ones have
+    //been read, if not read, add them to the a list to send to 
+    //a server
+    model.get("answers").then(function (answerList) {
+        var aids = [];
+        answerList.forEach(function (item) {
+            var read = item.get('read');
+            if (read == false) {
+                aids.push(item.get('id'));
+            }
+        });
+        socket.emit('readanswers', {aids : aids});
+    });
 }
     
