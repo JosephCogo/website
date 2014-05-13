@@ -81,7 +81,7 @@ function loadYourQuestions(callback) {
                 //nothing is found, if nothing it is null. 
                 if (ans[0] != null && ans[1] != null) {
                     answerIds.push(ans[1]);
-                    emberStore.push('answer', { id: ans[1], abody: ans[0], read: false });
+                    emberStore.push('answer', { id: ans[1], abody: ans[0], read: ans[2] });
                 }
             }
 
