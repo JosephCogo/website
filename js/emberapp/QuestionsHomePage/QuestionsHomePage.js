@@ -32,13 +32,13 @@ App.QuestionshomepageRoute = Ember.Route.extend({
 App.QuestionshomepageController = Ember.Controller.extend({
     ask: false,
     answer: false,
-    username : '',
+    username: '',
 
     actions: {
 
         toAnswers: function () {
             var controller = this;
-            if(this.get('answer') == false){
+            if (this.get('answer') == false) {
                 $('.content').fadeTo(200, 0, function () {
                     controller.transitionToRoute('answeraquestion');
                 });
@@ -46,11 +46,11 @@ App.QuestionshomepageController = Ember.Controller.extend({
         },
 
         toQuestions: function () {
-            if(this.get('ask') == false){
+            if (this.get('ask') == false) {
                 this.set("answer", false);
                 this.set("ask", "active-link");
                 var controller = this;
-            
+
                 $('.content').fadeTo(200, 0, function () {
                     controller.transitionToRoute('askaquestion');
                 });

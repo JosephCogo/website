@@ -10,6 +10,7 @@ var skills = [];
 //the autocompleted questions returned from the server
 var questions = [];
 
+
 //initialise the socket and store and register event listeners for the 
 //grabbing messages from the server
 function initSocket(store, callback){
@@ -24,13 +25,18 @@ function initSocket(store, callback){
 function connectSocket(callback) {
 
     //connect to socket io
-    socket = io.connect('http://localhost:3000', {
+    socket = io.connect('http://babblefishes.cloudapp.net:3000', {
         query: 'token=' + localStorage.token
     });
 
     //if the server responds, transition to ask
     //NOTE: NEED TO HAVE A FAILURE EVENT
     socket.on('connect', function (data) {
+        siofu = new SocketIOFileUpload(socket);
+
+        //siofu.listenOnInput($(".fileUpload"));
+        siofu.listenOnDrop($(".fileUpload"));
+        //$(".fileUpload").addEventListener("click", siofu.prompt, false);
         callback(null, data);
     });
 
@@ -84,7 +90,6 @@ function loadYourQuestions(callback) {
         }
         callback();
     });
-    
 }
 
 function loadQuestionsOthersAsk(callback) {

@@ -56,6 +56,7 @@ App.YourquestionsAnswersprovidedRoute = Ember.Route.extend({
                 answerList.forEach(function (item) {
                     console.log(item.get('id'));
                     item.set('read', true);
+                    item.save();
                 });
             });
         });

@@ -230,7 +230,7 @@ function program3(depth0,data) {
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n                <div class = \"space\"></div>\n            <form class=\"form text-center\">\n                <button data-loading-text=\"Asking...\" class='btn' ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "askquestion", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(" >Ask Question</button>\n            </form>\n\n</div> \n\n\n");
+  data.buffer.push(" >Ask Question</button>\n            </form>\n\n            <div class=\"fileUpload\">\n\n            </div>\n</div> \n\n\n");
   return buffer;
   
 });
@@ -464,7 +464,10 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},contexts:[],types:[],data:data})));
   data.buffer.push(" ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "toQuestions", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push("> Ask Question </a><span></span></li>\n        <li> <a href = '#/questionspage/answeraquestion' ");
+  data.buffer.push("> Ask Question ");
+  stack1 = helpers._triageMustache.call(depth0, "newAnswers", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("</a><span></span></li>\n        <li> <a href = '#/questionspage/answeraquestion' ");
   data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
     'class': ("answer")
   },hashTypes:{'class': "STRING"},hashContexts:{'class': depth0},contexts:[],types:[],data:data})));

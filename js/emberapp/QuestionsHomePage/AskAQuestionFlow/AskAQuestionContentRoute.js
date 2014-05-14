@@ -23,6 +23,7 @@ App.AskaquestioncontentController = Ember.ArrayController.extend({
         var controller = this;
         var newAnswers = 0;
         this.get('model');
+        console.log('fds');
         //get all the answers from the store, and then count the new ones!
         this.store.find("answer").then(function (results) {
             results.forEach(function (answer) {
@@ -31,12 +32,12 @@ App.AskaquestioncontentController = Ember.ArrayController.extend({
                 }
                 if (newAnswers > 0) {
                     controller.set('solved', '(' + newAnswers + ')');
-                }else{
+                } else {
                     controller.set('solved', '');
                 }
             });
         });
-    } .observes("answer.@each.read"),
+    } .observes("answer.@each.isLoading"),
 
     actions: {
 

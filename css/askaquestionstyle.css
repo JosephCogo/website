@@ -401,3 +401,9 @@ textarea {
 .tutorialDiv{
     margin:0 auto;
 }
+
+.fileUpload{
+    width: 100px;
+    height: 100px;
+    background-color: #2BB4A7;
+}
