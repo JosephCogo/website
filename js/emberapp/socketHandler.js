@@ -32,11 +32,6 @@ function connectSocket(callback) {
     //if the server responds, transition to ask
     //NOTE: NEED TO HAVE A FAILURE EVENT
     socket.on('connect', function (data) {
-        siofu = new SocketIOFileUpload(socket);
-
-        //siofu.listenOnInput($(".fileUpload"));
-        siofu.listenOnDrop($(".fileUpload"));
-        //$(".fileUpload").addEventListener("click", siofu.prompt, false);
         callback(null, data);
     });
 
