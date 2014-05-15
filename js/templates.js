@@ -222,6 +222,12 @@ function program3(depth0,data) {
   return buffer;
   }
 
+function program5(depth0,data) {
+  
+  
+  data.buffer.push("\n                <form  class=\"dropzone\" id=\"fileupload\" enctype=\"multipart/form-data\"></form>\n            ");
+  }
+
   data.buffer.push("<div class=\"askquestion contenthide\">\n            \n                ");
   stack1 = helpers.view.call(depth0, "App.QuestionareaView", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
@@ -230,7 +236,10 @@ function program3(depth0,data) {
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n                <div class = \"space\"></div>\n            <form class=\"form text-center\">\n                <button data-loading-text=\"Asking...\" class='btn' ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "askquestion", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(" >Ask Question</button>\n            </form>\n\n\n</div> \n\n\n");
+  data.buffer.push(" >Ask Question</button>\n            </form>\n\n            ");
+  stack1 = helpers.view.call(depth0, "App.DropzoneView", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n</div> \n\n\n");
   return buffer;
   
 });

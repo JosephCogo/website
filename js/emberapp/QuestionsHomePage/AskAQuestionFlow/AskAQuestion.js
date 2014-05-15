@@ -18,13 +18,16 @@ App.AskaquestionController = Ember.Controller.extend({
     actions: {
 
         askquestion: function () {
-            var controller = this;
+            var myDropzone = Dropzone.forElement("#fileupload");
+            console.log(myDropzone);
+            myDropzone.processQueue();
+            /*var controller = this;
             $(".btn").button('loading');
             askQuestion($('#questions').val(), $('#tagquestion').tokenfield('getTokensList'), function () {
-                $('.questionsOutlet').fadeTo(200, 0, function () {
-                    controller.replaceRoute("asksuccess");
-                });
+            $('.questionsOutlet').fadeTo(200, 0, function () {
+            controller.replaceRoute("asksuccess");
             });
+            });*/
         }
 
     }
@@ -99,4 +102,15 @@ App.TagquestionView = Ember.View.extend({
             }
         });
     }
+});
+
+App.DropzoneView = Em.View.extend({
+
+    didInsertElement : function(){
+        $("#fileupload").dropzone({ url: "http://localhost:3000/uploadfile", 
+                                    addRemoveLinks: true,
+                                    autoProcessQueue: false,
+                                    uploadMultiple: true });
+    }
+
 });

@@ -12,7 +12,9 @@
                 <button data-loading-text="Asking..." class='btn' {{action 'askquestion'}} >Ask Question</button>
             </form>
 
-
+            {{#view App.DropzoneView}}
+                <form  class="dropzone" id="fileupload" enctype="multipart/form-data"></form>
+            {{/view}}
 </div> 
 
 
