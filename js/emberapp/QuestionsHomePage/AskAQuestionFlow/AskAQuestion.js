@@ -18,8 +18,14 @@ App.AskaquestionController = Ember.Controller.extend({
     actions: {
 
         askquestion: function () {
+            //send files then ask question
             var myDropzone = Dropzone.forElement("#fileupload");
             console.log(myDropzone);
+
+            myDropzone.on('sending', function (file, xhr, formData) {
+                console.log(file.name);
+                formData.append('orgname', 'lightninglab');
+            });
             myDropzone.processQueue();
             /*var controller = this;
             $(".btn").button('loading');
