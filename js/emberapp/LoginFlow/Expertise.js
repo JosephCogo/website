@@ -36,6 +36,7 @@ App.ExpertiseController = Ember.ObjectController.extend({
                 var btn = $('.submit');
                 btn.button('loading');
 
+                //add the users skills to the database
                 addSkills($('#tokenfield-typeahead').tokenfield('getTokensList'), function () {
                     //move to ask a question
                     $(".application-content").fadeTo(500, 0, function () {
@@ -84,7 +85,8 @@ App.ExpertiseView = Ember.View.extend({
 });
 
 App.TutorialComponentComponent = Ember.Component.extend({
-    username: localStorage.username,
+    firstname: localStorage.firstname,
+    lastname: localStorage.lastname,
     userPressedEnter: '',
 
     firstExpertiseEnteredChanged: function () {

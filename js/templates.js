@@ -184,7 +184,7 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   
 
 
-  data.buffer.push("<body>\n<div class='sidebar'>\n    <h4></h4>\n\n</div>\n<div class='content-pane'>   \n    <div class='content'>\n            \n      Loading!!\n\n    \n    </div>\n</div>\n\n</body>\n");
+  data.buffer.push("<body>\n<div class='sidebar'>\n    <h4></h4>\n\n</div>\n<div class='content-pane'>   \n    <div class='loading-content'>\n      \n      <div class=\"loading\">\n        <img src=\"img/loading-gif_360.png\"></img>\n        <h3 class=\"loading-text\">Loading...</h3>\n      </div>\n    \n    </div>\n</div>\n\n</body>\n");
   
 });
 
@@ -236,10 +236,10 @@ function program5(depth0,data) {
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\n                <div class = \"space\"></div>\n            <form class=\"form text-center\">\n                <button data-loading-text=\"Asking...\" class='btn' ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "askquestion", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(" >Ask Question</button>\n            </form>\n\n            ");
+  data.buffer.push(" >Ask Question</button>\n            </form>\n            \n            <!--\n            ");
   stack1 = helpers.view.call(depth0, "App.DropzoneView", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\n</div> \n\n\n");
+  data.buffer.push("-->\n</div> \n\n\n");
   return buffer;
   
 });
@@ -465,7 +465,10 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 
 
   data.buffer.push("<body>\n<div class='sidebar'>\n    <h4>");
-  stack1 = helpers._triageMustache.call(depth0, "username", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers._triageMustache.call(depth0, "firstname", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push(" <br/> ");
+  stack1 = helpers._triageMustache.call(depth0, "lastname", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</h4>\n    <ul class=\"nav nav-stacked\">\n        <li><a href = '#/questionspage/askaquestion/ask' ");
   data.buffer.push(escapeExpression(helpers['bind-attr'].call(depth0, {hash:{
@@ -499,7 +502,7 @@ function program1(depth0,data) {
   
   var buffer = '', stack1;
   data.buffer.push("\r\n                <p class = \"tutorialBox\">Hey ");
-  stack1 = helpers._triageMustache.call(depth0, "username", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers._triageMustache.call(depth0, "firstname", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("! Nice to meet you!<button  ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "tutorialFirst", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));

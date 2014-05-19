@@ -1,38 +1,45 @@
 //this is the resource that contains both the questions and the answers
 App.QuestionshomepageRoute = Ember.Route.extend({
+
+
     //wait to load all the messages!!
     beforeModel: function () {
+        var route = this;
         var store = this.store;
         return new Ember.RSVP.Promise(function (resolve) {
             //reset the connection on refresh, and wait to load all the data
             if (Ember.isEmpty(getSocket())) {
-                initSocket(store, function () {
-                    loadData(store, function () {
-                        resolve();
-                        console.log('load');
-                    });
+                initSocket(store, function (err) {
+                    //if there is an error connecting, go to login
+                    //usually from unauthorized handshake
+                    if (err) {
+                        route.replaceWith('login');
+                    }
+                    else {
+                        loadData(store, function () {
+                            resolve();
+                            console.log('load');
+                        });
+                    }
                 });
             }
             else {
                 loadData(store, function () {
                     console.log('load');
                     resolve();
+                    $(".application-content").fadeTo(500, 1);
                 });
             }
 
         });
-    },
-
-    setupController: function (controller, model) {
-        controller.set('username', localStorage.username);
     }
-
 });
 
 App.QuestionshomepageController = Ember.Controller.extend({
     ask: false,
     answer: false,
-    username: '',
+    firstname: localStorage.firstname,
+    lastname:localStorage.lastname,
 
     actions: {
 

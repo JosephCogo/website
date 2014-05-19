@@ -17,7 +17,11 @@ function initSocket(store, callback){
     emberStore = store;
 
     connectSocket(function (err, data) {
-        callback();
+        //if unauthorized and other stuff etc
+        if (err) {
+            callback(err);
+        }
+        callback(null);
     });
 }
 
@@ -25,16 +29,20 @@ function initSocket(store, callback){
 function connectSocket(callback) {
 
     //connect to socket io
-    socket = io.connect('http://localhost:3000', {
+    socket = io.connect('http://babblefishes.cloudapp.net:3000', {
         query: 'token=' + localStorage.token
     });
 
     //if the server responds, transition to ask
     //NOTE: NEED TO HAVE A FAILURE EVENT
-    socket.on('connect', function (data) {
+    socket.once('connect', function (data) {
         callback(null, data);
     });
 
+    socket.once('error', function (err) {
+        //console.log(data);
+        callback(err, null);
+    });
 }
 
 function getSocket(){

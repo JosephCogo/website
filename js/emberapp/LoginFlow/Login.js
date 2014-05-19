@@ -17,7 +17,7 @@ App.LoginController = Ember.ObjectController.extend({
             btn.button('loading');
 
             $.ajax({
-                url: "http://localhost:3000/login",
+                url: "http://babblefishes.cloudapp.net:3000/login",
                 type: "post",
                 data: { email: this.get('email'), password: this.get('password') },
                 statusCode: {
@@ -25,7 +25,8 @@ App.LoginController = Ember.ObjectController.extend({
                         localStorage.token = data.token;
                         //is it the users first time logging in?
                         var firstTime = data.firsttime;
-                        localStorage.username = data.username;
+                        localStorage.firstname = data.firstname;
+                        localStorage.lastname = data.lastname;
                         initSocket(router.store, function () {
                             console.info("Sockets connected");
 

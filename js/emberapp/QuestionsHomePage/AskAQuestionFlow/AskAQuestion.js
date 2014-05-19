@@ -7,7 +7,7 @@ App.AskaquestionRoute = Ember.Route.extend({
         this.controllerFor('askaquestioncontent').set('askSelected', 'selected');
         this.controllerFor('askaquestioncontent').set('solvedSelected', false);
         this.controllerFor('questionshomepage').set('ask', 'active-link');
-        
+
     }
 
 });
@@ -19,14 +19,10 @@ App.AskaquestionController = Ember.Controller.extend({
 
         askquestion: function () {
             //send files then ask question
-            var myDropzone = Dropzone.forElement("#fileupload");
-            console.log(myDropzone);
+            //var myDropzone = Dropzone.forElement("#fileupload");
 
-            myDropzone.on('sending', function (file, xhr, formData) {
-                console.log(file.name);
-                formData.append('orgname', 'lightninglab');
-            });
-            myDropzone.processQueue();
+            //myDropzone.processQueue();
+
             /*var controller = this;
             $(".btn").button('loading');
             askQuestion($('#questions').val(), $('#tagquestion').tokenfield('getTokensList'), function () {
@@ -111,12 +107,24 @@ App.TagquestionView = Ember.View.extend({
 });
 
 App.DropzoneView = Em.View.extend({
+    /*
+    didInsertElement: function () {
+        $("#fileupload").dropzone({ url: "http://localhost:3000/uploadfile",
+            addRemoveLinks: true,
+            autoProcessQueue: false
+        });
 
-    didInsertElement : function(){
-        $("#fileupload").dropzone({ url: "http://localhost:3000/uploadfile", 
-                                    addRemoveLinks: true,
-                                    autoProcessQueue: false,
-                                    uploadMultiple: true });
-    }
+        var myDropzone = Dropzone.forElement("#fileupload");
+
+        myDropzone.on('sending', function (file, xhr, formData) {
+            console.log(file.name);
+            formData.append('orgname', 'lightninglab');
+        });
+
+        myDropzone.on('success', function (status, message) {
+            //console.log(status);
+            console.log(message);
+        });
+    }*/
 
 });
