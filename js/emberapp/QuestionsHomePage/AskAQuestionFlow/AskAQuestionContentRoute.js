@@ -31,8 +31,10 @@ App.AskaquestioncontentController = Ember.ArrayController.extend({
                     newAnswers++;
                 }
                 if (newAnswers > 0) {
+                    controller.controllerFor('questionshomepage').set('newAnswers', '(' + newAnswers + ')');
                     controller.set('solved', '(' + newAnswers + ')');
                 } else {
+                    controller.controllerFor('questionshomepage').set('newAnswers', '');
                     controller.set('solved', '');
                 }
             });

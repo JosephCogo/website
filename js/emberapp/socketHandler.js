@@ -50,7 +50,8 @@ function getSocket(){
 }
 
 function loadData(store, callback){
-
+    //var myController = ;
+    //console.log(myController);
 
     socket.emit('loaddata');
 
@@ -112,6 +113,7 @@ function loadQuestionsOthersAsk(callback) {
 
 //handle updates to the questions ie new answer for your questions, questions
 //directed at you etc
+
 function handleUpdates(){
 
     //BUG HERE
@@ -141,7 +143,7 @@ function handleUpdates(){
 
     socket.on('newanswer', function (data) {
 
-        emberStore.push('answer', { id: data.aid, abody: data.abody, read : false });
+        emberStore.push('answer', { id: data.aid, abody: data.abody, read: false });
 
         emberStore.find('questionsyouask', data.qid).then(function (question) {
             emberStore.find('answer', data.aid).then(function (answer) {
@@ -151,17 +153,21 @@ function handleUpdates(){
                 //this is not that nice, but update the number of new answers.
                 //only have to do this because of the fact that the observer does not
                 //work 
-                this.store.find("answer").then(function (results) {
+                emberStore.find("answer").then(function (results) {
                     var newAnswers = 0;
                     results.forEach(function (answer) {
                         if (answer.get('read') == false) {
                             newAnswers++;
                         }
                     });
+                    //CHANGE THIS LATER
+                    var controller = window.App.__container__.lookup('controller:askaquestioncontent');
                     //set the number of unread messages
                     if (newAnswers > 0) {
+                        controller.controllerFor('questionshomepage').set('newAnswers', '(' + newAnswers + ')');
                         controller.controllerFor('askaquestioncontent').set('solved', '(' + newAnswers + ')');
                     } else {
+                        controller.controllerFor('questionshomepage').set('newAnswers', '');
                         controller.controllerFor('askaquestioncontent').set('solved', '');
                     }
                 });

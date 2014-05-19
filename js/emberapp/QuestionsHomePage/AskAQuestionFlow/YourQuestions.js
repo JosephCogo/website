@@ -70,8 +70,10 @@ App.YourquestionsAnswersprovidedRoute = Ember.Route.extend({
             });
             //set the number of unread messages
             if (newAnswers > 0) {
+                controller.controllerFor('questionshomepage').set('newAnswers', '(' + newAnswers + ')');
                 controller.controllerFor('askaquestioncontent').set('solved', '(' + newAnswers + ')');
             } else {
+                controller.controllerFor('questionshomepage').set('newAnswers', '');
                 controller.controllerFor('askaquestioncontent').set('solved', '');
             }
         });
@@ -79,8 +81,6 @@ App.YourquestionsAnswersprovidedRoute = Ember.Route.extend({
 });
 
 App.YourquestionsAnswersprovidedController = Ember.ObjectController.extend({
-
-
 
 });
 

@@ -39,7 +39,28 @@ App.QuestionshomepageController = Ember.Controller.extend({
     ask: false,
     answer: false,
     firstname: localStorage.firstname,
-    lastname:localStorage.lastname,
+    lastname: localStorage.lastname,
+    newAnswers: '',
+
+    newAnswersUpdate: function () {
+        var controller = this;
+        var newAnswers = 0;
+        //console.log('fds');
+        //get all the answers from the store, and then count the new ones!
+        this.store.find("answer").then(function (results) {
+            results.forEach(function (answer) {
+                if (answer.get('read') == false) {
+                    newAnswers++;
+                }
+                console.log(newAnswers);
+                if (newAnswers > 0) {
+                    controller.set('newAnswers', '(' + newAnswers + ')');
+                } else {
+                    controller.set('newAnswers', '');
+                }
+            });
+        });
+    } .observes("answer.@each.isLoading"),
 
     actions: {
 

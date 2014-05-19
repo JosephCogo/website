@@ -50,6 +50,7 @@ body, html {
     text-align: left;
     color: white;
     text-transform:uppercase;
+    
 }
 .nav > li > a:hover {
     color: #F7F4F4;
