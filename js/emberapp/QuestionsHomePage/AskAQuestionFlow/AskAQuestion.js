@@ -23,13 +23,13 @@ App.AskaquestionController = Ember.Controller.extend({
 
             //myDropzone.processQueue();
 
-            /*var controller = this;
+            var controller = this;
             $(".btn").button('loading');
             askQuestion($('#questions').val(), $('#tagquestion').tokenfield('getTokensList'), function () {
-            $('.questionsOutlet').fadeTo(200, 0, function () {
-            controller.replaceRoute("asksuccess");
+                $('.questionsOutlet').fadeTo(200, 0, function () {
+                    controller.replaceRoute("asksuccess");
+                });
             });
-            });*/
         }
 
     }
