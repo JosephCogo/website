@@ -499,7 +499,7 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 Ember.TEMPLATES["components/tutorial-component"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', stack1, escapeExpression=this.escapeExpression, self=this;
+  var buffer = '', stack1, self=this;
 
 function program1(depth0,data) {
   
@@ -507,28 +507,20 @@ function program1(depth0,data) {
   data.buffer.push("\r\n                <p class = \"tutorialBox\">Hey ");
   stack1 = helpers._triageMustache.call(depth0, "firstname", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("! Nice to meet you!<button  ");
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "tutorialFirst", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(">n</button></p>\r\n            ");
+  data.buffer.push("! Nice to meet you!</p>\r\n            ");
   return buffer;
   }
 
 function program3(depth0,data) {
   
-  var buffer = '';
-  data.buffer.push("\r\n                <p class = \"tutorialBox\"> I'm Jeffrey Cogo, and I'm here to help you out!<button ");
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "tutorialSecond", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(">n</button></p>\r\n            ");
-  return buffer;
+  
+  data.buffer.push("\r\n                <p class = \"tutorialBox\"> I'm Jeffrey Cogo, and I'm here to help you out!</p>\r\n            ");
   }
 
 function program5(depth0,data) {
   
-  var buffer = '';
-  data.buffer.push("\r\n                <p class = \"tutorialBox\">Lets get started...<button  ");
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "tutorialThird", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(">n</button></p>\r\n            ");
-  return buffer;
+  
+  data.buffer.push("\r\n                <p class = \"tutorialBox\">Lets get started...</p>\r\n            ");
   }
 
 function program7(depth0,data) {
@@ -539,20 +531,14 @@ function program7(depth0,data) {
 
 function program9(depth0,data) {
   
-  var buffer = '';
-  data.buffer.push("\r\n                <p class = \"tutorialBox\">Wow! See that? <button  ");
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "tutorialFifth", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(">n</button></p>\r\n            ");
-  return buffer;
+  
+  data.buffer.push("\r\n                <p class = \"tutorialBox\">Wow! See that?</p>\r\n            ");
   }
 
 function program11(depth0,data) {
   
-  var buffer = '';
-  data.buffer.push("\r\n                <p class = \"tutorialBox\">You added a skill to the list. Skills that are already in the organisation will appear in the box underneath.<button  ");
-  data.buffer.push(escapeExpression(helpers.action.call(depth0, "tutorialSixth", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(">n</button></p>\r\n            ");
-  return buffer;
+  
+  data.buffer.push("\r\n                <p class = \"tutorialBox\">You added a skill to the list. Skills that are already in the organisation will appear in the box underneath.</p>\r\n            ");
   }
 
 function program13(depth0,data) {
@@ -561,7 +547,7 @@ function program13(depth0,data) {
   data.buffer.push("\r\n                <p class = \"tutorialBox\">Add at least 4 more skills, and we will be ready to go on</p>\r\n            ");
   }
 
-  data.buffer.push("       <div class = 'helpContainer'>\r\n            <img src = \"img/Marcelo.png\" id=\"marcelo\"/>\r\n\r\n            ");
+  data.buffer.push("       <div class = 'helpContainer'>\r\n\r\n            ");
   stack1 = helpers['if'].call(depth0, "firstBody", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n            ");

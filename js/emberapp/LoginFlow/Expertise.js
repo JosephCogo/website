@@ -92,39 +92,20 @@ App.TutorialComponentComponent = Ember.Component.extend({
     firstExpertiseEnteredChanged: function () {
         this.toggleProperty("fourthBody");
         this.toggleProperty("fifthBody");
+        var com = this;
+        setTimeout(function () {
+            com.toggleProperty("fifthBody");
+            com.toggleProperty("sixthBody");
+            setTimeout(function () {
+                com.toggleProperty("sixthBody");
+                com.toggleProperty("seventhBody");
+            }, 3000);
+        }, 3000);
     } .observes('userPressedEnter'),
 
 
     actions: {
 
-        tutorialFirst: function () {
-            this.toggleProperty("firstBody");
-            this.toggleProperty("secondBody");
-        },
-
-        tutorialSecond: function () {
-            this.toggleProperty("secondBody");
-            this.toggleProperty("thirdBody");
-        },
-
-        tutorialThird: function () {
-            var com = this;
-            $("#expertise").fadeTo(300, 1, function () {
-                setTimeout(function () {
-                    com.toggleProperty("thirdBody");
-                    com.toggleProperty("fourthBody");
-                }, 600);
-            });
-        },
-
-        tutorialFifth: function () {
-            this.toggleProperty("fifthBody");
-            this.toggleProperty("sixthBody");
-        },
-        tutorialSixth: function () {
-            this.toggleProperty("sixthBody");
-            this.toggleProperty("seventhBody");
-        }
     },
 
     didInsertElement: function () {
@@ -132,6 +113,25 @@ App.TutorialComponentComponent = Ember.Component.extend({
         console.log(this.userPressedEnter);
         $(".tutorialBox").fadeTo(700, 1);
         var data = this.get('data');
+
+        var com = this;
+
+        setTimeout(function () {
+            com.toggleProperty("firstBody");
+            com.toggleProperty("secondBody");
+            setTimeout(function () {
+                com.toggleProperty("secondBody");
+                com.toggleProperty("thirdBody");
+                setTimeout(function () {
+                    $("#expertise").fadeTo(300, 1, function () {
+                        setTimeout(function () {
+                            com.toggleProperty("thirdBody");
+                            com.toggleProperty("fourthBody");
+                        }, 600);
+                    });
+                }, 1500);
+            }, 3000);
+        }, 3000);
     }
 
 });

@@ -370,6 +370,7 @@ textarea {
   font-style: italic; 
   text-align: center;
   width : 300px;
+  margin-left: 25%;
 }
 
 .tutorialBox:after {
