@@ -17,7 +17,7 @@ App.LoginController = Ember.ObjectController.extend({
             btn.button('loading');
 
             $.ajax({
-                url: "https://babblefishes.cloudapp.net:3000/login",
+                url: "http://localhost:443/login",
                 type: "post",
                 data: { email: this.get('email'), password: this.get('password') },
                 statusCode: {
