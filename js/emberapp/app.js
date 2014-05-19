@@ -5,6 +5,8 @@ either to the login screen or to the home page of the application
 
 App = Ember.Application.create();
 
+var isActive=true;
+
 App.ApplicationAdapter = DS.FixtureAdapter;
 
 //define the routes
@@ -71,15 +73,18 @@ App.IndexRoute = Ember.Route.extend({
 
 
 $(document).ready(function () {
+    isActive = true;
+
     $(window).on('beforeunload', function () {
 
     });
 
     $(window).on("blur", function (e) {
-        //console.log("blur");
+        isActive = false;
     });
 
     $(window).on("focus", function (e) {
-        //console.log("focus");
+        isActive = true;
+        document.title = "Cogo";
     });
 });

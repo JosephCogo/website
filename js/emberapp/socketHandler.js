@@ -29,7 +29,7 @@ function initSocket(store, callback){
 function connectSocket(callback) {
 
     //connect to socket io
-    socket = io.connect('http://babblefishes.cloudapp.net:3000', {
+    socket = io.connect('https://babblefishes.cloudapp.net:3000', {
         query: 'token=' + localStorage.token
     });
 
@@ -118,6 +118,9 @@ function handleUpdates(){
 
     //BUG HERE
     socket.on('newquestion', function (data) {
+        if (!isActive) {
+            document.title = '!* New Question';
+        }
         //ugh clean up...
         emberStore.push('questionsothersask', { id: data.qid, qbody: data.qbody, seen : false });
 
@@ -142,7 +145,9 @@ function handleUpdates(){
     });
 
     socket.on('newanswer', function (data) {
-
+        if (!isActive) {
+            document.title = '!* New Answer';
+        }
         emberStore.push('answer', { id: data.aid, abody: data.abody, read: false });
 
         emberStore.find('questionsyouask', data.qid).then(function (question) {

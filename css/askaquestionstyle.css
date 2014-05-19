@@ -50,13 +50,19 @@ body, html {
     text-align: left;
     color: white;
     text-transform:uppercase;
-    
+    outline: 0;
 }
+
 .nav > li > a:hover {
     color: #F7F4F4;
     background-color: transparent;
-
 }
+
+.nav > li > a:focus {
+    color: #F7F4F4;
+    background-color: transparent;
+}
+
 .nav > li > a:before {
     content: "";
     display: inline-block;
@@ -333,7 +339,7 @@ textarea {
 }
 .expertise .input-group-addon {
     background-color: #2BB4A7;
-    padding:;
+    
 }
 .expertise img {
     width: 30px;

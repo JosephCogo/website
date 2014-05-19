@@ -4,6 +4,7 @@ App.QuestionshomepageRoute = Ember.Route.extend({
 
     //wait to load all the messages!!
     beforeModel: function () {
+        console.log(isActive);
         var route = this;
         var store = this.store;
         return new Ember.RSVP.Promise(function (resolve) {
@@ -43,6 +44,7 @@ App.QuestionshomepageController = Ember.Controller.extend({
     newAnswers: '',
 
     newAnswersUpdate: function () {
+   
         var controller = this;
         var newAnswers = 0;
         //console.log('fds');
