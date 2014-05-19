@@ -48,7 +48,7 @@ App.IndexRoute = Ember.Route.extend({
         //to the localStorage
         else {
             $.ajax({
-                url: "http://babblefishes.cloudapp.net:3000/refreshtoken",
+                url: "https://babblefishes.cloudapp.net:3000/refreshtoken",
                 type: "post",
                 data: { token: localStorage.token },
                 statusCode: {
@@ -87,4 +87,8 @@ $(document).ready(function () {
         isActive = true;
         document.title = "Cogo";
     });
+});
+
+App.LoadingRoute = Em.Route.extend({
+
 });

@@ -29,7 +29,7 @@ function initSocket(store, callback){
 function connectSocket(callback) {
 
     //connect to socket io
-    socket = io.connect('http://babblefishes.cloudapp.net:3000', {
+    socket = io.connect('https://babblefishes.cloudapp.net:3000', {
         query: 'token=' + localStorage.token
     });
 
@@ -104,7 +104,8 @@ function loadQuestionsOthersAsk(callback) {
         var questions = data.question;
         for (var i = 0; i < questions.length; i++) {
             var item = questions[i];
-            emberStore.push('questionsothersask', { id: item['q.qid'], qbody: item['q.qbody'], seen : item['seen'] });
+            console.log(item['seen']);
+            emberStore.push('questionsothersask', { id: item['q.qid'], qbody: item['q.qbody'], seen: item['seen'] });
         }
         callback();
     });
@@ -300,6 +301,14 @@ function readAnswers(model){
 }
 
 function readQuestions(model){
-
+        var qids = [];
+        model.forEach(function (item) {
+            var seen = item.get('seen');
+            if (seen == false) {
+                qids.push(item.get('id'));
+            }
+        });
+        socket.emit('readquestions', { questions: qids });
+    
 }
     

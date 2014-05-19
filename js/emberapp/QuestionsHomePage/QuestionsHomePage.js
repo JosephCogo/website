@@ -42,19 +42,17 @@ App.QuestionshomepageController = Ember.Controller.extend({
     firstname: localStorage.firstname,
     lastname: localStorage.lastname,
     newAnswers: '',
+    newQuestions: '',
 
     newAnswersUpdate: function () {
-   
         var controller = this;
         var newAnswers = 0;
-        //console.log('fds');
         //get all the answers from the store, and then count the new ones!
         this.store.find("answer").then(function (results) {
             results.forEach(function (answer) {
                 if (answer.get('read') == false) {
                     newAnswers++;
                 }
-                console.log(newAnswers);
                 if (newAnswers > 0) {
                     controller.set('newAnswers', '(' + newAnswers + ')');
                 } else {
@@ -62,7 +60,26 @@ App.QuestionshomepageController = Ember.Controller.extend({
                 }
             });
         });
-    } .observes("answer.@each.isLoading"),
+    } .observes("answer.@each"),
+
+    newQuestionsUpdate: function () {
+        var controller = this;
+        var newQuestions = 0;
+        //get all the answers from the store, and then count the new ones!
+        this.store.find("questionsothersask").then(function (results) {
+            results.forEach(function (question) {
+                if (question.get('seen') == false) {
+                    newQuestions++;
+                }
+                if (newQuestions > 0) {
+                    controller.set('newQuestions', '(' + newQuestions + ')');
+                    
+                } else {
+                    controller.set('newQuestions', '');
+                }
+            });
+        });
+    }.observes("newAnswers"), //THIS IS A GREASY HACK BUT IT WORKS FOR NOW
 
     actions: {
 

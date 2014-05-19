@@ -3,13 +3,13 @@
 **/
 
 App.AnsweraquestionIndexRoute = Ember.Route.extend({
-    renderTemplate : function(){
-      this.render('answeraquestionindex');  
+    renderTemplate: function () {
+        this.render('answeraquestionindex');
     },
-    
+
     model: function () {
         var store = this.store;
-        
+
         return store.find('questionsothersask');
     },
 
@@ -18,10 +18,40 @@ App.AnsweraquestionIndexRoute = Ember.Route.extend({
         $('.content').fadeTo(300, 1);
         this.controllerFor('questionshomepage').set('answer', 'active-link');
         this.controllerFor('questionshomepage').set('ask', false);
+
+        readQuestions(model);
+    },
+
+    deactivate: function () {
+        var controller = this;
+        //change all the new answers to read
+        this.store.find('questionsothersask').then(function (questionList) {
+            questionList.forEach(function (item) {
+                //console.log(item.get('id'));
+                item.set('seen', true);
+                item.save();
+            });
+        });
+        //have to do this here as the observer pattern is not working with the computed property
+        this.store.find("questionsothersask").then(function (results) {
+            var newQuestions = 0;
+            results.forEach(function (question) {
+                if (question.get('seen') == false) {
+                    newQuestions++;
+                }
+            });
+            //set the number of unread messages
+            if (newQuestions > 0) {
+                controller.controllerFor('questionshomepage').set('newQuestions', '(' + newQuestions + ')');
+            } else {
+                controller.controllerFor('questionshomepage').set('newQuestions', '');
+            }
+        });
     }
 });
 
 App.AnsweraquestionIndexController = Ember.ArrayController.extend({
+    
     actions: {
         answerquestion: function (questionsothersask) {
             this.transitionToRoute('answeraquestion.inputanswer', questionsothersask);
@@ -79,8 +109,8 @@ App.AnswerQuestionView = Ember.View.extend({
 
 
 App.Questionsothersask = DS.Model.extend({
-    qbody : DS.attr('string'),
-    seen : DS.attr('boolean') 
+    qbody: DS.attr('string'),
+    seen: DS.attr('boolean')
 });
 
 App.Questionsothersask.FIXTURES = [];
