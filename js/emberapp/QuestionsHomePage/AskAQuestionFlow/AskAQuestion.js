@@ -7,8 +7,9 @@ App.AskaquestionRoute = Ember.Route.extend({
         this.controllerFor('askaquestioncontent').set('askSelected', 'selected');
         this.controllerFor('askaquestioncontent').set('solvedSelected', false);
         this.controllerFor('questionshomepage').set('ask', 'active-link');
-
-    }
+        this.controllerFor('questionshomepage').set('firstname', localStorage.firstname);
+        this.controllerFor('questionshomepage').set('lastname', localStorage.lastname);
+    }    
 
 });
 

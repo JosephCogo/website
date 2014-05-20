@@ -33,6 +33,7 @@ App.QuestionshomepageRoute = Ember.Route.extend({
 
         });
     }
+
 });
 
 App.QuestionshomepageController = Ember.Controller.extend({
