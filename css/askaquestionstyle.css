@@ -330,6 +330,18 @@ textarea {
     background-color: #2BB4A7;
     font-family: 'Lato', sans-serif;
 }
+
+.logoutbtn {
+    font-size: 18px;
+    margin-top: 50px;
+    margin-left: 67px;
+    font-weight: 100;
+}
+
+.logoutbtn:focus{
+    outline: none;
+}
+
 .btnsmall {
     width: 100px;
 }

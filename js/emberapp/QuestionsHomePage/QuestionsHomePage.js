@@ -1,7 +1,6 @@
 //this is the resource that contains both the questions and the answers
 App.QuestionshomepageRoute = Ember.Route.extend({
 
-
     //wait to load all the messages!!
     beforeModel: function () {
         console.log(isActive);
@@ -73,13 +72,13 @@ App.QuestionshomepageController = Ember.Controller.extend({
                 }
                 if (newQuestions > 0) {
                     controller.set('newQuestions', '(' + newQuestions + ')');
-                    
+
                 } else {
                     controller.set('newQuestions', '');
                 }
             });
         });
-    }.observes("newAnswers"), //THIS IS A GREASY HACK BUT IT WORKS FOR NOW
+    } .observes("newAnswers"), //THIS IS A GREASY HACK BUT IT WORKS FOR NOW
 
     actions: {
 
@@ -102,6 +101,17 @@ App.QuestionshomepageController = Ember.Controller.extend({
                     controller.transitionToRoute('askaquestion');
                 });
             }
+        },
+
+        logout: function () {
+            var controller = this;
+            disconnect();
+            $('.application-content').fadeTo(200, 0, function () {
+                localStorage.removeItem('token');
+                localStorage.removeItem('firstname');
+                localStorage.removeItem('lastname');
+                controller.replaceRoute('login');
+            });
         }
 
     }

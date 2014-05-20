@@ -46,6 +46,12 @@ function connectSocket(callback) {
     });
 }
 
+function disconnect(){
+    socket.disconnect();
+    io.j = [];
+    io.sockets = [];
+}
+
 function getSocket(){
     return socket;
 }

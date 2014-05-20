@@ -3,11 +3,15 @@ App.LoginRoute = Ember.Route.extend({
     //little hack to make sure user doesn't go back to login
    model : function(){
      return {};  
+   },
+
+   setupController: function(){
+       $(".application-content").fadeTo(500, 1);
    }
 });
 
 
-App.LoginController = Ember.ObjectController.extend({
+App.LoginController = Ember.Controller.extend({
     actions: {
         //will create a post request to login, if successful, login and store token
         login: function () {
@@ -27,6 +31,7 @@ App.LoginController = Ember.ObjectController.extend({
                         var firstTime = data.firsttime;
                         localStorage.firstname = data.firstname;
                         localStorage.lastname = data.lastname;
+                        console.log(getSocket());
                         initSocket(router.store, function () {
                             console.info("Sockets connected");
 
