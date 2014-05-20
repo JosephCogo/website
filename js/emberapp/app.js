@@ -48,7 +48,7 @@ App.IndexRoute = Ember.Route.extend({
         //to the localStorage
         else {
             $.ajax({
-                url: "http://babblefishes.com:3000/refreshtoken",
+                url: "https://babblefishes.com:443/refreshtoken",
                 type: "post",
                 data: { token: localStorage.token },
                 statusCode: {
