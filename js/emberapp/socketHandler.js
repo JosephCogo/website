@@ -29,7 +29,7 @@ function initSocket(store, callback){
 function connectSocket(callback) {
 
     //connect to socket io
-    socket = io.connect('https://babblefishes.com:443', {
+    socket = io.connect('https://babblefishes.com:8083', {
         query: 'token=' + localStorage.token,
         secure: true
     });
