@@ -18,7 +18,7 @@ App.ExpertiseRoute = Ember.Route.extend({
 });
 
 App.ExpertiseController = Ember.ObjectController.extend({
-    username : localStorage.username,
+    username : localStorage.firstname,
     userPressedEnter : false,
     
     actions: {

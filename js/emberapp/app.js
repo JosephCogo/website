@@ -56,10 +56,16 @@ App.IndexRoute = Ember.Route.extend({
                         //set the new token
                         localStorage.token = data.token;
                         //get the username of the user
-                        localStorage.username = data.username;
-                        initSocket(store, function () {
-                            router.transitionTo("askaquestion");
-                        });
+                        localStorage.firstname = data.firstname;
+                        localStorage.lastname = data.lastname;
+                        if (data.firsttime) {
+                            router.transitionTo("expertise");
+                        }
+                        else {
+                            initSocket(store, function () {
+                                router.transitionTo("askaquestion");
+                            });
+                        }
                     },
                     401: function () {
                         console.log("ERROR");
