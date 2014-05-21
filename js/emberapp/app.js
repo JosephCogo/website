@@ -13,7 +13,7 @@ App.ApplicationAdapter = DS.FixtureAdapter;
 App.Router.map(function () {
     this.resource('login');
     this.resource('expertise');
-    this.resource('chromepermissions');
+    this.resource('desktoppermissions');
 
     this.resource('questionshomepage', function () {
         //answer a question and its sub routes

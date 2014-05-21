@@ -11,7 +11,8 @@ App.AskaquestionRoute = Ember.Route.extend({
         this.controllerFor('questionshomepage').set('firstname', localStorage.firstname);
         this.controllerFor('questionshomepage').set('lastname', localStorage.lastname);
 
-
+        
+        //notify.createNotification({title : 'Hello', body : 'body', icon: 'img/logogreensmal_.png'});
     }
 
 });

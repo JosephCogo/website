@@ -16,11 +16,6 @@ var questions = [];
 function initSocket(store, callback){
     emberStore = store;
 
-        notify.createNotification('SUCCESS', {
-            body: 'body',
-            icon: 'img/logogreensmal_.png'
-        });
-
     connectSocket(function (err, data) {
         //if unauthorized and other stuff etc
         if (err) {
@@ -159,6 +154,8 @@ function loadQuestionsOthersAsk(callback) {
 
 function handleUpdates(){
 
+
+
     //BUG HERE
     socket.on('newquestion', function (data) {
         if (!isActive) {
@@ -167,22 +164,15 @@ function handleUpdates(){
         //ugh clean up...
         emberStore.push('questionsothersask', { id: data.qid, qbody: data.qbody, seen: false });
 
-        var havePermission = window.webkitNotifications.checkPermission();
-        if (havePermission == 0) {
-            // 0 is PERMISSION_ALLOWED
-            var notification = window.webkitNotifications.createNotification(
-            'img/logogreensmal_.png',
-            'New Question Asked',
-             data.qbody
-            );
+        if (notify.permissionLevel() == notify.PERMISSION_GRANTED) {
 
-            notification.onclick = function () {
-                //window.open("http://stackoverflow.com/a/13328397/1269037"); //go to new question here????
-                notification.close();
-            }
-            notification.show();
+            var notification = notify.createNotification('New Question Asked', {
+                body: data.qbody,
+                icon: 'img/logogreensmal_.png'
+            });
+
             setTimeout(function () {
-                notification.cancel();
+                notification.close();
             }, 5000);
         }
 
@@ -243,21 +233,16 @@ function handleUpdates(){
         });
 
         var havePermission = window.webkitNotifications.checkPermission();
-        if (havePermission == 0) {
-            // 0 is PERMISSION_ALLOWED
-            var notification = window.webkitNotifications.createNotification(
-            'img/logogreensmal_.png',
-            'New Answer',
-             data.abody
-            );
 
-            notification.onclick = function () {
-                //window.open("http://stackoverflow.com/a/13328397/1269037"); //go to new question here????
-                notification.close();
-            }
-            notification.show();
+        if (notify.permissionLevel() == notify.PERMISSION_GRANTED) {
+
+            var notification = notify.createNotification('New Answer', {
+                body: data.abody,
+                icon: 'img/logogreensmal_.png'
+            });
+
             setTimeout(function () {
-                notification.cancel();
+                notification.close();
             }, 5000);
         }
     });

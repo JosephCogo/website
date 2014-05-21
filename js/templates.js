@@ -1,9 +1,14 @@
-Ember.TEMPLATES["chromepermissions"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+Ember.TEMPLATES["desktoppermissions"] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '';
+  var buffer = '', escapeExpression=this.escapeExpression;
 
 
+  data.buffer.push("\r\n<p class = 'permissionsPrompt'>One last thing. The experience is so much better with desktop notifications (trust us)! Click request to allow notifications or continue to the next page</p>\r\n\r\n<div class = 'permissionBtnDiv'>\r\n    <button ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "request", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push(" class = 'btn permissionBtn'>PERMISSION</button>\r\n    <button ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "skip", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
+  data.buffer.push(" class = 'btn skipBtn'>SKIP</button>\r\n</div>");
   return buffer;
   
 });

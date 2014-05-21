@@ -33,9 +33,9 @@ App.ExpertiseRoute = Ember.Route.extend({
 });
 
 App.ExpertiseController = Ember.ObjectController.extend({
-    username : localStorage.firstname,
-    userPressedEnter : false,
-    
+    username: localStorage.firstname,
+    userPressedEnter: false,
+
     actions: {
         //will handle the submit event sent from the button in the expertise template
         submit: function () {
@@ -55,7 +55,12 @@ App.ExpertiseController = Ember.ObjectController.extend({
                 addSkills($('#tokenfield-typeahead').tokenfield('getTokensList'), function () {
                     //move to ask a question
                     $(".application-content").fadeTo(500, 0, function () {
-                        controller.replaceRoute('askaquestion');
+                        if (notify.permissionLevel() == notify.PERMISSION_DEFAULT) {
+                            controller.replaceRoute('desktoppermissions');
+                        }
+                        else {
+                            controller.replaceRoute('askaquestion');
+                        }
                     });
                 });
             } else {
