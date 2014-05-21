@@ -1,13 +1,13 @@
 App.LoginRoute = Ember.Route.extend({
     //if user is already authenticated, go back to ask a question,
     //little hack to make sure user doesn't go back to login
-   model : function(){
-     return {};  
-   },
+    model: function () {
+        return {};
+    },
 
-   setupController: function(){
-       $(".application-content").fadeTo(500, 1);
-   }
+    setupController: function () {
+        $(".application-content").fadeTo(500, 1);
+    }
 });
 
 

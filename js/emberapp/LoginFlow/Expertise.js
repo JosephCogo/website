@@ -6,6 +6,8 @@ add any new skills that the users put in
 
 App.ExpertiseRoute = Ember.Route.extend({
     setupController: function () {
+        var route = this;
+
         //reset the connection on refresh
         if (Ember.isEmpty(getSocket())) {
             initSocket(this.store, function (err) {
@@ -16,11 +18,15 @@ App.ExpertiseRoute = Ember.Route.extend({
 
     },
 
-    beforeModel: function () {
+    redirect: function () {
         var route = this;
-
-        if (!localStorage.firsttime) {
-            // this.replaceWith('askaquestion');
+        console.log(localStorage.firsttime);
+        if (localStorage.firsttime == 'false') {
+            console.log("first " + localStorage.firsttime);
+            route.replaceWith('askaquestion');
+        }
+        else if (!localStorage.firsttime) {
+            route.replaceWith('login');
         }
     }
 

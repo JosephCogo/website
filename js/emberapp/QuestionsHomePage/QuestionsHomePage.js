@@ -6,6 +6,7 @@ App.QuestionshomepageRoute = Ember.Route.extend({
         console.log(isActive);
         var route = this;
         var store = this.store;
+
         return new Ember.RSVP.Promise(function (resolve) {
             //reset the connection on refresh, and wait to load all the data
             if (Ember.isEmpty(getSocket())) {
@@ -32,6 +33,13 @@ App.QuestionshomepageRoute = Ember.Route.extend({
             }
 
         });
+    },
+
+    redirect: function () {
+        if (localStorage.firsttime == 'true') {
+            this.replaceWith('login');
+            disconnect();
+        }
     }
 
 });
@@ -111,6 +119,7 @@ App.QuestionshomepageController = Ember.Controller.extend({
                 localStorage.removeItem('token');
                 localStorage.removeItem('firstname');
                 localStorage.removeItem('lastname');
+                localStorage.removeItem('firsttime');
                 controller.replaceRoute('login');
                 controller.store.unloadAll('answer');
                 controller.store.unloadAll('questionsyouask');
