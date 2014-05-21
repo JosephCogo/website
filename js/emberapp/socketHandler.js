@@ -16,6 +16,11 @@ var questions = [];
 function initSocket(store, callback){
     emberStore = store;
 
+        notify.createNotification('SUCCESS', {
+            body: 'body',
+            icon: 'img/logogreensmal_.png'
+        });
+
     connectSocket(function (err, data) {
         //if unauthorized and other stuff etc
         if (err) {

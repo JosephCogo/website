@@ -10,7 +10,9 @@ App.AskaquestionRoute = Ember.Route.extend({
         this.controllerFor('questionshomepage').set('answer', false);
         this.controllerFor('questionshomepage').set('firstname', localStorage.firstname);
         this.controllerFor('questionshomepage').set('lastname', localStorage.lastname);
-    }    
+
+
+    }
 
 });
 
