@@ -92,8 +92,10 @@ App.AnsweraquestionInputanswerController = Ember.ObjectController.extend({
 
 });
 
+
 App.AnswerSuccessRoute = Em.Route.extend({
-    setupController : function(){
+    setupController : function(controller, model){
+        controller.set('model', model);
         this.controllerFor('questionshomepage').set('answer', 'active-link');
         this.controllerFor('questionshomepage').set('ask', false);
     }

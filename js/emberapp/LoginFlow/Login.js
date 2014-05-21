@@ -31,11 +31,13 @@ App.LoginController = Ember.Controller.extend({
                         var firstTime = data.firsttime;
                         localStorage.firstname = data.firstname;
                         localStorage.lastname = data.lastname;
-                        console.log(localStorage.firstname);
+
                         initSocket(router.store, function () {
                             console.info("Sockets connected");
 
                             $(".application-content").fadeTo(500, 0, function () {
+                                router.set('email', '');
+                                router.set('password', '');
                                 //transition to inputting user expertise 
                                 if (firstTime) {
                                     router.replaceRoute('expertise');

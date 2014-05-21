@@ -66,6 +66,25 @@ function loadData(store, callback){
 
         loadQuestionsOthersAsk(function () {
 
+            var newQuestions = 0;
+
+            //WILL CHANGE LATER, update the number of new questions in the left pane
+            emberStore.find("questionsothersask").then(function (results) {
+                results.forEach(function (question) {
+                    console.log('new');
+                    if (question.get('seen') == false) {
+                        newQuestions++;
+                    }
+                    var controller = window.App.__container__.lookup('controller:questionshomepage');
+                    if (newQuestions > 0) {
+                        controller.set('newQuestions', '(' + newQuestions + ')');
+
+                    } else {
+                        controller.set('newQuestions', '');
+                    }
+                });
+            });
+
             handleUpdates();
 
             callback();
@@ -78,28 +97,33 @@ function loadYourQuestions(callback) {
     console.info('loading your questions');
     //these are the questions that you have asked!
     socket.once('questions-you-ask', function (data) {
-        //console.log(data);
+
         var questions = data.question;
-        for (var i = 0; i < questions.length; i++) {
-            var item = questions[i];
+        if (!Ember.isEmpty(questions)) {
+            for (var i = 0; i < questions.length; i++) {
+                var item = questions[i];
 
-            //this is for the hasMany relationship
-            var answerIds = [];
+                //this is for the hasMany relationship
+                var answerIds = [];
 
-            //push answers onto the store
-            for (var j = 0; j < questions[i].answers.length; j++) {
-                var ans = questions[i].answers[j];
-                //this is required due to the optional match always returns something if 
-                //nothing is found, if nothing it is null. 
-                if (ans[0] != null && ans[1] != null) {
-                    answerIds.push(ans[1]);
-                    emberStore.push('answer', { id: ans[1], abody: ans[0], read: ans[2] });
+                //push answers onto the store
+                for (var j = 0; j < questions[i].answers.length; j++) {
+                    var ans = questions[i].answers[j];
+                    //this is required due to the optional match always returns something if 
+                    //nothing is found, if nothing it is null. 
+                    if (ans[0] != null && ans[1] != null) {
+                        answerIds.push(ans[1]);
+                        emberStore.push('answer', { id: ans[1], abody: ans[0], read: ans[2] });
+                    }
                 }
+                //push questions onto the store
+                emberStore.push('questionsyouask', { id: item['q.qid'], qbody: item['q.qbody'], answers: answerIds });
             }
-            //push questions onto the store
-            emberStore.push('questionsyouask', { id: item['q.qid'], qbody: item['q.qbody'], answers: answerIds });
+            callback();
         }
-        callback();
+        else {
+            callback();
+        }
     });
 }
 
@@ -109,12 +133,17 @@ function loadQuestionsOthersAsk(callback) {
     //these are questions that need your expertise!!
     socket.once('questions-others-ask', function (data) {
         var questions = data.question;
-        for (var i = 0; i < questions.length; i++) {
-            var item = questions[i];
-            console.log(item['seen']);
-            emberStore.push('questionsothersask', { id: item['q.qid'], qbody: item['q.qbody'], seen: item['seen'] });
+        if (!Ember.isEmpty(questions)) {
+            for (var i = 0; i < questions.length; i++) {
+                var item = questions[i];
+                console.log(item['seen']);
+                emberStore.push('questionsothersask', { id: item['q.qid'], qbody: item['q.qbody'], seen: item['seen'] });
+            }
+            callback();
         }
-        callback();
+        else {
+            callback();
+        }
     });
     
 }
@@ -130,7 +159,7 @@ function handleUpdates(){
             document.title = '!* New Question';
         }
         //ugh clean up...
-        emberStore.push('questionsothersask', { id: data.qid, qbody: data.qbody, seen : false });
+        emberStore.push('questionsothersask', { id: data.qid, qbody: data.qbody, seen: false });
 
         var havePermission = window.webkitNotifications.checkPermission();
         if (havePermission == 0) {
@@ -150,6 +179,26 @@ function handleUpdates(){
                 notification.cancel();
             }, 5000);
         }
+
+        var newQuestions = 0;
+
+        //WILL CHANGE LATER, update the number of new questions in the left pane
+        emberStore.find("questionsothersask").then(function (results) {
+            results.forEach(function (question) {
+                console.log('new');
+                if (question.get('seen') == false) {
+                    newQuestions++;
+                }
+                var controller = window.App.__container__.lookup('controller:questionshomepage');
+                if (newQuestions > 0) {
+                    controller.set('newQuestions', '(' + newQuestions + ')');
+
+                } else {
+                    controller.set('newQuestions', '');
+                }
+            });
+        });
+
     });
 
     socket.on('newanswer', function (data) {

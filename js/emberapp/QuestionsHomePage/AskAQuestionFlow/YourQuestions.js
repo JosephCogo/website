@@ -113,14 +113,24 @@ App.Questionsyouask = DS.Model.extend({
     newAnswers: function () {
         var newAnswers = 0;
         //get all the answers from the store, and then count the new ones!
-        this.get("answers").forEach(function(answer){
-            if(answer.get('read') == false){
+        this.get("answers").forEach(function (answer) {
+            if (answer.get('read') == false) {
                 newAnswers++;
             }
-            });  
+        });
 
         return newAnswers;
-    }.property('answers.@each.read')
+    } .property('answers.@each.read'),
+
+    totalAnswers: function () {
+        var totalAnswers = 0;
+        //get all the answers from the store, and then count the new ones!
+        this.get("answers").forEach(function (answer) {
+            totalAnswers++;
+        });
+
+        return totalAnswers;
+    } .property('answers.@each')
 });
 
 App.Questionsyouask.FIXTURES = [];

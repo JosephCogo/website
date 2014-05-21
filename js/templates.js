@@ -93,15 +93,62 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = '', stack1;
-  data.buffer.push("\r\n                \r\n                    ");
-  stack1 = helpers.view.call(depth0, "App.QuestionView", {hash:{
-    'contentBinding': ("this")
-  },hashTypes:{'contentBinding': "STRING"},hashContexts:{'contentBinding': depth0},inverse:self.noop,fn:self.program(2, program2, data),contexts:[depth0],types:["ID"],data:data});
+  data.buffer.push("\r\n                ");
+  stack1 = helpers['if'].call(depth0, "questionsothersask.seen", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(4, program4, data),fn:self.program(2, program2, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n                    \r\n                    ");
+  data.buffer.push(" \r\n\r\n            ");
   return buffer;
   }
 function program2(depth0,data) {
+  
+  
+  data.buffer.push("\r\n\r\n                ");
+  }
+
+function program4(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\r\n                    ");
+  stack1 = helpers.view.call(depth0, "App.QuestionView", {hash:{
+    'contentBinding': ("this")
+  },hashTypes:{'contentBinding': "STRING"},hashContexts:{'contentBinding': depth0},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n                ");
+  return buffer;
+  }
+function program5(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\r\n                        <p class = \"questionParagraph\" ");
+  data.buffer.push(escapeExpression(helpers.action.call(depth0, "answerquestion", "questionsothersask", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0,depth0],types:["STRING","ID"],data:data})));
+  data.buffer.push("> ");
+  stack1 = helpers._triageMustache.call(depth0, "questionsothersask.qbody", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push(" </p>\r\n                    ");
+  return buffer;
+  }
+
+function program7(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\r\n                ");
+  stack1 = helpers['if'].call(depth0, "questionsothersask.seen", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(8, program8, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push(" \r\n            ");
+  return buffer;
+  }
+function program8(depth0,data) {
+  
+  var buffer = '', stack1;
+  data.buffer.push("\r\n                    ");
+  stack1 = helpers.view.call(depth0, "App.QuestionView", {hash:{
+    'contentBinding': ("this")
+  },hashTypes:{'contentBinding': "STRING"},hashContexts:{'contentBinding': depth0},inverse:self.noop,fn:self.program(9, program9, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n                ");
+  return buffer;
+  }
+function program9(depth0,data) {
   
   var buffer = '', stack1;
   data.buffer.push("\r\n                         <p class = \"questionParagraph\" ");
@@ -113,16 +160,28 @@ function program2(depth0,data) {
   return buffer;
   }
 
-function program4(depth0,data) {
+function program11(depth0,data) {
   
   
-  data.buffer.push("\r\n                         <span>There are no questions to answer</span>\r\n            ");
+  data.buffer.push("\r\n                ");
   }
 
-  data.buffer.push("<div class=\"actions\">\r\n        </div>\r\n\r\n        <div class=\"question-stack\">\r\n            ");
-  stack1 = helpers.each.call(depth0, "questionsothersask", "in", "controller", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(4, program4, data),fn:self.program(1, program1, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+function program13(depth0,data) {
+  
+  
+  data.buffer.push("\r\n                <span>There are no questions to answer</span>\r\n            ");
+  }
+
+  data.buffer.push("<div class=\"actions\">\r\n        </div>\r\n\r\n        <div class=\"question-stack\">\r\n        <h5>New Questions</h5>\r\n            ");
+  stack1 = helpers.each.call(depth0, "questionsothersask", "in", "controller", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push("\r\n  \r\n\r\n        </div>\r\n");
+  data.buffer.push("\r\n            <h5>Old Questions</h5>\r\n            ");
+  stack1 = helpers.each.call(depth0, "questionsothersask", "in", "controller", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n  \r\n            ");
+  stack1 = helpers.each.call(depth0, "questionsothersask", "in", "controller", {hash:{},hashTypes:{},hashContexts:{},inverse:self.program(13, program13, data),fn:self.program(11, program11, data),contexts:[depth0,depth0,depth0],types:["ID","ID","ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n\r\n            \r\n\r\n        </div>\r\n");
   return buffer;
   
 });
@@ -362,7 +421,7 @@ function program9(depth0,data) {
 function program10(depth0,data) {
   
   
-  data.buffer.push("\r\n                <p class=\"solvedAnswersParagraph\">nothing</p>\r\n            ");
+  data.buffer.push("\r\n                <span>There are no answers</span>\r\n            ");
   }
 
 function program12(depth0,data) {
@@ -426,7 +485,10 @@ function program2(depth0,data) {
   data.buffer.push(">  ");
   stack1 = helpers._triageMustache.call(depth0, "questionsyouask.qbody", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  data.buffer.push(" <br/> New answers: ");
+  data.buffer.push(" <br/> Total answers: ");
+  stack1 = helpers._triageMustache.call(depth0, "questionsyouask.totalAnswers", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("  <br/>New answers: ");
   stack1 = helpers._triageMustache.call(depth0, "questionsyouask.newAnswers", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</p>\r\n                ");
@@ -490,7 +552,7 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("</a><span></span></li>\r\n    </ul>\r\n    <button ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "logout", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(" class = 'logoutbtn btn'>Logout</button>\r\n</div>\r\n\r\n<div class='content-pane'>\r\n    <div class='content'>\r\n           \r\n        ");
+  data.buffer.push(" class = 'logoutbtn'>Logout</button>\r\n</div>\r\n\r\n<div class='content-pane'>\r\n    <div class='content'>\r\n           \r\n        ");
   stack1 = helpers._triageMustache.call(depth0, "outlet", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n        \r\n    </div>\r\n</div>\r\n\r\n</body>\r\n");

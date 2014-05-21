@@ -112,6 +112,9 @@ App.QuestionshomepageController = Ember.Controller.extend({
                 localStorage.removeItem('firstname');
                 localStorage.removeItem('lastname');
                 controller.replaceRoute('login');
+                controller.store.unloadAll('answer');
+                controller.store.unloadAll('questionsyouask');
+                controller.store.unloadAll('questionsothersask');
             });
         }
 

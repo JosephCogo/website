@@ -2,15 +2,31 @@
         </div>
 
         <div class="question-stack">
+        <h5>New Questions</h5>
             {{#each questionsothersask in controller}}
-                
+                {{#if questionsothersask.seen}}
+
+                {{else}}
+                    {{#view App.QuestionView contentBinding="this"}}
+                        <p class = "questionParagraph" {{action 'answerquestion' questionsothersask}}> {{questionsothersask.qbody}} </p>
+                    {{/view}}
+                {{/if}} 
+
+            {{/each}}
+            <h5>Old Questions</h5>
+            {{#each questionsothersask in controller}}
+                {{#if questionsothersask.seen}}
                     {{#view App.QuestionView contentBinding="this"}}
                          <p class = "questionParagraph" {{action 'answerquestion' questionsothersask}}> {{questionsothersask.qbody}} </p>
                     {{/view}}
-                    
-                    {{else}}
-                         <span>There are no questions to answer</span>
+                {{/if}} 
             {{/each}}
   
+            {{#each questionsothersask in controller}}
+                {{else}}
+                <span>There are no questions to answer</span>
+            {{/each}}
+
+            
 
         </div>

@@ -332,6 +332,24 @@ textarea {
 }
 
 .logoutbtn {
+    display: inline-block;
+margin-bottom: 0;
+font-weight: normal;
+text-align: center;
+vertical-align: middle;
+cursor: pointer;
+background-image: none;
+border: 1px solid transparent;
+white-space: nowrap;
+padding: 6px 12px;
+font-size: 14px;
+line-height: 1.42857143;
+border-radius: 4px;
+-webkit-user-select: none;
+    border-radius: 0;
+    color: white;
+    background-color: #2BB4A7;
+    font-family: 'Lato', sans-serif;
     font-size: 18px;
     margin-top: 50px;
     margin-left: 67px;
@@ -340,6 +358,10 @@ textarea {
 
 .logoutbtn:focus{
     outline: none;
+}
+
+.logoutbtn:hover{
+    color: black;
 }
 
 .btnsmall {
