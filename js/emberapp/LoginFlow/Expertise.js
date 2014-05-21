@@ -8,11 +8,20 @@ App.ExpertiseRoute = Ember.Route.extend({
     setupController: function () {
         //reset the connection on refresh
         if (Ember.isEmpty(getSocket())) {
-            initSocket(this.store, function () {
+            initSocket(this.store, function (err) {
                 console.info("Successfully Reconnected");
             });
         }
         $(".application-content").fadeTo(500, 1);
+
+    },
+
+    beforeModel: function () {
+        var route = this;
+
+        if (!localStorage.firsttime) {
+            // this.replaceWith('askaquestion');
+        }
     }
 
 });

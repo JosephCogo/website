@@ -58,6 +58,7 @@ App.IndexRoute = Ember.Route.extend({
                         //get the username of the user
                         localStorage.firstname = data.firstname;
                         localStorage.lastname = data.lastname;
+                        localStorage.firsttime = data.firsttime;
                         if (data.firsttime) {
                             router.transitionTo("expertise");
                         }

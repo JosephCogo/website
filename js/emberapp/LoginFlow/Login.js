@@ -31,6 +31,7 @@ App.LoginController = Ember.Controller.extend({
                         var firstTime = data.firsttime;
                         localStorage.firstname = data.firstname;
                         localStorage.lastname = data.lastname;
+                        localStorage.firsttime = data.firsttime;
 
                         initSocket(router.store, function () {
                             console.info("Sockets connected");

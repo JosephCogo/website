@@ -2,7 +2,10 @@
         </div>
 
         <div class="question-stack">
-        <h5>New Questions</h5>
+        {{#if newAnswers}}
+            <h5>New Questions</h5>
+        {{/if}}
+            
             {{#each questionsothersask in controller}}
                 {{#if questionsothersask.seen}}
 
@@ -13,7 +16,11 @@
                 {{/if}} 
 
             {{/each}}
-            <h5>Old Questions</h5>
+            
+            {{#if oldAnswers}}
+                <h5>Old Questions</h5>
+            {{/if}}
+            
             {{#each questionsothersask in controller}}
                 {{#if questionsothersask.seen}}
                     {{#view App.QuestionView contentBinding="this"}}

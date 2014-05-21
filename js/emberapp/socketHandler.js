@@ -99,6 +99,7 @@ function loadYourQuestions(callback) {
     socket.once('questions-you-ask', function (data) {
 
         var questions = data.question;
+        console.log(data);
         if (!Ember.isEmpty(questions)) {
             for (var i = 0; i < questions.length; i++) {
                 var item = questions[i];
@@ -265,6 +266,7 @@ function getSkills(yourSkills, callback){
 
     socket.once('autoskill', function (data) {
         //console.log(data.m);
+        
         var s = data.message.suggest[0];
         //console.log(s);
 
@@ -335,9 +337,8 @@ function askQuestion(question, expertise, callback){
 function answerQuestion(answer, qid, model){
     console.log('answer');
     socket.emit('answerquestion', {answer : answer, qid: qid} );
-
-    //remove the model from the store as it has been answered
-    model.unloadRecord();
+   //remove the model from the store as it has been answered
+   model.destroyRecord();
 }
 
 function readAnswers(model){
