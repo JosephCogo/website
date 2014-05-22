@@ -259,6 +259,12 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 
 function program1(depth0,data) {
   
+  
+  data.buffer.push("\r\n                        <div class=\"alert alert-danger hide fade in\" id = \"inputerror\">\r\n                            <button type=\"button\" class=\"close\" aria-hidden=\"true\">&times;</button>\r\n                            <strong>Whoa!</strong> Please make sure all input fields are filled out before asking a question\r\n                        </div>\r\n                ");
+  }
+
+function program3(depth0,data) {
+  
   var buffer = '', helper, options;
   data.buffer.push("\r\n                    ");
   data.buffer.push(escapeExpression((helper = helpers.textarea || (depth0 && depth0.textarea),options={hash:{
@@ -271,7 +277,7 @@ function program1(depth0,data) {
   return buffer;
   }
 
-function program3(depth0,data) {
+function program5(depth0,data) {
   
   var buffer = '', helper, options;
   data.buffer.push("\r\n                    ");
@@ -286,22 +292,25 @@ function program3(depth0,data) {
   return buffer;
   }
 
-function program5(depth0,data) {
+function program7(depth0,data) {
   
   
   data.buffer.push("\r\n                <form  class=\"dropzone\" id=\"fileupload\" enctype=\"multipart/form-data\"></form>\r\n            ");
   }
 
-  data.buffer.push("<div class=\"askquestion contenthide\">\r\n            \r\n                ");
-  stack1 = helpers.view.call(depth0, "App.QuestionareaView", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  data.buffer.push("<div class=\"askquestion contenthide\">\r\n       \r\n               ");
+  stack1 = helpers.view.call(depth0, "App.AlertView", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\r\n                \r\n                ");
+  stack1 = helpers.view.call(depth0, "App.QuestionareaView", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n                <div class = \"space\"></div>\r\n                ");
-  stack1 = helpers.view.call(depth0, "App.TagquestionView", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers.view.call(depth0, "App.TagquestionView", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("\r\n                <div class = \"space\"></div>\r\n            <form class=\"form text-center\">\r\n                <button data-loading-text=\"Asking...\" class='btn' ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "askquestion", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
   data.buffer.push(" >Ask Question</button>\r\n            </form>\r\n            \r\n            <!--\r\n            ");
-  stack1 = helpers.view.call(depth0, "App.DropzoneView", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(5, program5, data),contexts:[depth0],types:["ID"],data:data});
+  stack1 = helpers.view.call(depth0, "App.DropzoneView", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(7, program7, data),contexts:[depth0],types:["ID"],data:data});
   if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
   data.buffer.push("-->\r\n</div> \r\n\r\n\r\n");
   return buffer;

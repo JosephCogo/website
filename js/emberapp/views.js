@@ -25,6 +25,7 @@ App.AlertView = Ember.View.extend({
             //yeah this is pretty terrible...
             $('#loginerror').addClass("hide");
             $('#expertiseerror').addClass("hide");
+            $('#inputerror').addClass("hide");
         });
     }
 

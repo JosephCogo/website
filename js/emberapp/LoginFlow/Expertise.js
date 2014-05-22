@@ -5,7 +5,7 @@ add any new skills that the users put in
 **/
 
 App.ExpertiseRoute = Ember.Route.extend({
-    setupController: function () {
+    setupController: function (controller, model) {
         var route = this;
 
         //reset the connection on refresh
@@ -15,6 +15,7 @@ App.ExpertiseRoute = Ember.Route.extend({
             });
         }
         $(".application-content").fadeTo(500, 1);
+        controller.set('username', localStorage.firstname);
 
     },
 

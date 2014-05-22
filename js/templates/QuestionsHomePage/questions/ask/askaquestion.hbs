@@ -1,5 +1,12 @@
 <div class="askquestion contenthide">
-            
+       
+               {{#view App.AlertView}}
+                        <div class="alert alert-danger hide fade in" id = "inputerror">
+                            <button type="button" class="close" aria-hidden="true">&times;</button>
+                            <strong>Whoa!</strong> Please make sure all input fields are filled out before asking a question
+                        </div>
+                {{/view}}
+                
                 {{#view App.QuestionareaView}}
                     {{textarea class="form-control" id='questions' rows="3" placeholder="Enter your question here..." }}
                 {{/view}}

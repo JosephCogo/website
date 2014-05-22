@@ -87,7 +87,7 @@ App.QuestionshomepageController = Ember.Controller.extend({
                 }
             });
         });
-    } .observes("newAnswers"), //THIS IS A GREASY HACK BUT IT WORKS FOR NOW
+    }.observes("newAnswers"), //THIS IS A GREASY HACK BUT IT WORKS FOR NOW
 
     actions: {
 

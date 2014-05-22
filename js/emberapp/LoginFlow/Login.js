@@ -30,9 +30,12 @@ App.LoginController = Ember.Controller.extend({
                         localStorage.token = data.token;
                         //is it the users first time logging in?
                         var firstTime = data.firsttime;
+                        
                         localStorage.firstname = data.firstname;
                         localStorage.lastname = data.lastname;
                         localStorage.firsttime = data.firsttime;
+
+                        console.log(localStorage.firstname);
 
                         initSocket(router.store, function () {
                             console.info("Sockets connected");

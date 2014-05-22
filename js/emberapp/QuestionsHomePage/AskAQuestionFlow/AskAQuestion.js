@@ -11,8 +11,7 @@ App.AskaquestionRoute = Ember.Route.extend({
         this.controllerFor('questionshomepage').set('firstname', localStorage.firstname);
         this.controllerFor('questionshomepage').set('lastname', localStorage.lastname);
 
-        
-        //notify.createNotification({title : 'Hello', body : 'body', icon: 'img/logogreensmal_.png'});
+
     }
 
 });
@@ -28,13 +27,18 @@ App.AskaquestionController = Ember.Controller.extend({
 
             //myDropzone.processQueue();
 
-            var controller = this;
-            $(".btn").button('loading');
-            askQuestion($('#questions').val(), $('#tagquestion').tokenfield('getTokensList'), function () {
-                $('.questionsOutlet').fadeTo(200, 0, function () {
-                    controller.replaceRoute("asksuccess");
+            if ($('#tagquestion').tokenfield('getTokens').length == 0 || $('#questions').val() == '') {
+                $('#inputerror').removeClass("hide");
+            }
+            else {
+                var controller = this;
+                $(".btn").button('loading');
+                askQuestion($('#questions').val(), $('#tagquestion').tokenfield('getTokensList'), function () {
+                    $('.questionsOutlet').fadeTo(200, 0, function () {
+                        controller.replaceRoute("asksuccess");
+                    });
                 });
-            });
+            }
         }
 
     }
