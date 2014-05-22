@@ -15,7 +15,7 @@ App.ExpertiseRoute = Ember.Route.extend({
             });
         }
         $(".application-content").fadeTo(500, 1);
-        controller.set('username', localStorage.firstname);
+       // controller.set('username', localStorage.firstname);
 
     },
 

@@ -4,11 +4,11 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   var buffer = '', escapeExpression=this.escapeExpression;
 
 
-  data.buffer.push("\r\n<p class = 'permissionsPrompt'>One last thing. The experience is so much better with desktop notifications (trust us)! Click request to allow notifications or continue to the next page</p>\r\n\r\n<div class = 'permissionBtnDiv'>\r\n    <button ");
+  data.buffer.push("\r\n<p class = 'permissionsPrompt'>One last thing. The experience is so much better with desktop notifications (trust us!). Click 'Allow' to allow notifications or continue to the next page</p>\r\n\r\n<div class = 'permissionBtnDiv'>\r\n    <button ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "request", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(" class = 'btn permissionBtn'>PERMISSION</button>\r\n    <button ");
+  data.buffer.push(" class = 'btn permissionBtn'>Allow</button>\r\n    <button ");
   data.buffer.push(escapeExpression(helpers.action.call(depth0, "skip", {hash:{},hashTypes:{},hashContexts:{},contexts:[depth0],types:["STRING"],data:data})));
-  data.buffer.push(" class = 'btn skipBtn'>SKIP</button>\r\n</div>");
+  data.buffer.push(" class = 'btn skipBtn'>Skip</button>\r\n</div>");
   return buffer;
   
 });
@@ -54,7 +54,7 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   
-  data.buffer.push("\r\n    <div class=\"alert alert-danger hide fade in\" id = \"loginerror\">\r\n        <button type=\"button\" class=\"close\" aria-hidden=\"true\">&times;</button>\r\n        <strong>Whoa!</strong> Sorry buddy we don't have that user name or password. Try again!\r\n    </div>\r\n    ");
+  data.buffer.push("\r\n    <div class=\"alert alert-danger hide fade in\" id = \"loginerror\">\r\n        <button type=\"button\" class=\"close\" aria-hidden=\"true\">&times;</button>\r\n        <strong>Sorry!</strong> You typed in an incorrect email or password. Check your login credentials and try again!\r\n    </div>\r\n    ");
   }
 
   data.buffer.push("<div class=\"holder\">\r\n    <div class=\"mast login-mast\">\r\n    <img src='img/logogreensmal_.png'/>\r\n    <h4>LOGIN</h4>\r\n</div>\r\n    \r\n    ");
@@ -592,7 +592,7 @@ function program1(depth0,data) {
 function program3(depth0,data) {
   
   
-  data.buffer.push("\r\n                <p class = \"tutorialBox\"> I'm Jeffrey Cogo, and I'm here to help you out!</p>\r\n            ");
+  data.buffer.push("\r\n                <p class = \"tutorialBox\"> Welcome to Cogo, here are a few hints to help you out!</p>\r\n            ");
   }
 
 function program5(depth0,data) {
@@ -604,7 +604,7 @@ function program5(depth0,data) {
 function program7(depth0,data) {
   
   
-  data.buffer.push("\r\n                <p class = \"tutorialBox\">Awesome! Here is how you can help your organisation! Try typing in anything\r\n                that you think you are good at and press enter.</p>\r\n            ");
+  data.buffer.push("\r\n                <p class = \"tutorialBox\">Awesome! The first thing we have to do before you can start sharing knowledge with your organisation is to enter in your areas of expertise. \r\n                 Add your first skill by typing it into the box and pressing enter.  </p>\r\n            ");
   }
 
 function program9(depth0,data) {
