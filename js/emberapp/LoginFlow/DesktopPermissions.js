@@ -15,7 +15,7 @@ App.DesktoppermissionsController = Ember.Controller.extend({
             var controller = this;
             notify.requestPermission(function () {
                 $(".application-content").fadeTo(500, 0, function () {
-                    controller.replaceRoute('askaquestion');
+                    controller.replaceWith('askaquestion');
                 });
             });
         },
@@ -23,7 +23,7 @@ App.DesktoppermissionsController = Ember.Controller.extend({
         skip: function () {
             var controller = this;
             $(".application-content").fadeTo(500, 0, function () {
-                controller.replaceRoute('askaquestion');
+                controller.replaceWith('askaquestion');
             });
         }
 

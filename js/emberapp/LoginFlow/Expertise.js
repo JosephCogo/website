@@ -55,6 +55,8 @@ App.ExpertiseController = Ember.ObjectController.extend({
                 addSkills($('#tokenfield-typeahead').tokenfield('getTokensList'), function () {
                     //move to ask a question
                     $(".application-content").fadeTo(500, 0, function () {
+                        localStorage.firsttime = false;
+
                         if (notify.permissionLevel() == notify.PERMISSION_DEFAULT) {
                             controller.replaceRoute('desktoppermissions');
                         }

@@ -6,9 +6,6 @@ App.LoginRoute = Ember.Route.extend({
     },
 
     setupController: function () {
-        this.store.unloadAll('answer');
-        this.store.unloadAll('questionsyouask');
-        this.store.unloadAll('questionsothersask');
         $(".application-content").fadeTo(500, 1);
     }
 });
